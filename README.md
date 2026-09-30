@@ -1,7 +1,7 @@
 # Army PQC readiness timeline
 
-Private demo of the Army briefing page.
+Demo of the Army briefing page.
 
-Open the GitHub Pages URL to walk the timeline. Add people as repository collaborators if they need the files.
+Live site: https://alld0wnh1ll.github.io/pqc-army-readiness/
 
-The repository stays private. Anyone who has the Pages URL can open the live page.
+This repository is public so the page opens without a GitHub login.
