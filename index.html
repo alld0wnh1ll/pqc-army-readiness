@@ -261,6 +261,7 @@ td.m-link a{font-family:var(--mono);font-size:.7rem;color:var(--mc);text-decorat
 .m-meta strong{color:var(--army);font-weight:500}
 .m-verified{font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-top:6px;white-space:nowrap}
 .asof-note{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+.asof-note a{color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)}
 
 footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68rem;border-top:1px solid var(--line)}
 
@@ -513,6 +514,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   <p style="max-width:70ch;color:var(--muted);font-size:.88rem;margin-bottom:20px">These pages change often. The timeline does not pin them to a date. Use them as the live working list.</p>
   <table><thead><tr><th>Org</th><th>Resource</th><th>Source</th></tr></thead><tbody id="hbody"></tbody></table>
   <p class="asof-note" id="hubs-asof"></p>
+  <p class="asof-note">Special PQC-related documents sit on <a href="https://www.intelink.gov/" target="_blank" rel="noopener">intelink.gov</a>. CAC registration takes about 24 hours.</p>
 </section>
 
 <footer>U.S. ARMY · CRYPTOGRAPHIC READINESS · Q-DAY IS A POINT. ITS TIMING IS A BAND.</footer>
@@ -746,7 +748,8 @@ const HUBS = [
   {org:'NIST NCCoE', title:'Migration to Post-Quantum Cryptography (execution hub)', url:'https://www.nccoe.nist.gov/applied-cryptography/migration-to-pqc'},
   {org:'IETF', title:'Post-Quantum Use In Protocols (PQUIP) working group · RFC pipeline', url:'https://datatracker.ietf.org/wg/pquip/about/'},
   {org:'CISA', title:'Post-Quantum Cryptography Initiative', url:'https://www.cisa.gov/topics/risk-management/quantum'},
-  {org:'DHS',  title:'Post-Quantum Cryptography | Homeland Security', url:'https://www.dhs.gov/quantum'}
+  {org:'DHS',  title:'Post-Quantum Cryptography | Homeland Security', url:'https://www.dhs.gov/quantum'},
+  {org:'Intelink', title:'Special PQC-related documents (CAC; registration takes about 24 hours)', url:'https://www.intelink.gov/'}
 ];
 
 /* ============================================================ */
