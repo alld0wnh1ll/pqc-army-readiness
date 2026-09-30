@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Road to Q-Day: Army cryptographic readiness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121a16;
+  --panel:#1a2420;
+  --panel-2:#223028;
+  --line:#3a4a3f;
+  --text:#e8efe8;
+  --muted:#9eb0a4;
+  --jump-h:42px;
+  --army:#8fae6e; /* OD-adjacent accent: Army lens */
+  --ph0:#8d9aa8;  /* origins: slate */
+  --ph1:#82a4d4;  /* pre-strategy: steel */
+  --ph2:#5cd4b4;  /* strategy: teal */
+  --ph3:#f5b04a;  /* implementation: amber */
+  --ph4:#ec6c6c;  /* q-day: red */
+  --ph5:#b294ec;  /* post-crqc: violet */
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'IBM Plex Sans',sans-serif;
+  --disp:'Archivo',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font-family:var(--sans);line-height:1.6}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+a{color:inherit}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- on-this-page jump bar ---------- */
+nav.jump{position:sticky;top:0;z-index:40;display:flex;flex-wrap:wrap;align-items:center;gap:0;padding:0 4vw;background:color-mix(in srgb,var(--ink) 94%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.jump .jump-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--army);padding:11px 14px 11px 0;margin-right:4px;border-right:1px solid var(--line);white-space:nowrap}
+nav.jump a{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:11px 14px;border-right:1px solid var(--line);transition:color .15s,background .15s}
+nav.jump a:hover,nav.jump a:focus-visible{color:var(--text);background:rgba(255,255,255,.03);outline:none}
+nav.jump a.on{color:var(--text);background:color-mix(in srgb,var(--army) 12%,transparent)}
+@media (max-width:720px){
+  :root{--jump-h:74px}
+  nav.jump .jump-label{width:100%;border-right:none;border-bottom:1px solid var(--line);padding:8px 0 6px}
+}
+
+/* ---------- section dividers ---------- */
+.sec-rule{display:flex;align-items:center;gap:16px;padding:32px 6vw 0;background:var(--ink)}
+.sec-rule i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+.sec-rule span{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--army);white-space:nowrap}
+#overview,#timeline,#manifest,#panic-curve,#atlas,#hubs{scroll-margin-top:calc(var(--jump-h) + 8px)}
+
+/* ---------- header ---------- */
+header{padding:28px 6vw 40px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+header::after{content:'';position:absolute;right:6%;top:28%;width:min(420px,46vw);height:240px;background:radial-gradient(ellipse at center,color-mix(in srgb,var(--ph4) 26%,transparent),transparent 72%);filter:blur(8px);pointer-events:none;z-index:1}
+.masthead{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:28px;position:relative;z-index:2}
+.mast-aci{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+.mast-aci img{width:72px;height:auto;display:block;flex-shrink:0}
+.mast-aci .aci-meta{display:flex;flex-direction:column;gap:3px;min-width:0}
+.mast-aci .aci-name{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text);line-height:1.35}
+.mast-aci .aci-role{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--army)}
+.mast-orgs{display:flex;flex-direction:column;align-items:flex-end;gap:10px;max-width:min(58vw,560px);opacity:.42}
+.mast-orgs .org-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:right}
+.mast-orgs .org-row{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px 10px}
+.org-chip{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--muted);font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;padding:3px 4px;border:1px solid transparent;transition:opacity .15s,border-color .15s,color .15s}
+.org-chip:hover{color:var(--text);border-color:var(--line);opacity:1}
+.org-chip img{display:block;height:22px;width:22px;object-fit:contain;flex-shrink:0;opacity:.9}
+.org-chip.wide img{width:auto;height:12px;filter:invert(1) brightness(.92)}
+.org-chip.text-only{padding:4px 6px;border-color:color-mix(in srgb,var(--line) 70%,transparent)}
+.mast-orgs .org-row.army-row .org-chip{color:color-mix(in srgb,var(--army) 75%,var(--muted))}
+header .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px;position:relative;z-index:2}
+header .brand-mark{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--army);border:1px solid color-mix(in srgb,var(--army) 55%,transparent);padding:6px 10px}
+header h1{font-family:var(--disp);font-stretch:125%;font-weight:800;font-size:clamp(2.2rem,5.5vw,4.4rem);line-height:1.02;letter-spacing:-.01em;margin:14px 0 18px;text-transform:uppercase;position:relative;z-index:2}
+header h1 .qd{color:var(--ph4);text-shadow:0 0 28px color-mix(in srgb,var(--ph4) 50%,transparent),0 0 8px color-mix(in srgb,var(--ph4) 35%,transparent)}
+header p.lede{max-width:64ch;color:var(--muted);font-size:1.02rem;position:relative;z-index:2}
+.cipher{position:absolute;inset:0;pointer-events:none;opacity:.14;font-family:var(--mono);font-size:.7rem;line-height:1.9;color:#5a7a62;white-space:pre;user-select:none}
+@media (max-width:720px){
+  .masthead{flex-direction:column;align-items:stretch}
+  .mast-orgs{align-items:flex-start;max-width:none;opacity:.5}
+  .mast-orgs .org-label,.mast-orgs .org-row{justify-content:flex-start;text-align:left}
+}
+
+/* ---------- phase tabs ---------- */
+nav.phases{display:flex;gap:0;border-bottom:1px solid var(--line);position:sticky;top:var(--jump-h);background:color-mix(in srgb,var(--ink) 92%, transparent);backdrop-filter:blur(10px);z-index:30;box-shadow:0 10px 28px rgba(0,0,0,.28)}
+nav.phases button{background:none;min-width:0;white-space:normal;text-align:center;line-height:1.4;border:none;border-right:1px solid var(--line);color:var(--muted);font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 4px;cursor:pointer;position:relative;transition:color .2s,background .2s}
+nav.phases button:last-child{border-right:none}
+nav.phases button::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent;transition:background .2s}
+nav.phases button:hover{color:var(--text);background:rgba(255,255,255,.02)}
+nav.phases button.active{color:var(--text);background:color-mix(in srgb,var(--pc) 12%,transparent)}
+nav.phases button.active::after{background:var(--pc)}
+nav.phases button:focus-visible{outline:2px solid var(--text);outline-offset:-2px}
+
+/* ---------- timeline ---------- */
+#timeline-wrap{position:relative;border-bottom:1px solid var(--line);background:radial-gradient(120% 80% at 78% 40%,color-mix(in srgb,var(--ph4) 7%,transparent),transparent 55%),linear-gradient(180deg,color-mix(in srgb,var(--panel) 55%,transparent),transparent 42%)}
+#timeline-scroll{overflow:visible}
+#track{position:relative;height:318px;width:100%}
+@media (max-width:760px){#timeline-scroll{overflow-x:auto}#track{min-width:900px}}
+#lattice{height:318px}
+#lattice{position:absolute;inset:0;pointer-events:none}
+.phase-band{position:absolute;top:0;bottom:0;overflow:hidden;border-left:2px solid var(--bc);background:linear-gradient(90deg, color-mix(in srgb, var(--bc) 10%, transparent), color-mix(in srgb, var(--bc) 3%, transparent) 40%, transparent 85%);transition:background .25s,box-shadow .25s}
+.phase-band.on{background:linear-gradient(90deg, color-mix(in srgb, var(--bc) 20%, transparent), color-mix(in srgb, var(--bc) 7%, transparent) 42%, transparent 88%);box-shadow:inset 0 0 48px color-mix(in srgb, var(--bc) 14%, transparent)}
+.phase-band .band-head{position:absolute;top:16px;left:14px;right:8px;display:flex;flex-direction:column;gap:3px}
+.phase-band .band-label{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bc);line-height:1.3}
+.phase-band .band-years{font-family:var(--mono);font-size:.6rem;color:var(--muted);opacity:.75}
+#axis{position:absolute;left:0;right:0;top:228px;height:3px;border-radius:1px;background:linear-gradient(90deg,var(--ph1),var(--ph2) 34%,var(--ph3) 58%,var(--ph4) 78%,var(--ph5));box-shadow:0 0 16px color-mix(in srgb,var(--ph2) 28%,transparent),0 1px 0 rgba(0,0,0,.4)}
+.year-tick{position:absolute;top:296px;transform:translateX(-50%);font-family:var(--mono);font-size:.62rem;color:var(--muted)}
+.year-mark{position:absolute;top:230px;width:1px;height:5px;background:var(--line);transform:translateX(-50%)}
+/* axis break: marks the seam where the compressed 1994-2015 prologue meets the to-scale axis */
+.axis-break{position:absolute;top:222px;width:10px;height:14px;transform:translateX(-50%) skewX(-24deg);border-left:2px solid var(--ink);border-right:2px solid var(--ink);background:linear-gradient(90deg,transparent 2px,var(--muted) 2px,var(--muted) 4px,transparent 4px,transparent 6px,var(--muted) 6px,var(--muted) 8px,transparent 8px);z-index:6}
+/* CRQC estimate strip: nested inside the Post-CRQC band (whose opening edge is Q-Day),
+   vertically inset so it clears the band header above and the axis star labels below */
+.qband{position:absolute;top:64px;bottom:98px;z-index:1;background:repeating-linear-gradient(-55deg,rgba(212,91,91,.14) 0 8px,transparent 8px 16px);border:1px dashed rgba(236,108,108,.55);border-left:none}
+.qband .q-label{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;line-height:1.6;text-align:center;color:var(--ph4);white-space:nowrap;background:rgba(18,26,22,.92);padding:3px 8px;border:1px solid rgba(236,108,108,.45)}
+/* you-are-here: a live date pin in the Strategy window */
+.now-mark{position:absolute;top:52px;bottom:28px;z-index:7;width:0;border-left:1px dashed color-mix(in srgb,var(--ph2) 75%,transparent);transform:translateX(-50%);pointer-events:none;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--ph2) 40%,transparent))}
+.now-mark .now-flag{position:absolute;bottom:56px;left:7px;font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ph2);background:var(--ink);padding:2px 7px;border:1px solid color-mix(in srgb,var(--ph2) 55%,transparent);white-space:nowrap}
+
+.dot{position:absolute;border-radius:50%;transform:translate(-50%,-50%);background:var(--ink);border:2.5px solid var(--dc);box-shadow:0 0 10px color-mix(in srgb, var(--dc) 45%, transparent);cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s;z-index:5;padding:0;text-decoration:none;display:block}
+.dot:hover,.dot:focus-visible,.dot.lit{transform:translate(-50%,-50%) scale(1.55);background:var(--dc);outline:none;box-shadow:0 0 18px color-mix(in srgb, var(--dc) 70%, transparent)}
+.dot .did{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.6rem;color:var(--text);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s}
+.dot:hover .did,.dot:focus-visible .did,.dot.lit .did{opacity:1}
+.dot.up .did{bottom:calc(100% + 6px)}
+.dot.dn .did{top:calc(100% + 6px)}
+/* dots hugging the left track edge: pin the label rightward so it stays on screen */
+.dot.edge .did{left:0;transform:none}
+/* prediction milestones: hover explains, nothing to open */
+.dot.nolink{cursor:default}
+/* predicted milestones live below the axis: hollow dashed diamond, persistent label.
+   Above the axis is the record; on it, the turning points; below it, the forecast. */
+.pred-mark{position:absolute;z-index:8;display:flex;flex-direction:column;align-items:center;transform:translateX(-50%);color:var(--pc2);cursor:default}
+.pred-mark .pstem{width:1px;height:16px;background:linear-gradient(var(--pc2),color-mix(in srgb,var(--pc2) 20%,transparent));opacity:.85}
+.pred-mark .pglyph{width:11px;height:11px;border:1.5px dashed var(--pc2);transform:rotate(45deg);background:var(--ink);box-shadow:0 0 10px color-mix(in srgb,var(--pc2) 28%,transparent);transition:box-shadow .15s,background .15s}
+.pred-mark .plabel{font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;margin-top:8px;padding:2px 6px;border:1px solid color-mix(in srgb,var(--pc2) 38%,transparent);background:color-mix(in srgb,var(--ink) 88%,var(--pc2))}
+.pred-mark:hover .pglyph,.pred-mark.lit .pglyph{background:color-mix(in srgb,var(--pc2) 35%,var(--ink));box-shadow:0 0 16px color-mix(in srgb,var(--pc2) 55%,transparent)}
+
+/* critical milestone stars: sit on the axis, labels stack above */
+.star-mark{position:absolute;transform:translate(-50%,-50%);z-index:9;background:none;border:none;padding:0;cursor:pointer;color:var(--sc);display:flex;flex-direction:column-reverse;align-items:center;gap:1px;text-decoration:none;font:inherit}
+.star-mark .glyph{font-size:1.4rem;line-height:1;filter:drop-shadow(0 0 6px color-mix(in srgb, var(--sc) 55%, transparent));transition:transform .15s}
+.star-mark:hover .glyph,.star-mark:focus-visible .glyph{transform:scale(1.25)}
+.star-mark:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+.star-mark .slabel{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--sc);white-space:nowrap;pointer-events:none;margin-bottom:2px}
+.star-mark .syear{font-family:var(--mono);font-size:.55rem;color:var(--muted);white-space:nowrap;pointer-events:none}
+/* informational stars: hover explains, no click action */
+.star-mark.static{cursor:default}
+.star-mark.static:hover .glyph{transform:none}
+@keyframes qpulse{0%,100%{filter:drop-shadow(0 0 6px color-mix(in srgb, var(--sc) 55%, transparent))}50%{filter:drop-shadow(0 0 16px color-mix(in srgb, var(--sc) 85%, transparent))}}
+.star-mark.pulse .glyph{animation:qpulse 2.8s ease-in-out infinite}
+
+#tooltip{position:fixed;z-index:60;max-width:320px;background:color-mix(in srgb,var(--panel-2) 88%,transparent);backdrop-filter:blur(12px);border:1px solid var(--line);border-top:3px solid var(--tc,var(--ph1));padding:14px 16px;font-size:.85rem;display:none;box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 1px color-mix(in srgb,var(--tc,var(--ph1)) 18%,transparent)}
+#tooltip .tt-id{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--muted)}
+#tooltip .tt-title{font-weight:600;margin:4px 0 6px;line-height:1.35}
+#tooltip .tt-desc{color:var(--muted);font-size:.8rem}
+#tooltip .tt-open{margin-top:8px;font-family:var(--mono);font-size:.65rem;color:var(--tc,var(--ph1))}
+
+
+/* ---------- stories under timeline phases ---------- */
+#phase-stories{display:flex;width:100%;border-top:1px solid var(--line);background:var(--ink)}
+.phase-story{display:block;width:auto;text-align:left;font:inherit;color:inherit;background:transparent;padding:16px 14px 20px;border:none;border-right:1px solid var(--line);border-top:3px solid transparent;cursor:pointer;transition:background .2s,border-color .2s;min-width:0}
+.phase-story:last-child{border-right:none}
+.phase-story:hover{background:rgba(255,255,255,.02)}
+.phase-story.active{background:color-mix(in srgb, var(--nc) 11%, transparent);border-top-color:var(--nc);box-shadow:inset 0 -24px 36px color-mix(in srgb, var(--nc) 6%, transparent)}
+.phase-story:focus-visible{outline:2px solid var(--text);outline-offset:-2px}
+.phase-story .tense,.flag-card .tense{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--nc);margin-bottom:6px}
+.phase-story .s-label,.flag-card .s-label{font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:.95rem;line-height:1.15;margin-bottom:4px}
+.phase-story .s-years,.flag-card .s-years{font-family:var(--mono);font-size:.6rem;color:var(--muted);margin-bottom:10px}
+.phase-story p,.flag-card p{font-size:.78rem;line-height:1.45;color:var(--muted)}
+@media (max-width:760px){#phase-stories,.story-flag{min-width:900px}}
+
+/* narrow phase columns: keep the date-true column, move the story text below */
+.phase-story.slim{padding:16px 4px 20px;text-align:center}
+.phase-story.slim .tense{font-size:.52rem;letter-spacing:.06em}
+.phase-story.slim .s-label{font-size:.78rem}
+.phase-story.slim .s-below{font-family:var(--mono);font-size:.7rem;color:var(--nc);margin-top:10px}
+/* relocated story card: sits below the row, a leader line points back to its true column.
+   No horizontal padding on the wrapper: the card's % margin and the absolutely
+   positioned line must resolve against the same width so they stay attached at
+   every viewport size and in every browser. */
+.story-flag{position:relative;border-top:1px solid var(--line);background:var(--ink);padding:26px 0 22px}
+.story-flag .flag-line{position:absolute;left:var(--anchor);top:0;width:2px;height:26px;background:var(--nc)}
+.story-flag .flag-line::after{content:'';position:absolute;left:50%;bottom:-2px;width:7px;height:7px;border-radius:50%;background:var(--nc);transform:translateX(-50%)}
+/* card is centered on the anchor (leader line) so it reads as nested under its own
+   column, clamped so it can never slide under a neighboring phase's far edge */
+.story-flag .flag-card{display:block;width:100%;max-width:520px;max-width:min(520px,88%);margin-left:calc(var(--anchor) - 260px);margin-left:clamp(6%, calc(var(--anchor) - min(260px,44%)), calc(94% - min(520px,88%)));border:1px solid var(--line);border-top:3px solid var(--nc);background:var(--panel);padding:14px 18px 16px;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.story-flag .flag-card:hover{background:var(--panel-2)}
+.story-flag .flag-card:focus-visible{outline:2px solid var(--text);outline-offset:-2px}
+
+/* ---------- legend: phases + marker types ---------- */
+#phase-key{display:flex;flex-direction:column;gap:10px;padding:14px 6vw 16px;border-top:1px solid var(--line);background:linear-gradient(180deg,color-mix(in srgb,var(--panel) 70%,transparent),var(--ink));font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#phase-key .key-group{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+#phase-key .key-group + .key-group{padding-top:8px;border-top:1px solid var(--line)}
+#phase-key .key-title{color:var(--army);letter-spacing:.2em;flex-shrink:0;min-width:66px}
+#phase-key .key-chip{white-space:nowrap;padding:4px 8px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 80%,transparent)}
+#phase-key .key-chip i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+#phase-key .key-chip .key-glyph{margin-right:6px;font-size:.75rem;vertical-align:-1px}
+#phase-key .key-chip em{font-style:normal;color:var(--text)}
+
+/* ---------- cost of waiting / lessons ---------- */
+#panic-curve{padding:52px 6vw;border-bottom:1px solid var(--line)}
+#panic-curve .cow-head{text-align:center;max-width:78ch;margin:0 auto 28px}
+#panic-curve .cow-head h2{font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:10px 0 12px}
+#panic-curve .cow-head p{color:var(--muted);font-size:.98rem}
+#panic-curve .cow-head a{color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)}
+#panic-curve .cow-head a:hover{color:var(--text)}
+#panic-curve .cow-callout{max-width:78ch;margin:0 auto 28px;padding:18px 20px;border-left:3px solid var(--army);background:color-mix(in srgb, var(--army) 8%, transparent);text-align:left}
+#panic-curve .cow-callout strong{color:var(--text);font-weight:600}
+#panic-curve .cow-callout p{color:var(--muted);font-size:.92rem;line-height:1.5}
+#panic-curve .cow-callout ul{list-style:none;display:grid;gap:6px;margin:12px 0}
+#panic-curve .cow-callout li{font-size:.88rem;color:var(--text);padding-left:16px;position:relative}
+#panic-curve .cow-callout li::before{content:'▸';position:absolute;left:0;color:var(--army)}
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:28px auto 0;max-width:1100px;text-align:left}
+.lesson{background:var(--panel);padding:22px;scroll-margin-top:80px}
+.lesson .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--army);margin-bottom:8px}
+.lesson h3{font-size:1.05rem;font-weight:600;margin-bottom:10px}
+.lesson p{font-size:.88rem;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.lesson .cites{display:flex;flex-wrap:wrap;gap:6px 10px}
+.lesson .cites a{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)}
+.lesson .cites a:hover{color:var(--text)}
+.cow-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 28px;max-width:820px;margin:18px auto 0;padding:14px 18px;border:1px solid var(--line);background:var(--panel);text-align:left}
+.cow-legend .leg{display:flex;align-items:flex-start;gap:10px;max-width:240px}
+.cow-legend .swatch{width:28px;height:3px;margin-top:7px;flex-shrink:0;border-radius:1px}
+.cow-legend .swatch.fill{height:12px;margin-top:3px;opacity:.35;border-radius:2px}
+.cow-legend .swatch.axis{height:0;border-top:2px solid var(--muted);width:28px;margin-top:8px}
+.cow-legend strong{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text);margin-bottom:3px}
+.cow-legend span{font-size:.78rem;color:var(--muted);line-height:1.4}
+.cow-legend .leg-note{width:100%;text-align:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.8}
+.cow-foot{max-width:78ch;margin:24px auto 0;color:var(--muted);font-size:.88rem;text-align:center}
+.cow-foot a{color:var(--army);font-family:var(--mono);font-size:.75rem}
+
+/* ---------- ATLAS: what it is, how it fits ---------- */
+#atlas{padding:52px 6vw;border-bottom:1px solid var(--line)}
+#atlas .atlas-head{max-width:78ch;margin:0 auto 22px}
+#atlas .atlas-head h2{font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:10px 0 12px}
+#atlas .atlas-head p{color:var(--muted);font-size:.98rem}
+#atlas .atlas-fit{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);max-width:1100px;margin:0 auto 22px}
+#atlas .fit-cell{background:var(--panel);padding:18px 20px}
+#atlas .fit-cell .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--army);margin-bottom:8px}
+#atlas .fit-cell h3{font-size:1rem;font-weight:600;margin-bottom:8px}
+#atlas .fit-cell p{font-size:.86rem;color:var(--muted);line-height:1.5}
+#atlas .atlas-actions{display:flex;flex-wrap:wrap;gap:8px 10px;max-width:1100px;margin:0 auto}
+#atlas .atlas-actions a{font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--army);text-decoration:none;border:1px solid color-mix(in srgb,var(--army) 50%,transparent);padding:6px 10px}
+#atlas .atlas-actions a:hover{color:var(--text);border-color:var(--text)}
+#atlas .atlas-note{max-width:1100px;margin:12px auto 0;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:760px){#atlas .atlas-fit{grid-template-columns:1fr}}
+
+/* ---------- manifest ---------- */
+#manifest{padding:52px 6vw 80px}
+#manifest h2{font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:10px 0 24px}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr.mrow{cursor:pointer;transition:background .15s}
+tr.mrow:hover,tr.mrow.lit{background:color-mix(in srgb,var(--mc,var(--panel)) 8%,var(--panel))}
+tr.mrow.pred{cursor:default}
+tr.mrow.pred td.m-id{opacity:.85}
+td.m-id{font-family:var(--mono);white-space:nowrap;color:var(--mc)}
+td.m-date{font-family:var(--mono);white-space:nowrap;color:var(--muted)}
+td.m-link a{font-family:var(--mono);font-size:.7rem;color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc)}
+.phase-chip{display:inline-block;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;padding:2px 8px;border:1px solid var(--mc);color:var(--mc);text-transform:uppercase;white-space:nowrap}
+.status-chip{display:inline-block;font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;padding:2px 6px;margin-top:6px;border:1px dashed var(--muted);color:var(--muted);text-transform:uppercase;white-space:nowrap}
+.m-meta{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.m-meta strong{color:var(--army);font-weight:500}
+.m-verified{font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-top:6px;white-space:nowrap}
+.asof-note{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+
+footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68rem;border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
+@media (max-width:640px){
+  nav.phases button{font-size:.56rem;padding:12px 4px}
+  #track{height:328px}
+}
+</style>
+</head>
+<body>
+
+<nav class="jump" id="jumpNav" aria-label="On this page">
+  <span class="jump-label">On this page</span>
+  <a href="#overview">Overview</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#manifest">Manifest</a>
+  <a href="#panic-curve">Do this first</a>
+  <a href="#atlas">ATLAS</a>
+  <a href="#hubs">Working lists</a>
+</nav>
+
+<header id="overview">
+  <div class="cipher" id="cipher"></div>
+  <div class="masthead">
+    <a class="mast-aci" href="https://cyber.army.mil/" target="_blank" rel="noopener" title="Army Cyber Institute at West Point">
+      <img src="assets/aci-west-point.png" alt="The Army Cyber Institute at West Point" width="72" height="72">
+      <div class="aci-meta">
+        <span class="aci-role">Prepared by</span>
+        <span class="aci-name">Army Cyber Institute<br>at West Point</span>
+      </div>
+    </a>
+    <div class="mast-orgs" aria-label="Organizations on the paper trail">
+      <div class="org-label">Army and federal partners</div>
+      <div class="org-row army-row">
+        <a class="org-chip" href="https://www.army.mil/cio" target="_blank" rel="noopener" title="U.S. Army Chief Information Officer">
+          <img src="assets/orgs/army.svg" alt="" width="22" height="22">
+          <span>Army CIO</span>
+        </a>
+        <a class="org-chip" href="https://www.army.mil/pca" target="_blank" rel="noopener" title="Principal Cyber Advisor to the Secretary of the Army">
+          <img src="assets/orgs/army.svg" alt="" width="22" height="22">
+          <span>Army PCA</span>
+        </a>
+      </div>
+      <div class="org-row">
+        <a class="org-chip" href="https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/" target="_blank" rel="noopener" title="National Security Agency">
+          <img src="assets/orgs/nsa.svg" alt="" width="22" height="22">
+          <span>NSA</span>
+        </a>
+        <a class="org-chip wide" href="https://csrc.nist.gov/Projects/post-quantum-cryptography" target="_blank" rel="noopener" title="National Institute of Standards and Technology">
+          <img src="assets/orgs/nist.svg" alt="" width="46" height="12">
+          <span>NIST</span>
+        </a>
+        <a class="org-chip" href="https://www.cisa.gov/topics/risk-management/quantum" target="_blank" rel="noopener" title="Cybersecurity and Infrastructure Security Agency">
+          <img src="assets/orgs/cisa.svg" alt="" width="22" height="22">
+          <span>CISA</span>
+        </a>
+        <a class="org-chip" href="https://www.war.gov/" target="_blank" rel="noopener" title="Department of War">
+          <img src="assets/orgs/dod.svg" alt="" width="22" height="22">
+          <span>DoW</span>
+        </a>
+        <span class="org-chip text-only" title="Office of Management and Budget">OMB</span>
+        <span class="org-chip text-only" title="Executive Office of the President">Exec. Office</span>
+        <span class="org-chip text-only" title="Department of Homeland Security">DHS</span>
+        <span class="org-chip text-only" title="Committee on National Security Systems">CNSS</span>
+      </div>
+    </div>
+  </div>
+  <div class="brand">
+    <span class="brand-mark">U.S. Army</span>
+    <div class="eyebrow">1994 → Q-DAY · Army cryptographic readiness</div>
+  </div>
+  <h1>The road to <span class="qd">Q&#8209;Day</span></h1>
+  <p class="lede">In August 2015, NSA and CNSS directed programs to stop new investment in the public-key crypto that protects command and control and to prepare for quantum-resistant algorithms. This page records that path for the Army: the warning, the current work, and the effect of a cryptographically relevant quantum computer (CRQC) if migration finishes late. Briefings stress harvest-now-decrypt-later. Forgery is the operational problem. A CRQC reads stored traffic. It also signs new orders, forges credentials, and ships software updates that verify as authentic.</p>
+</header>
+
+<div class="sec-rule" aria-hidden="true"><i></i><span>01 · Timeline</span><i></i></div>
+<section id="timeline">
+<nav class="phases" id="phaseTabs" aria-label="Timeline phases"></nav>
+
+<div id="timeline-wrap">
+  <div id="timeline-scroll">
+    <div id="track">
+      <svg id="lattice" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div id="axis"></div>
+    </div>
+    <div id="phase-stories" aria-live="polite"></div>
+    <div id="phase-key" aria-label="Phase color key"></div>
+  </div>
+</div>
+</section>
+
+<div id="tooltip" role="tooltip"></div>
+
+<div class="sec-rule" aria-hidden="true"><i></i><span>02 · Document manifest</span><i></i></div>
+<section id="manifest">
+  <div class="eyebrow">Document manifest · newest first</div>
+  <h2>ID → Document</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Date</th><th>Document</th><th>Phase</th><th>Source</th></tr></thead>
+    <tbody id="mbody"></tbody>
+  </table>
+  <p class="asof-note" id="manifest-asof"></p>
+</section>
+
+<div class="sec-rule" aria-hidden="true"><i></i><span>03 · Requirements</span><i></i></div>
+<section id="panic-curve">
+  <div class="cow-head">
+    <div class="eyebrow">Do this before you cut over</div>
+    <h2>Map the network first</h2>
+    <p>Do not wait to buy PQC. Wait only long enough to know your network. If you skip inventory and rush the cutover, you pay twice. Time spent now on inventory, latency, whether systems still talk to each other, and how Soldiers actually use the gear is cheap. Army programs already learned this on <a href="#case-wint">WIN-T</a> and <a href="#case-jrss">JRSS</a>. Write the hard requirements first. Then field PQC.</p>
+  </div>
+
+  <div class="cow-callout">
+    <p><strong>Spend early money on requirements. Do not rush the cutover.</strong> Finish this list first:</p>
+    <ul>
+      <li>Find every place RSA and ECC still live</li>
+      <li>Map apps and old networks that depend on that crypto</li>
+      <li>Set latency and throughput limits for bigger keys and slower handshakes</li>
+      <li>Include ICS, OT, and small devices</li>
+      <li>Account for tactical conditions and what operators can handle</li>
+      <li>Get vendor support and a path to swap algorithms later</li>
+    </ul>
+    <p>Skip this and the Army fields gear it has to rework, then does the job again under a tighter clock.</p>
+  </div>
+
+  <svg viewBox="-20 -10 920 400" width="100%" style="max-width:1400px;display:block;margin:0 auto;overflow:visible" role="img" aria-label="Conceptual diagram: resources, mistakes, and vendor hype all grow when network requirements are deferred until a rushed PQC transition near Q-Day">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/>
+      </marker>
+    </defs>
+    <!-- time axis -->
+    <line x1="60" y1="300" x2="800" y2="300" stroke="var(--muted)" stroke-width="2" marker-start="url(#arr)" marker-end="url(#arr)"/>
+    <text x="90" y="328" font-family="var(--mono)" font-size="13" fill="var(--ph2)" letter-spacing="2">NO PANIC</text>
+    <text x="800" y="328" text-anchor="end" font-family="var(--mono)" font-size="13" fill="var(--ph4)" letter-spacing="2">PANIC</text>
+    <!-- resource envelope -->
+    <path d="M90,278 L94,278 L98,278 L102,278 L106,278 L110,278 L114,278 L118,278 L122,278 L126,278 L130,278 L134,278 L138,277 L142,277 L146,277 L150,277 L154,277 L158,277 L162,277 L166,276 L170,276 L174,276 L178,276 L182,276 L186,275 L190,275 L194,275 L198,275 L202,274 L206,274 L210,274 L214,274 L218,273 L222,273 L226,272 L230,272 L234,272 L238,271 L242,271 L246,271 L250,270 L254,270 L258,269 L262,269 L266,268 L270,268 L274,267 L278,267 L282,266 L286,266 L290,265 L294,265 L298,264 L302,263 L306,263 L310,262 L314,261 L318,261 L322,260 L326,259 L330,259 L334,258 L338,257 L342,257 L346,256 L350,255 L354,254 L358,254 L362,253 L366,252 L370,251 L374,250 L378,249 L382,248 L386,248 L390,247 L394,246 L398,245 L402,244 L406,243 L410,242 L414,241 L418,240 L422,239 L426,238 L430,237 L434,236 L438,234 L442,233 L446,232 L450,231 L454,230 L458,229 L462,228 L466,226 L470,225 L474,224 L478,223 L482,221 L486,220 L490,219 L494,218 L498,216 L502,215 L506,214 L510,212 L514,211 L518,209 L522,208 L526,207 L530,205 L534,204 L538,202 L542,201 L546,199 L550,198 L554,196 L558,194 L562,193 L566,191 L570,190 L574,188 L578,186 L582,185 L586,183 L590,181 L594,180 L598,178 L602,176 L606,174 L610,173 L614,171 L618,169 L622,167 L626,165 L630,164 L634,162 L638,160 L642,158 L646,156 L650,154 L654,152 L658,150 L662,148 L666,146 L670,144 L674,142 L678,140 L682,138 L686,136 L690,134 L694,132 L698,129 L702,127 L706,125 L710,123 L714,121 L718,119 L722,116 L726,114 L730,112 L734,109 L738,107 L742,105 L746,102 L750,100 L754,98 L758,95 L762,93 L766,90 L770,88 L770,288 L90,288 Z" fill="var(--ph2)" opacity="0.08"/>
+    <path d="M90,278 L94,278 L98,278 L102,278 L106,278 L110,278 L114,278 L118,278 L122,278 L126,278 L130,278 L134,278 L138,277 L142,277 L146,277 L150,277 L154,277 L158,277 L162,277 L166,276 L170,276 L174,276 L178,276 L182,276 L186,275 L190,275 L194,275 L198,275 L202,274 L206,274 L210,274 L214,274 L218,273 L222,273 L226,272 L230,272 L234,272 L238,271 L242,271 L246,271 L250,270 L254,270 L258,269 L262,269 L266,268 L270,268 L274,267 L278,267 L282,266 L286,266 L290,265 L294,265 L298,264 L302,263 L306,263 L310,262 L314,261 L318,261 L322,260 L326,259 L330,259 L334,258 L338,257 L342,257 L346,256 L350,255 L354,254 L358,254 L362,253 L366,252 L370,251 L374,250 L378,249 L382,248 L386,248 L390,247 L394,246 L398,245 L402,244 L406,243 L410,242 L414,241 L418,240 L422,239 L426,238 L430,237 L434,236 L438,234 L442,233 L446,232 L450,231 L454,230 L458,229 L462,228 L466,226 L470,225 L474,224 L478,223 L482,221 L486,220 L490,219 L494,218 L498,216 L502,215 L506,214 L510,212 L514,211 L518,209 L522,208 L526,207 L530,205 L534,204 L538,202 L542,201 L546,199 L550,198 L554,196 L558,194 L562,193 L566,191 L570,190 L574,188 L578,186 L582,185 L586,183 L590,181 L594,180 L598,178 L602,176 L606,174 L610,173 L614,171 L618,169 L622,167 L626,165 L630,164 L634,162 L638,160 L642,158 L646,156 L650,154 L654,152 L658,150 L662,148 L666,146 L670,144 L674,142 L678,140 L682,138 L686,136 L690,134 L694,132 L698,129 L702,127 L706,125 L710,123 L714,121 L718,119 L722,116 L726,114 L730,112 L734,109 L738,107 L742,105 L746,102 L750,100 L754,98 L758,95 L762,93 L766,90 L770,88" fill="none" stroke="var(--ph2)" stroke-width="2.5"/>
+    <text x="450" y="208" font-family="var(--mono)" font-size="13" fill="var(--ph2)" letter-spacing="2" transform="rotate(-16 450 208)">RESOURCES EXPENDED</text>
+    <!-- mistakes oscillation -->
+    <path d="M90,282 L94,280 L98,281 L102,283 L106,284 L110,282 L114,280 L118,281 L122,283 L126,284 L130,282 L134,280 L138,280 L142,282 L146,284 L150,283 L154,280 L158,279 L162,280 L166,283 L170,284 L174,282 L178,279 L182,278 L186,280 L190,283 L194,284 L198,282 L202,278 L206,276 L210,278 L214,281 L218,284 L222,283 L226,279 L230,275 L234,274 L238,277 L242,281 L246,284 L250,282 L254,278 L258,273 L262,271 L266,273 L270,279 L274,283 L278,284 L282,280 L286,274 L290,268 L294,267 L298,270 L302,276 L306,282 L310,284 L314,281 L318,275 L322,267 L326,262 L330,261 L334,266 L338,273 L342,280 L346,284 L350,283 L354,278 L358,270 L362,261 L366,255 L370,253 L374,256 L378,263 L382,271 L386,278 L390,283 L394,284 L398,280 L402,272 L406,263 L410,254 L414,246 L418,242 L422,242 L426,245 L430,251 L434,259 L438,268 L442,275 L446,281 L450,284 L454,284 L458,280 L462,275 L466,267 L470,258 L474,249 L478,241 L482,233 L486,227 L490,222 L494,220 L498,219 L502,220 L506,222 L510,225 L514,229 L518,234 L522,239 L526,244 L530,249 L534,254 L538,258 L542,262 L546,266 L550,269 L554,271 L558,273 L562,275 L566,276 L570,277 L574,278 L578,279 L582,279 L586,279 L590,279 L594,278 L598,277 L602,276 L606,275 L610,273 L614,270 L618,267 L622,263 L626,258 L630,252 L634,245 L638,237 L642,228 L646,217 L650,206 L654,194 L658,182 L662,171 L666,160 L670,151 L674,145 L678,142 L682,143 L686,149 L690,160 L694,175 L698,194 L702,215 L706,237 L710,258 L714,274 L718,283 L722,283 L726,273 L730,252 L734,223 L738,189 L742,154 L746,124 L750,105 L754,101 L758,115 L762,144 L766,184 L770,228" fill="none" stroke="var(--ph4)" stroke-width="1.6" opacity="0.85"/>
+    <!-- vendor hype: solution pressure outruns validated requirements as panic rises (conceptual) -->
+    <path d="M90,258 C280,246 460,200 590,140 C660,107 720,60 762,16" fill="none" stroke="var(--ph3)" stroke-width="2" stroke-dasharray="7 5" opacity="0.9"/>
+    <text x="250" y="222" font-family="var(--mono)" font-size="12" fill="var(--ph3)" letter-spacing="2" transform="rotate(-10 250 222)">VENDOR HYPE</text>
+    <text x="100" y="273" font-family="var(--mono)" font-size="11" fill="var(--text)">map the network first: cheap, steady</text>
+    <text x="520" y="64" font-family="var(--mono)" font-size="11" fill="var(--text)">cutover without requirements:</text>
+    <text x="520" y="80" font-family="var(--mono)" font-size="11" fill="var(--text)">expensive, brittle</text>
+  </svg>
+
+  <div class="cow-legend" aria-label="Diagram legend">
+    <div class="leg">
+      <div class="swatch axis"></div>
+      <div>
+        <strong>Left → right</strong>
+        <span>Calm now. Rush later. Time to the threat runs left to right.</span>
+      </div>
+    </div>
+    <div class="leg">
+      <div class="swatch" style="background:var(--ph2)"></div>
+      <div>
+        <strong>Teal curve · resources</strong>
+        <span>Cost climbs if you wait. Early requirements work is cheap. A late cutover is not.</span>
+      </div>
+    </div>
+    <div class="leg">
+      <div class="swatch" style="background:var(--ph4)"></div>
+      <div>
+        <strong>Red wave · mistakes</strong>
+        <span>A rush misses apps, latency, ICS, and whether operators can use the gear in the field.</span>
+      </div>
+    </div>
+    <div class="leg">
+      <div class="swatch" style="background:repeating-linear-gradient(90deg,var(--ph3) 0 6px,transparent 6px 10px)"></div>
+      <div>
+        <strong>Amber dashes · vendor hype</strong>
+        <span>Vendors will sell hard as the clock gets short. Buy to your inventory, not the pitch.</span>
+      </div>
+    </div>
+    <div class="leg-note">These curves show the idea. They are not measured data.</div>
+  </div>
+
+  <div class="lesson-grid">
+    <div class="lesson" id="case-wint">
+      <div class="tag">Lessons · WIN-T Inc 2</div>
+      <h3>Field gear that formations can use</h3>
+      <p>WIN-T put mobile tactical networking in the field at a scale no one had done before. Testing showed early nodes asked more of formations than operations allow. Army leadership paused, moved about $2.3B, and redesigned the approach. For PQC, write C2, mobility, and Soldier load as hard requirements from day one. Field crypto that units can operate.</p>
+      <div class="cites">
+        <a href="https://www.dote.osd.mil/Portals/97/pub/reports/FY2013/army/2013win-t.pdf" target="_blank" rel="noopener">DOT&amp;E FY2013</a>
+        <a href="https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Science_and_Technology/16-F-0250_(REPORT)_Operational_Evaluation_of_Warfighter_Information-Tactical_(WIN-T)_Inc_2.pdf" target="_blank" rel="noopener">FOT&amp;E 2</a>
+        <a href="https://media.defense.gov/2016/Mar/01/2001714217/-1/-1/1/DODIG-2016-058.pdf" target="_blank" rel="noopener">DODIG-2016-058</a>
+        <a href="https://www.congress.gov/crs_external_products/IN/PDF/IN10799/IN10799.5.pdf" target="_blank" rel="noopener">CRS IN10799</a>
+        <a href="https://www.dote.osd.mil/Portals/97/pub/reports/FY2017/army/2017win-t.pdf" target="_blank" rel="noopener">DOT&amp;E FY2017</a>
+      </div>
+    </div>
+    <div class="lesson" id="case-jrss">
+      <div class="tag">Lessons · JRSS</div>
+      <h3>The hard problems show up when you move at scale</h3>
+      <p>JRSS set out to put enterprise security on one modern stack. The stack worked. The hard part showed up during the move: old apps, old networks, ICS and OT paths, and latency. DISA closed those gaps as it went. PQC will hit the same edges because keys get bigger and handshakes get heavier. Find those paths now.</p>
+      <div class="cites">
+        <a href="https://www.dodig.mil/reports.html/Article/1867983/audit-of-the-dods-implementation-of-the-joint-regional-security-stacks-dodig-20/" target="_blank" rel="noopener">DODIG-2019-089</a>
+        <a href="https://www.dote.osd.mil/Portals/97/pub/reports/FY2020/dod/2020jrss.pdf" target="_blank" rel="noopener">DOT&amp;E FY2020</a>
+        <a href="https://www.defenseone.com/defense-systems/2019/02/disa-works-to-make-jrss-faster-more-reliable/191254/" target="_blank" rel="noopener">Defense One 2019</a>
+        <a href="https://federalnewsnetwork.com/defense-main/2019/06/ig-audit-raises-more-red-flags-for-dods-joint-regional-security-stacks/" target="_blank" rel="noopener">FNN 2019</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cow-callout" style="margin-top:28px">
+    <p><strong>Army PQC work applies these lessons now.</strong> Discovery and validation tools find crypto on the network. New vendor solutions go through <a href="#atlas" style="color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)">ATLAS</a> before test, buy, or fielding.</p>
+  </div>
+
+  <p class="cow-foot">The network keeps getting denser: more function in less gear, more apps on shared paths, less slack. A rushed PQC cutover repeats two failures: gear formations cannot use, and late-found apps, legacy links, ICS, and latency. Inventory shows those paths early.</p>
+</section>
+
+<div class="sec-rule" aria-hidden="true"><i></i><span>04 · ATLAS</span><i></i></div>
+<section id="atlas">
+  <div class="atlas-head">
+    <div class="eyebrow">How the Army takes in PQC products</div>
+    <h2>What ATLAS is</h2>
+    <p>ATLAS means Acquisition, Testing, Licensing, and Security. It is the Department door for new PQC products. A vendor enters once. Army and other Components share one list of approved products and approved uses. ATLAS does not replace NIST standards, CNSA 2.0, or a program's own test. It is the gate a product passes before test, buy, or fielding.</p>
+  </div>
+  <div class="atlas-fit" aria-label="How ATLAS fits the migration">
+    <div class="fit-cell">
+      <div class="tag">How it fits · now</div>
+      <h3>One door for the 2029 job</h3>
+      <p>The Department set 31 December 2029 as the date for core systems to run PQC. ATLAS keeps that work from turning into a pile of one-off pilots. Vendors enter here. The Army uses it to see what is approved and ready.</p>
+    </div>
+    <div class="fit-cell">
+      <div class="tag">Who does what</div>
+      <h3>The Army starts it; the vendor fills it</h3>
+      <p>An Army or other Component sponsor opens the request. The vendor submits one form per product and shows how the crypto actually works: algorithms, protocols, random numbers, and key storage. The process requires white papers and declines marketing-only packets.</p>
+    </div>
+    <div class="fit-cell">
+      <div class="tag">What approval means</div>
+      <h3>One approval, Department-wide</h3>
+      <p>Once ATLAS approves a product for a use, the rest of the Department can use it for that same use. Another office does not start over. ATLAS does not redesign the product or chase missing papers. Send a complete packet the first time.</p>
+    </div>
+  </div>
+  <div class="atlas-actions">
+    <a href="https://forms.osi.apps.mil/r/MuJFwCHiC7" target="_blank" rel="noopener">ATLAS intake questionnaire ↗</a>
+    <a href="https://dowcio.war.gov/Portals/0/Documents/Library/PreparingForMigrationPQC.pdf" target="_blank" rel="noopener">Memo · Preparing for Migration to PQC ↗</a>
+    <a href="https://cybersecurityks.osd.mil/DoDcs/pqc" target="_blank" rel="noopener">DoW PQC site · CAC required ↗</a>
+  </div>
+  <p class="atlas-note">The form sits on a CAC host. The November 2025 CIO memo has the detail. Vendors do not get the .mil site.</p>
+</section>
+
+<div class="sec-rule" aria-hidden="true"><i></i><span>05 · Working lists</span><i></i></div>
+<section id="hubs" style="padding:52px 6vw 80px">
+  <div class="eyebrow">Working lists</div>
+  <h2 style="font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(1.1rem,2.2vw,1.5rem);margin:10px 0 8px">Working lists, not on the timeline</h2>
+  <p style="max-width:70ch;color:var(--muted);font-size:.88rem;margin-bottom:20px">These pages change often. The timeline does not pin them to a date. Use them as the live working list.</p>
+  <table><thead><tr><th>Org</th><th>Resource</th><th>Source</th></tr></thead><tbody id="hbody"></tbody></table>
+  <p class="asof-note" id="hubs-asof"></p>
+</section>
+
+<footer>U.S. ARMY · CRYPTOGRAPHIC READINESS · Q-DAY IS A POINT. ITS TIMING IS A BAND.</footer>
+
+<script>
+/* ============================================================
+   DATA: edit these two arrays to grow the site.
+   dates are decimal years (2022.85 ≈ Nov 2022) for positioning.
+============================================================ */
+const YEAR_MIN = 2014.5, YEAR_MAX = 2037;
+/* Prologue: the 1994-2015 foundations era is real but would flatten the modern
+   detail if drawn to scale, so it is compressed into a fixed share of the track
+   and the seam is marked with an axis break. Wide enough that the Origins
+   narration sits in-line with the other phase stories. YEAR_MAX is clipped
+   just past 2035 so that civilian-migration mark sits on the right of the axis. */
+const YEAR_PRO_MIN = 1994.0;
+const PRO_SHARE = 16; // % of track width given to the compressed 1994-2015 prologue
+
+/* Site-level governance: when the links and metadata below were last checked by a human. */
+const META = { validatedAsOf: 'Jul 2026' };
+
+/* Invisible day-level graduations: every record carries a real calendar date (d:'YYYY-MM-DD')
+   and is converted to a fractional year at day precision, so dots snap to the exact day
+   between the year ticks instead of a hand-estimated decimal. */
+function decYear(iso){
+  const [y,m,day] = iso.split('-').map(Number);
+  const start = Date.UTC(y,0,1), next = Date.UTC(y+1,0,1);
+  return y + (Date.UTC(y,(m||1)-1,day||1) - start) / (next - start);
+}
+const STRATEGY_DAY = decYear('2026-06-23'); // DoW PQC Strategy release: the phase pivot
+const TARGET_STATE_DAY = decYear('2029-12-31'); // core systems migrated to PQC-compliant algorithms
+const QDAY_THEORETICAL = decYear('2032-07-01'); // midpoint of the ~2030-2035 CRQC estimate band; the Q-Day phase opens here
+
+const PHASES = [
+  {
+    key:'origins', label:'Origins', years:'1994 to 2015 · compressed', from:YEAR_PRO_MIN, to:2014.5, color:'var(--ph0)',
+    meaning:'how the threat started',
+    tense:'Where it began',
+    story:'The threat started long before the policy memos. In 1994 Peter Shor showed a quantum computer can break RSA, Diffie-Hellman, and ECC once the machine exists. Researchers worked that problem for twenty years. Policy caught up in 2015. Anyone who stored old encrypted traffic during those years can wait and read it later. The axis compresses this stretch.'
+  },
+  {
+    key:'pre', label:'Pre-Strategy', years:'Aug 2015 to Jun 2026', from:2014.5, to:STRATEGY_DAY, color:'var(--ph1)',
+    meaning:'policy and standards',
+    tense:'What programs assumed',
+    story:'Programs treated the threat as 15 to 30 years out. Near-term funding followed that view. Federal rules and NIST standards aimed at about 2035 for civilian systems. Briefings stressed harvest-now-decrypt-later. Signature forgery received little attention outside academic work. Army C2 and logistics stayed on classical crypto with no firm Army date.'
+  },
+  {
+    key:'strat', label:'Strategy', years:'Jun 2026 to Dec 2029', from:STRATEGY_DAY, to:TARGET_STATE_DAY, color:'var(--ph2)',
+    meaning:'this window is current',
+    tense:'Current work',
+    story:'The Department published the PQC Strategy. Core systems move to PQC by 31 December 2029. Programs support or phase out the rest by 2030. National security systems use CNSA 2.0. The Department coordinates with industry. That date is earlier than the civilian 2035 target. Progress is inventories, contracts, and fielded gear. New products enter through ATLAS so the Army keeps one door in and one list of approved tools.'
+  },
+  {
+    key:'impl', label:'Target State', years:'Dec 2029 →', from:TARGET_STATE_DAY, to:QDAY_THEORETICAL, color:'var(--ph3)',
+    meaning:'the planned end state',
+    tense:'Planned end state',
+    story:'By this date, inventoried core systems run PQC and the managed network retires classical public-key crypto. That holds only if the inventory is complete. Platforms, operational technology, and vendor-built crypto still need work.'
+  },
+  {
+    /* Q-Day is a point, not a phase: the moment a peer holds a CRQC, Post-CRQC begins.
+       The star marks the theoretical point; the hatched strip shows where it may land. */
+    key:'post', label:'Post-CRQC', years:'After Q-Day (timing unknown)', from:QDAY_THEORETICAL, to:YEAR_MAX, color:'var(--ph5)',
+    meaning:'starts at Q-Day; the date is unknown',
+    tense:'Risk after Q-Day',
+    story:'Q-Day is the day a CRQC exists. The operator may not announce it. Estimates from 2029 to 2035 overlap the migration window, so a CRQC can arrive before the work finishes. Migrated systems stay protected. Unmigrated systems fail. Stored traffic becomes readable. Forgery is the larger operational problem: a CRQC can sign as a commander, ship a trusted-looking update, and inject false orders into C2. Harvested traffic exposes the past. Forged signatures break current operations. Programs need modular crypto and a way to swap algorithms.'
+  }
+];
+
+const DOCS = [
+  {id:'PQC-000', d:'1994-11-20', label:'Nov 1994', phase:'origins',
+   title:'Shor\u2019s Algorithm: Quantum Factoring in Polynomial Time',
+   desc:'Peter Shor presents "Algorithms for Quantum Computation: Discrete Logarithms and Factoring" at IEEE FOCS (Nov 1994), proving a sufficiently large quantum computer breaks RSA, Diffie-Hellman, and ECC. Every document on this timeline is downstream of this result. Link is the expanded journal version on arXiv.',
+   url:'https://arxiv.org/abs/quant-ph/9508027'},
+  {id:'PQC-001', d:'2015-08-11', label:'Aug 2015', phase:'pre', sourceTier:'mirror', bibKey:'cnss2015am0215',
+   title:'CNSS Advisory Memorandum 02-15: Quantum Transition',
+   desc:'CNSS Advisory Memorandum 02-15 (11 Aug 2015): an advisory memo, not a directive. NSA/CNSS announce the coming transition to quantum-resistant algorithms and advise against major new Suite B (ECC) investment. The starting gun. Link is an archived mirror; the original CNSS posting requires navigation from cnss.gov.',
+   url:'https://cryptome.org/2015/08/CNSS_Advisory_Memo_02-15.pdf'},
+  {id:'PQC-002', d:'2016-04-28', label:'Apr 2016', phase:'pre',
+   title:'NISTIR 8105: Report on Post-Quantum Cryptography',
+   desc:'NIST frames the quantum threat and announces intent to standardize PQC algorithms via open competition.',
+   url:'https://nvlpubs.nist.gov/nistpubs/ir/2016/NIST.IR.8105.pdf'},
+  {id:'PQC-003', d:'2016-12-20', label:'Dec 2016', phase:'pre',
+   title:'NIST Call for PQC Standardization Submissions',
+   desc:'Formal call for proposals opens the multi-round global competition; 82 submissions follow.',
+   url:'https://csrc.nist.gov/projects/post-quantum-cryptography'},
+  {id:'PQC-004', d:'2022-05-04', label:'May 2022', phase:'pre',
+   title:'NSM-10: National Security Memorandum on Quantum',
+   desc:'White House directs federal migration to PQC, sets ~2035 goal, and orders annual cryptographic inventories. Linked: NIST briefing on the government transition under NSM-10.',
+   url:'https://csrc.nist.gov/csrc/media/Presentations/2024/u-s-government-s-transition-to-pqc/images-media/presman-govt-transition-pqc2024.pdf'},
+  {id:'PQC-005', d:'2022-09-07', label:'Sep 2022', phase:'pre', supersedes:'PQC-026',
+   title:'NSA CNSA 2.0 Advisory',
+   desc:'NSA specifies quantum-resistant algorithm requirements and timelines for national security systems. Replaces the interim CNSA 1.0 suite.',
+   url:'https://media.defense.gov/2025/May/30/2003728741/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS.PDF'},
+  {id:'PQC-006', d:'2022-11-18', label:'Nov 2022', phase:'pre', supersededBy:'PQC-022', bibKey:'omb2023m2302',
+   title:'OMB M-23-02: Migrating to PQC',
+   desc:'Binding OMB memorandum: agencies must inventory quantum-vulnerable cryptography and plan migration. Governed the civilian planning phase until M-26-15 moved the effort to execution.',
+   url:'https://bidenwhitehouse.archives.gov/wp-content/uploads/2022/11/M-23-02-M-Memo-on-Migrating-to-Post-Quantum-Cryptography.pdf'},
+  {id:'PQC-007', d:'2022-12-21', label:'Dec 2022', phase:'pre',
+   title:'Quantum Computing Cybersecurity Preparedness Act',
+   desc:'Public Law 117-260 writes the PQC migration mandate into statute.',
+   url:'https://www.congress.gov/bill/117th-congress/house-bill/7535'},
+  {id:'PQC-008', d:'2023-08-21', label:'Aug 2023', phase:'pre',
+   title:'CISA/NSA/NIST Quantum-Readiness Factsheet',
+   desc:'Joint guidance: build a quantum-readiness roadmap, inventory cryptography, engage vendors on harvest-now-decrypt-later risk.',
+   url:'https://www.cisa.gov/resources-tools/resources/quantum-readiness-migration-post-quantum-cryptography'},
+  {id:'PQC-009', d:'2024-07-15', label:'Jul 2024', phase:'pre',
+   title:'White House Report on PQC Migration (Cost Estimate)',
+   desc:'Estimates ~$7.1B (2024 dollars) to migrate civilian federal systems, 2025-2035. NSS costs estimated separately, classified.',
+   url:'https://bidenwhitehouse.archives.gov/wp-content/uploads/2024/07/REF_PQC-Report_FINAL_Send.pdf'},
+  {id:'PQC-010', d:'2024-08-13', label:'Aug 2024', phase:'pre', supersedes:'PQC-033',
+   title:'FIPS 203 / 204 / 205: First PQC Standards',
+   desc:'ML-KEM (Kyber), ML-DSA (Dilithium), SLH-DSA (SPHINCS+) finalized. "Prepare" becomes an engineering task. Resolves the competition\u2019s round-3 field.',
+   url:'https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization'},
+  {id:'PQC-011', d:'2024-11-12', label:'Nov 2024', phase:'pre', status:'draft',
+   title:'NIST IR 8547 (Draft): Transition to PQC Standards',
+   desc:'Deprecation schedule for quantum-vulnerable algorithms: deprecated after 2030, disallowed after 2035.',
+   url:'https://csrc.nist.gov/pubs/ir/8547/ipd'},
+  {id:'PQC-012', d:'2025-03-11', label:'Mar 2025', phase:'pre',
+   title:'NIST Selects HQC as Backup KEM',
+   desc:'A fifth algorithm chosen from a different math family (codes, not lattices), a hedge against a lattice break.',
+   url:'https://www.nist.gov/news-events/news/2025/03/nist-selects-hqc-fifth-algorithm-post-quantum-encryption'},
+  {id:'PQC-013', d:'2025-11-18', label:'Nov 2025', phase:'pre', supersededBy:'PQC-014',
+   title:'DoW CIO Memo: Preparing for Migration to PQC',
+   desc:'Department CIO memo on preparing for PQC migration; cites M-23-02 as governing mandate. Precursor to the full strategy, which absorbed and replaced it.',
+   url:'https://dodcio.defense.gov/Portals/0/Documents/Library/PreparingForMigrationPQC.pdf'},
+  {id:'PQC-014', d:'2026-06-23', label:'Jun 2026', phase:'strat', supersedes:'PQC-013',
+   title:'Department of War Post-Quantum Cryptography Strategy',
+   desc:'THE strategy: the document this timeline pivots on. Core systems migrated to PQC-compliant algorithms by 31 Dec 2029; PQC on high-impact systems by 2030; coordination with the defense industrial base. Cleared for publication 16 Apr 2026; released 23 Jun 2026, one day after the EO pair.',
+   url:'https://dowcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
+  {id:'PQC-015', d:'2030-12-31', label:'Dec 2030', phase:'impl', status:'milestone',
+   title:'Milestone: DoW High-Impact Systems Deadline',
+   desc:'Strategy target: PQC deployed on high-impact systems. Also NIST\u2019s deprecation date for classical asymmetric crypto. A point of prediction, not a dated document.',
+   predLabel:'High-impact systems'},
+  {id:'PQC-016', d:'2035-01-01', label:'2035', phase:'impl', status:'milestone',
+   title:'Milestone: Federal Migration Complete / Classical Disallowed',
+   desc:'NSM-10 target for civilian migration; NIST IR 8547 disallows quantum-vulnerable algorithms. A compliance milestone, not a Q-Day event; it sits inside the CRQC estimate band by calendar, not by nature. A point of prediction, not a dated document.',
+   predLabel:'Civilian migration complete'},
+  {id:'PQC-017', d:'2021-07-15', label:'2021', phase:'pre',
+   title:'NCCoE Project Launch: Migration to Post-Quantum Cryptography',
+   desc:'NIST NCCoE stands up the applied migration project: discovery tooling, interoperability demos, and practice guides. The go-to site for migration execution.',
+   url:'https://www.nccoe.nist.gov/applied-cryptography/migration-to-pqc'},
+  {id:'PQC-018', d:'2021-10-15', label:'Oct 2021', phase:'pre',
+   title:'DHS Infographic: Preparing for Post-Quantum Cryptography',
+   desc:'DHS/CISA one-page roadmap: inventory, engage standards, prioritize by data lifetime. An early, unusually clear articulation of the migration playbook.',
+   url:'https://www.dhs.gov/sites/default/files/publications/post-quantum_cryptography_infographic_october_2021_508.pdf'},
+  {id:'PQC-019', d:'2023-09-15', label:'Sep 2023', phase:'pre',
+   title:'CISA: Post-Quantum Considerations for Operational Technology',
+   desc:'First dedicated look at the OT/ICS long tail: constrained devices, decades-long lifecycles, and why the hardest migration is not IT.',
+   url:'https://www.cisa.gov/resources-tools/resources/post-quantum-considerations-operational-technology'},
+  {id:'PQC-020', d:'2026-06-22', label:'Jun 2026', phase:'pre',
+   title:'EO 14412: Securing the Nation Against Advanced Cryptographic Attacks',
+   desc:'Executive order on defending against cryptographic attack, the defensive half of the June 2026 EO pair that set conditions for the strategy.',
+   url:'https://www.whitehouse.gov/presidential-actions/2026/06/securing-the-nation-against-advanced-cryptographic-attacks/'},
+  {id:'PQC-021', d:'2026-06-22', label:'Jun 2026', phase:'pre',
+   title:'EO 14413: Ushering in the Next Frontier of Quantum Innovation',
+   desc:'The offensive/industrial half of the EO pair: advancing U.S. quantum capability alongside the defensive migration.',
+   url:'https://www.whitehouse.gov/presidential-actions/2026/06/ushering-in-the-next-frontier-of-quantum-innovation/'},
+  {id:'PQC-022', d:'2026-06-24', label:'Jun 2026', phase:'pre', supersedes:'PQC-006',
+   title:'OMB M-26-15: Execution of the Migration to PQC',
+   desc:'OMB moves from planning (M-23-02) to execution: the memo that operationalizes the migration government-wide. Issued 24 Jun 2026, two days after the EO pair and one day after the DoW strategy.',
+   url:'https://www.whitehouse.gov/wp-content/uploads/2026/06/M-26-15-Execution-of-the-Migration-to-Post-Quantum-Cryptography.pdf'},
+  {id:'PQC-023', d:'2026-06-23', label:'Jun 2026', phase:'strat', status:'press',
+   title:'DoW Release: Quantum Defense Strategy Announcement',
+   desc:'Official press release accompanying the strategy, same day (23 Jun 2026): hardening networks and empowering the joint force.',
+   url:'https://www.war.gov/News/Releases/Release/Article/4524599/securing-global-dominance-dow-unleashes-quantum-defense-strategy-to-harden-netw/'},
+  {id:'PQC-024', d:'2025-06-01', label:'Jun 2025', phase:'pre', lastValidated:'Aug 2026',
+   title:'RFC 9794: Terminology for PQ/Traditional Hybrid Schemes',
+   desc:'IETF informational RFC (PQUIP WG) that fixes a shared vocabulary for hybrid schemes pairing post-quantum and traditional algorithms, the transition pattern most protocols use on the way to pure PQC. Standards bodies agreeing on words is a real milestone: it is how interoperable implementations get built.',
+   url:'https://www.rfc-editor.org/rfc/rfc9794.html'},
+  {id:'PQC-025', d:'2026-06-19', label:'Jun 2026', phase:'pre', lastValidated:'Aug 2026',
+   title:'RFC 9958: Post-Quantum Cryptography for Engineers',
+   desc:'IETF field guide (PQUIP WG) for the people who must actually ship the migration: why a CRQC breaks today\u2019s public-key crypto, why PQC is not a drop-in swap and may force protocol redesign, and how to plan the transition. Published 19 Jun 2026, days before the EO pair and the DoW strategy.',
+   url:'https://www.rfc-editor.org/info/rfc9958'},
+  {id:'PQC-026', d:'2016-01-01', label:'Jan 2016', phase:'pre', sourceTier:'mirror', supersededBy:'PQC-005', lastValidated:'Aug 2026',
+   title:'NSA CNSA Suite 1.0 & Quantum Computing FAQ',
+   desc:'NSA\u2019s public explanation of the CNSA 1.0 suite named in CNSS AM 02-15 and of why the quantum warning came when it did: advances in quantum computing plus the October 2015 ECC deadline made it the moment to stop investing in doomed crypto. CNSA 1.0 was interim guidance by design, replaced by CNSA 2.0 in 2022. Link is an archived mirror.',
+   url:'https://cryptome.org/2016/01/CNSA-Suite-and-Quantum-Computing-FAQ.pdf'},
+  {id:'PQC-027', d:'2016-10-01', label:'Oct 2016', phase:'pre', lastValidated:'Aug 2026',
+   title:'CNSSP-15 Update: CNSA Suite Codified for NSS',
+   desc:'CNSS re-issues Policy 15, writing the CNSA 1.0 algorithms into binding policy for national security systems as the authorized bridge "until acceptable public standards for quantum resistant cryptography exist." Its algorithm guidance was later overtaken by CNSA 2.0.',
+   url:'https://www.cnss.gov/CNSS/issuances/Policies.cfm'},
+  {id:'PQC-028', d:'2017-12-20', label:'Dec 2017', phase:'pre', supersededBy:'PQC-032', lastValidated:'Aug 2026',
+   title:'NIST PQC Competition: Round 1 Candidates (69)',
+   desc:'82 submissions arrived by the November 2017 deadline; 69 were accepted as first-round candidates on 20 Dec 2017. The global competition becomes real. Candidate list superseded as each round narrowed the field.',
+   url:'https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-1-submissions'},
+  {id:'PQC-029', d:'2018-04-11', label:'Apr 2018', phase:'pre', lastValidated:'Aug 2026',
+   title:'First NIST PQC Standardization Conference',
+   desc:'Submitters present all 69 first-round candidates publicly (11-13 Apr 2018). The open-review machinery that later killed Rainbow and SIKE starts turning here.',
+   url:'https://csrc.nist.gov/projects/post-quantum-cryptography/workshops-and-timeline'},
+  {id:'PQC-030', d:'2018-12-01', label:'Dec 2018', phase:'pre', lastValidated:'Aug 2026',
+   title:'National Academies: Quantum Computing Progress & Prospects',
+   desc:'ODNI-sponsored independent assessment of CRQC feasibility (prepublication Dec 2018, published 2019). The report that anchored serious harvest-now-decrypt-later discussion and CRQC timeline estimates in government planning.',
+   url:'https://nap.nationalacademies.org/catalog/25196/quantum-computing-progress-and-prospects'},
+  {id:'PQC-031', d:'2018-12-21', label:'Dec 2018', phase:'pre', lastValidated:'Aug 2026',
+   title:'National Quantum Initiative Act',
+   desc:'Public Law 115-368: the 10-year federal framework coordinating quantum R&D across NIST, NSF, DOE, defense, and intelligence. The legislative bookend to the 2022 Quantum Computing Cybersecurity Preparedness Act.',
+   url:'https://www.congress.gov/bill/115th-congress/house-bill/6227'},
+  {id:'PQC-032', d:'2019-01-30', label:'Jan 2019', phase:'pre', supersedes:'PQC-028', supersededBy:'PQC-033', lastValidated:'Aug 2026',
+   title:'NIST PQC Competition: Round 2 Candidates (26)',
+   desc:'Field cut from 69 to 26, including the eventual winners Kyber, Dilithium, Falcon, and SPHINCS+. Documented in NISTIR 8240.',
+   url:'https://csrc.nist.gov/News/2019/pqc-standardization-process-2nd-round-candidates'},
+  {id:'PQC-033', d:'2020-07-22', label:'Jul 2020', phase:'pre', supersedes:'PQC-032', supersededBy:'PQC-010', lastValidated:'Aug 2026',
+   title:'NIST PQC Competition: Round 3 Finalists (7 + 8 alternates)',
+   desc:'Seven finalists and eight alternates announced (NISTIR 8309). Finalist Rainbow and alternate SIKE were later broken during evaluation, proof that candidates can fail late. Resolved by the 2024 FIPS standards.',
+   url:'https://www.nist.gov/news-events/news/2020/07/pqc-standardization-process-third-round-candidate-announcement'},
+  {id:'PQC-034', d:'1996-05-29', label:'1996', phase:'origins', lastValidated:'Aug 2026',
+   title:'Grover\u2019s Algorithm: Quantum Search Speedup',
+   desc:'Lov Grover shows a quantum computer searches unsorted data quadratically faster, effectively halving symmetric key strength. The reason CNSA mandates AES-256: symmetric crypto survives the quantum era, but only at doubled key sizes.',
+   url:'https://arxiv.org/abs/quant-ph/9605043'},
+  {id:'PQC-035', d:'2001-12-19', label:'2001', phase:'origins', lastValidated:'Aug 2026',
+   title:'IBM/Stanford: Shor\u2019s Algorithm Runs on Real Hardware',
+   desc:'Vandersypen et al. factor 15 with Shor\u2019s algorithm on a 7-qubit NMR quantum computer (Nature, Dec 2001). Trivial number, profound point: the hardware started chasing the math, and it has not stopped.',
+   url:'https://arxiv.org/abs/quant-ph/0112176'},
+  {id:'PQC-036', d:'2005-05-22', label:'2005', phase:'origins', lastValidated:'Aug 2026',
+   title:'Regev: Learning With Errors (LWE)',
+   desc:'Oded Regev introduces the learning-with-errors problem and its lattice hardness reduction (STOC 2005). This is the math ML-KEM and ML-DSA stand on: the defense was on paper two decades before it was mandated.',
+   url:'https://cims.nyu.edu/~regev/papers/qcrypto.pdf'},
+  {id:'PQC-037', d:'2006-05-23', label:'2006', phase:'origins', lastValidated:'Aug 2026',
+   title:'PQCrypto 2006: The Field Gets Its Name',
+   desc:'First International Workshop on Post-Quantum Cryptography (Leuven, May 2006). The research community organizes under the name "post-quantum cryptography," a decade before NIST\u2019s competition and two before the DoW strategy.',
+   url:'https://pqcrypto.org/conferences.html'}
+];
+
+/* snap every document to its day graduation */
+DOCS.forEach(x=>{ x.date = decYear(x.d); });
+
+
+const HUBS = [
+  {org:'DoW CIO', title:'ATLAS intake questionnaire (DoW Forms · CAC required)', url:'https://forms.osi.apps.mil/r/MuJFwCHiC7'},
+  {org:'DoW CIO', title:'ATLAS process · Preparing for Migration to PQC (memo)', url:'https://dowcio.war.gov/Portals/0/Documents/Library/PreparingForMigrationPQC.pdf'},
+  {org:'DoW CIO', title:'PQC coordination site (DoW CAC required)', url:'https://cybersecurityks.osd.mil/DoDcs/pqc'},
+  {org:'DoW CIO', title:'Department of War Post-Quantum Cryptography Strategy (PDF)', url:'https://dowcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
+  {org:'DoW',  title:'News: PQC Strategy tag (ongoing coverage)', url:'https://www.war.gov/News/Tag/323123/post-quantum-cryptography-strategy/'},
+  {org:'NSA',  title:'Post-Quantum Cybersecurity Resources (incl. CNSA 2.0)', url:'https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/'},
+  {org:'CNSS', title:'CNSS Policy Issuances (incl. CNSSP-15)', url:'https://www.cnss.gov/CNSS/issuances/Policies.cfm'},
+  {org:'NIST', title:'Post-Quantum Cryptography Project | CSRC', url:'https://csrc.nist.gov/Projects/post-quantum-cryptography'},
+  {org:'NIST NCCoE', title:'Migration to Post-Quantum Cryptography (execution hub)', url:'https://www.nccoe.nist.gov/applied-cryptography/migration-to-pqc'},
+  {org:'IETF', title:'Post-Quantum Use In Protocols (PQUIP) working group · RFC pipeline', url:'https://datatracker.ietf.org/wg/pquip/about/'},
+  {org:'CISA', title:'Post-Quantum Cryptography Initiative', url:'https://www.cisa.gov/topics/risk-management/quantum'},
+  {org:'DHS',  title:'Post-Quantum Cryptography | Homeland Security', url:'https://www.dhs.gov/quantum'}
+];
+
+/* ============================================================ */
+const AXIS_Y = 228;
+const NOW_DAY = decYear('2026-09-03'); // briefing date: you-are-here pin
+/* percent of track width: compressed prologue before YEAR_MIN, linear after */
+const pct = yr => yr < YEAR_MIN
+  ? ((yr - YEAR_PRO_MIN) / (YEAR_MIN - YEAR_PRO_MIN)) * PRO_SHARE
+  : PRO_SHARE + ((yr - YEAR_MIN) / (YEAR_MAX - YEAR_MIN)) * (100 - PRO_SHARE);
+const track = document.getElementById('track');
+
+/* --- header cipher texture: ciphertext degrading to plaintext --- */
+(function(){
+  const el = document.getElementById('cipher');
+  const plain = 'FORGED SIGNATURES · STORED TRAFFIC · MIGRATE ON TIME ';
+  let out = '';
+  for(let r=0;r<10;r++){
+    let line = '';
+    for(let c=0;c<140;c++){
+      const p = c/140;
+      line += Math.random() < p*0.9 ? plain[(c+r)%plain.length] : String.fromCharCode(0x2500 + Math.floor(Math.random()*80));
+    }
+    out += line + '\n';
+  }
+  el.textContent = out;
+})();
+
+/* --- lattice background: ordered grid that jitters toward Q-Day --- */
+(function(){
+  const svg = document.getElementById('lattice');
+  svg.setAttribute('viewBox', '0 0 1000 318');
+  svg.setAttribute('preserveAspectRatio', 'none');
+  svg.setAttribute('width', '100%'); svg.setAttribute('height', 318);
+  let s = '';
+  for(let gx=0; gx<=1000; gx+=16){
+    for(let gy=20; gy<=280; gy+=40){
+      const p = gx/1000;                       // 0 left → 1 right
+      const jitter = Math.pow(p,2.2)*26;       // grows toward q-day
+      const dx = (Math.random()-.5)*jitter, dy = (Math.random()-.5)*jitter;
+      const op = .10 + p*.10;
+      s += `<circle cx="${gx+dx}" cy="${gy+dy}" r="1.2" fill="#4a6b52" opacity="${op}"/>`;
+    }
+  }
+  svg.innerHTML = s;
+})();
+
+/* --- axis gradient: hard color stops aligned to the same phase dates as bands/tabs --- */
+document.getElementById('axis').style.background =
+  'linear-gradient(90deg,' +
+  PHASES.map(ph=>`${ph.color} ${pct(ph.from)}%, ${ph.color} ${pct(ph.to)}%`).join(',') +
+  ')';
+
+/* --- phase bands + tabs + stories + color key under the track --- */
+const tabs = document.getElementById('phaseTabs');
+const stories = document.getElementById('phase-stories');
+const phaseKey = document.getElementById('phase-key');
+/* legend reads in two rows: what the colors mean, then what the shapes mean */
+const keyPhases = document.createElement('div');
+keyPhases.className = 'key-group';
+keyPhases.innerHTML = '<span class="key-title">Phases</span>';
+const keyMarks = document.createElement('div');
+keyMarks.className = 'key-group';
+keyMarks.innerHTML = '<span class="key-title">Markers</span>';
+phaseKey.append(keyPhases, keyMarks);
+  keyMarks.insertAdjacentHTML('beforeend',
+  `<span class="key-chip"><i style="background:var(--text)"></i><em>Dot, above axis</em> · a published document. Click it to open the source</span>` +
+  `<span class="key-chip"><span class="key-glyph" style="color:var(--ph4)">★</span><em>Star, on axis</em> · a turning point</span>` +
+  `<span class="key-chip"><i style="background:transparent;border:1.5px dashed var(--text);border-radius:0;transform:rotate(45deg);width:7px;height:7px"></i><em>Dashed diamond, below axis</em> · a planned date, not a document</span>` +
+  `<span class="key-chip"><i style="width:1px;height:11px;border-radius:0;background:var(--ph2);box-shadow:0 0 0 1px color-mix(in srgb,var(--ph2) 40%,transparent)"></i><em>Dashed teal line</em> · today</span>`);
+const ORDINALS = ['first','second','third','fourth','fifth'];
+/* Three layers share one ruler: tabs, track bands, and story columns are all cut
+   at the same date graduations (pct of the year axis). Story text that cannot fit
+   its date-true column is relocated below with a leader line pointing back. */
+const SLIM_SHARE = 8;      // % of track width below which a story column goes slim
+const storyFlags = [];
+PHASES.forEach((ph,i)=>{
+  const wsh = pct(ph.to)-pct(ph.from);   // width share, identical for all three layers
+
+  const band = document.createElement('div');
+  band.className='phase-band';
+  band.dataset.phase = ph.key;
+  band.style.left = pct(ph.from)+'%';
+  band.style.width = wsh+'%';
+  band.style.setProperty('--bc', ph.color);
+  band.innerHTML = `<div class="band-head"><span class="band-label">${ph.label}</span><span class="band-years">${ph.years}</span></div>`;
+  track.appendChild(band);
+
+  const b = document.createElement('button');
+  b.textContent = ph.label;
+  b.title = ph.label + ' · ' + ph.years;
+  b.setAttribute('aria-label', `Phase ${ORDINALS[i]||i+1}: ${ph.label} (${ph.years})`);
+  b.style.setProperty('--pc', ph.color);
+  /* shrink allowed: absorbs sub-pixel % rounding differences between browsers */
+  b.style.flex = '0 1 auto';
+  b.style.width = wsh+'%';
+  b.addEventListener('click', ()=>setPhase(i));
+  tabs.appendChild(b);
+
+  const cell = document.createElement('button');
+  cell.type = 'button';
+  cell.className = 'phase-story';
+  cell.id = 'story-'+ph.key;
+  cell.style.flex = '0 1 auto';
+  cell.style.width = wsh+'%';
+  cell.style.setProperty('--nc', ph.color);
+  if(wsh < SLIM_SHARE){
+    cell.classList.add('slim');
+    cell.innerHTML = `<div class="tense">${ph.tense}</div><div class="s-label">${ph.label}</div><div class="s-years">${ph.years}</div><div class="s-below" aria-hidden="true">▼</div>`;
+    const flag = document.createElement('div');
+    flag.className = 'story-flag';
+    flag.style.setProperty('--nc', ph.color);
+    flag.style.setProperty('--anchor', ((pct(ph.from)+pct(ph.to))/2)+'%');
+    flag.innerHTML = `<i class="flag-line" aria-hidden="true"></i><button type="button" class="flag-card"><div class="tense">${ph.tense}</div><div class="s-label">${ph.label}</div><div class="s-years">${ph.years}</div><p>${ph.story}</p></button>`;
+    flag.querySelector('.flag-card').addEventListener('click', ()=>setPhase(i));
+    storyFlags.push(flag);
+  } else {
+    cell.innerHTML = `<div class="tense">${ph.tense}</div><div class="s-label">${ph.label}</div><div class="s-years">${ph.years}</div><p>${ph.story}</p>`;
+  }
+  cell.addEventListener('click', ()=>setPhase(i));
+  stories.appendChild(cell);
+
+  const chip = document.createElement('span');
+  chip.className = 'key-chip';
+  chip.innerHTML = `<i style="background:${ph.color}"></i><em>${ph.label}</em> · ${ph.meaning}`;
+  keyPhases.appendChild(chip);
+});
+stories.after(...storyFlags);
+
+/* --- q-day uncertainty band --- */
+(function(){
+  /* Nested inside the Post-CRQC band: the strip shows where its opening edge
+     (Q-Day) may actually land. It runs from the theoretical Q-Day to the end
+     of the estimate window (2035); the full window is 2030-2035 and the label
+     and key carry the true range. */
+  const q = document.createElement('div');
+  q.className='qband';
+  q.style.left = pct(QDAY_THEORETICAL)+'%';
+  q.style.width = (pct(2035)-pct(QDAY_THEORETICAL))+'%';
+  q.innerHTML = '<span class="q-label">CRQC ESTIMATE<br>2030-2035</span>';
+  track.appendChild(q);
+
+  const qchip = document.createElement('span');
+  qchip.className = 'key-chip';
+  qchip.innerHTML = `<i style="background:repeating-linear-gradient(-55deg,rgba(236,108,108,.55) 0 3px,transparent 3px 6px)"></i><em>Hatched strip</em> · where Q-Day may land, 2030-2035`;
+  keyMarks.appendChild(qchip);
+})();
+
+/* --- you-are-here pin: Sep 2026 sits inside the Strategy window --- */
+(function(){
+  const n = document.createElement('div');
+  n.className = 'now-mark';
+  n.style.left = pct(NOW_DAY)+'%';
+  n.innerHTML = '<span class="now-flag">Now · Sep 2026</span>';
+  n.setAttribute('aria-hidden','true');
+  track.appendChild(n);
+})();
+
+/* --- year ticks --- */
+/* prologue tick + axis break at the compression seam */
+(function(){
+  const t=document.createElement('div');
+  t.className='year-tick';
+  t.style.left = pct(YEAR_PRO_MIN)+'%';
+  t.style.transform='translateX(0)'; // left edge: don't center off-track
+  t.textContent = 1994;
+  track.appendChild(t);
+  const br=document.createElement('div');
+  br.className='axis-break';
+  br.style.left = pct(YEAR_MIN)+'%';
+  br.title='Axis compressed: 1994-2015 is not to scale';
+  track.appendChild(br);
+})();
+for(let y=2015; y<=Math.floor(YEAR_MAX); y++){
+  const m=document.createElement('div');
+  m.className='year-mark';
+  m.style.left = pct(y)+'%';
+  track.appendChild(m);
+  if(y%5===0||y===2015){
+    const t=document.createElement('div');
+    t.className='year-tick';
+    t.style.left = pct(y)+'%';
+    t.textContent = y;
+    track.appendChild(t);
+  }
+}
+
+/* --- critical milestone stars --- */
+const STARS = [
+  {
+    d:'2024-08-13', year:'Aug 2024', label:'FIPS standards',
+    title:'FIPS 203 / 204 / 205 established',
+    desc:'First NIST PQC standards finalized (ML-KEM, ML-DSA, SLH-DSA). "Prepare" becomes an engineering task.',
+    color:'var(--ph1)', docId:'PQC-010'
+  },
+  {
+    d:'2026-06-23', year:'Jun 2026', label:'Strategy',
+    title:'DoW PQC Strategy released',
+    desc:'The Department set the plan: move core systems to PQC by 31 Dec 2029, support or phase out the rest by 2030, use CNSA 2.0 on national security systems, and work with industry. Released 23 Jun 2026.',
+    color:'var(--ph2)', docId:'PQC-014'
+  },
+  {
+    d:'2029-12-31', year:'Dec 2029', label:'Target state', static:true,
+    title:'Core systems PQC-compliant',
+    desc:'By 31 December 2029, core systems move to PQC algorithms.',
+    color:'var(--ph3)'
+  },
+  {
+    d:'2032-07-01', year:'~2030-35', label:'Q-Day', static:true,
+    title:'Estimated Q-Day',
+    desc:'The date a cryptographically relevant quantum computer is expected to exist. The mark sits at the middle of the 2030-2035 window. The date is unknown. The operator may not announce it.',
+    color:'var(--ph4)'
+  }
+];
+STARS.forEach(s=>{ s.date = decYear(s.d); });
+
+/* --- dots + tooltip --- */
+DOCS.sort((a,b)=>a.date-b.date);
+const tooltip = document.getElementById('tooltip');
+const phaseOf = k => PHASES.find(p=>p.key===k);
+/* seeded pseudo-random from doc id, so the "imperfection" is stable across loads */
+function seedRand(str){
+  let h=2166136261;
+  for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619); }
+  return (n)=>{ h=Math.imul(h^(h>>>15),2246822507); h=Math.imul(h^(h>>>13),3266489909); return (((h^=h>>>16)>>>0)%1000)/1000 * n; };
+}
+DOCS.forEach((d,i)=>{
+  /* url-less entries are prediction milestones: rendered below the axis as dashed diamonds */
+  if(!d.url){
+    const pm=document.createElement('span');
+    pm.className='pred-mark';
+    pm.style.left = pct(d.date)+'%';
+    pm.style.top = AXIS_Y+'px';
+    pm.style.setProperty('--pc2', phaseOf(d.phase).color);
+    pm.dataset.id = d.id;
+    pm.setAttribute('aria-label', d.id+': '+d.title);
+    pm.innerHTML = `<span class="pstem" aria-hidden="true"></span><span class="pglyph" aria-hidden="true"></span><span class="plabel">${d.predLabel||d.label}</span>`;
+    pm.addEventListener('mouseenter', e=>showTip(d,e));
+    pm.addEventListener('mousemove', e=>moveTip(e));
+    pm.addEventListener('mouseleave', hideTip);
+    track.appendChild(pm);
+    return;
+  }
+  const rnd = seedRand(d.id);
+  // all dots above the axis; neighbors cycle through 5 height steps so labels never collide
+  const off = 34 + (i%5)*30 + rnd(10);
+  const size = 11 + rnd(6);
+  const dot=document.createElement('a');
+  dot.className='dot '+((i%5)%2===0 ? 'up':'dn');
+  if(pct(d.date) < 3) dot.classList.add('edge');
+  dot.href = d.url;
+  dot.target = '_blank';
+  dot.rel = 'noopener noreferrer';
+  dot.style.left = pct(d.date)+'%';
+  dot.style.top = (AXIS_Y - off)+'px';
+  dot.style.width = size+'px'; dot.style.height = size+'px';
+  dot.style.setProperty('--dc', phaseOf(d.phase).color);
+  dot.dataset.id = d.id;
+  dot.setAttribute('aria-label', d.id+': '+d.title);
+  dot.innerHTML = `<span class="did">${d.id}</span>`;
+  dot.addEventListener('mouseenter', e=>showTip(d,e));
+  dot.addEventListener('mousemove', e=>moveTip(e));
+  dot.addEventListener('mouseleave', hideTip);
+  dot.addEventListener('focus', e=>showTip(d, {clientX: dot.getBoundingClientRect().x, clientY: dot.getBoundingClientRect().y}));
+  dot.addEventListener('blur', hideTip);
+  track.appendChild(dot);
+});
+
+STARS.forEach(s=>{
+  const linked = s.docId ? DOCS.find(d=>d.id===s.docId) : null;
+  const tip = {
+    id:'★', label:s.year, title:s.title, desc:s.desc,
+    phase: linked?.phase || (PHASES.find(p=>s.date>=p.from && s.date<p.to) || PHASES[PHASES.length-1]).key,
+    url: linked?.url || null,
+    color: s.color
+  };
+  /* static stars are informational markers only: hover explains, nothing to click */
+  const el = s.static ? document.createElement('span')
+    : tip.url ? document.createElement('a') : document.createElement('button');
+  if(tip.url && !s.static){ el.href = tip.url; el.target = '_blank'; el.rel = 'noopener noreferrer'; }
+  else if(!s.static){ el.type = 'button'; }
+  el.className = 'star-mark' + (s.static ? ' static' : '') + (s.label === 'Q-Day' ? ' pulse' : '');
+  el.style.left = pct(s.date)+'%';
+  el.style.top = AXIS_Y+'px';
+  el.style.setProperty('--sc', s.color);
+  el.setAttribute('aria-label', 'Critical: '+s.title);
+  el.innerHTML = `<span class="glyph" aria-hidden="true">★</span><span class="slabel">${s.label}</span><span class="syear">${s.year}</span>`;
+  el.addEventListener('mouseenter', e=>showStarTip(tip,e));
+  el.addEventListener('mousemove', e=>moveTip(e));
+  el.addEventListener('mouseleave', hideTip);
+  if(!s.static){
+    el.addEventListener('focus', e=>showStarTip(tip,{clientX:el.getBoundingClientRect().x, clientY:el.getBoundingClientRect().y}));
+    el.addEventListener('blur', hideTip);
+    el.addEventListener('click', ()=>{
+      const ph = PHASES.findIndex(p=>p.key===tip.phase);
+      if(ph>=0) setPhase(ph);
+    });
+  }
+  track.appendChild(el);
+});
+
+function showTip(d,e){
+  tooltip.style.setProperty('--tc', phaseOf(d.phase).color);
+  const open = d.url ? `<div class="tt-open">CLICK TO OPEN ↗</div>` : `<div class="tt-open">PLANNED DATE · NOT A DOCUMENT</div>`;
+  tooltip.innerHTML = `<div class="tt-id">${d.id} · ${d.label}</div><div class="tt-title">${d.title}</div><div class="tt-desc">${d.desc}</div>${open}`;
+  tooltip.style.display='block'; moveTip(e);
+}
+function showStarTip(t,e){
+  tooltip.style.setProperty('--tc', t.color);
+  const open = t.url ? `<div class="tt-open">CLICK TO OPEN ↗</div>` : `<div class="tt-open">TURNING POINT</div>`;
+  tooltip.innerHTML = `<div class="tt-id">★ CRITICAL · ${t.label}</div><div class="tt-title">${t.title}</div><div class="tt-desc">${t.desc}</div>${open}`;
+  tooltip.style.display='block'; moveTip(e);
+}
+function moveTip(e){
+  const w = tooltip.offsetWidth, vw = window.innerWidth;
+  let lx = e.clientX + 16; if(lx + w > vw - 12) lx = e.clientX - w - 16;
+  let ly = e.clientY + 16; if(ly + tooltip.offsetHeight > window.innerHeight - 12) ly = e.clientY - tooltip.offsetHeight - 16;
+  tooltip.style.left = lx+'px'; tooltip.style.top = ly+'px';
+}
+function hideTip(){ tooltip.style.display='none'; }
+
+let activePhase = -1;
+function setPhase(i){
+  if(i===activePhase) return;
+  activePhase = i;
+  [...tabs.children].forEach((b,j)=>b.classList.toggle('active', j===i));
+  [...stories.children].forEach((s,j)=>s.classList.toggle('active', j===i));
+  document.querySelectorAll('.phase-band').forEach((b,j)=>b.classList.toggle('on', j===i));
+}
+setPhase(PHASES.findIndex(p=>p.key==='strat')); // default: Strategy, where we are now
+
+/* --- manifest (newest first) --- */
+const mbody = document.getElementById('mbody');
+[...DOCS].sort((a,b)=>b.date-a.date).forEach(d=>{
+  const ph = phaseOf(d.phase);
+  const tr=document.createElement('tr');
+  tr.className='mrow'+(d.url?'':' pred');
+  tr.style.setProperty('--mc', ph.color);
+  const rel = [
+    d.supersededBy ? `Superseded by <strong>${d.supersededBy}</strong>` : '',
+    d.supersedes ? `Supersedes <strong>${d.supersedes}</strong>` : ''
+  ].filter(Boolean).join(' · ');
+  const chips = [
+    d.status ? `<span class="status-chip">${d.status}</span>` : '',
+    d.sourceTier === 'mirror' ? `<span class="status-chip">archived mirror</span>` : ''
+  ].filter(Boolean).join(' ');
+  tr.innerHTML = `<td class="m-id">${d.id}</td><td class="m-date">${d.label}</td>
+    <td><strong>${d.title}</strong><br><span style="color:var(--muted);font-size:.8rem">${d.desc}</span>${rel?`<div class="m-meta">${rel}</div>`:''}</td>
+    <td><span class="phase-chip">${ph.label}</span>${chips?`<div>${chips}</div>`:''}</td>
+    <td class="m-link">${d.url ? `<a href="${d.url}" target="_blank" rel="noopener">OPEN ↗</a><div class="m-verified">✓ ${d.lastValidated || META.validatedAsOf}</div>` : `<span style="font-family:var(--mono);font-size:.7rem;color:var(--muted)">PREDICTED</span>`}</td>`;
+  tr.addEventListener('click', e=>{
+    if(e.target.closest('a')) return;
+    const mark = track.querySelector(`.dot[data-id="${d.id}"], .pred-mark[data-id="${d.id}"]`);
+    if(!mark) return;
+    document.getElementById('timeline-wrap').scrollIntoView({behavior:'smooth', block:'center'});
+    document.querySelectorAll('.dot.lit,.pred-mark.lit,.mrow.lit').forEach(el=>el.classList.remove('lit'));
+    mark.classList.add('lit'); tr.classList.add('lit');
+    setTimeout(()=>{mark.classList.remove('lit'); tr.classList.remove('lit')}, 2500);
+  });
+  mbody.appendChild(tr);
+});
+
+/* --- reference hubs --- */
+const hbody = document.getElementById('hbody');
+HUBS.forEach(h=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML = `<td class="m-id" style="--mc:var(--muted)">${h.org}</td><td>${h.title}</td>
+    <td class="m-link" style="--mc:var(--text)"><a href="${h.url}" target="_blank" rel="noopener">OPEN ↗</a></td>`;
+  hbody.appendChild(tr);
+});
+
+/* --- validation as-of notes --- */
+document.getElementById('manifest-asof').textContent =
+  `Links and metadata last validated ${META.validatedAsOf}. Superseded documents stay listed for the historical record.`;
+document.getElementById('hubs-asof').textContent =
+  `Reference hubs last validated ${META.validatedAsOf}.`;
+
+/* --- on-this-page: highlight the section in view --- */
+(function(){
+  const links = [...document.querySelectorAll('nav.jump a[href^="#"]')];
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const els = [...map.keys()].map(id => document.getElementById(id)).filter(Boolean);
+  if(!els.length) return;
+  const spy = new IntersectionObserver(entries=>{
+    const vis = entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(!vis) return;
+    links.forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+vis.target.id));
+  }, {rootMargin:'-18% 0px -62% 0px', threshold:[0,.15,.4]});
+  els.forEach(el=>spy.observe(el));
+  links[0].classList.add('on');
+})();
+</script>
+</body>
+</html>
