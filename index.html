@@ -344,7 +344,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <div class="eyebrow">1994 → Q-DAY · Army cryptographic readiness</div>
   </div>
   <h1>The road to <span class="qd">Q&#8209;Day</span></h1>
-  <p class="lede">In August 2015, NSA and CNSS directed programs to stop new investment in the public-key crypto that protects command and control and to prepare for quantum-resistant algorithms. This page records that path for the Army: the warning, the current work, and the effect of a cryptographically relevant quantum computer (CRQC) if migration finishes late. Briefings stress harvest-now-decrypt-later. Forgery is the operational problem. A CRQC reads stored traffic. It also signs new orders, forges credentials, and ships software updates that verify as authentic.</p>
+  <p class="lede">From August 2015, the government has been on a road to preparing for a quantum threat. NSA and CNSS directed programs to stop new investment in the public-key crypto that protects command and control and to prepare for quantum-resistant algorithms. This page records that path for the Army. A cryptographically relevant quantum computer (CRQC) makes it easy to derive a private key from a public key. Harvested ciphertext can then be decrypted. An attacker can also sign new orders, forge credentials, and ship software updates that verify as authentic. Forgery is the operational problem.</p>
 </header>
 
 <div class="sec-rule" aria-hidden="true"><i></i><span>01 · Timeline</span><i></i></div>
@@ -566,7 +566,7 @@ const PHASES = [
     key:'origins', label:'Origins', years:'1994 to 2015 · compressed', from:YEAR_PRO_MIN, to:2014.5, color:'var(--ph0)',
     meaning:'how the threat started',
     tense:'Where it began',
-    story:'The threat started long before the policy memos. In 1994 Peter Shor showed a quantum computer can break RSA, Diffie-Hellman, and ECC once the machine exists. Researchers worked that problem for twenty years. Policy caught up in 2015. Anyone who stored old encrypted traffic during those years can wait and read it later. The axis compresses this stretch.'
+    story:'The threat started long before the policy memos. In 1994 Peter Shor showed a quantum computer can break RSA, Diffie-Hellman, and ECC once the machine exists. Researchers worked that problem for twenty years. Policy caught up in 2015. Anyone who stored old encrypted traffic during those years can wait and decrypt it later. The axis compresses this stretch.'
   },
   {
     key:'pre', label:'Pre-Strategy', years:'Aug 2015 to Jun 2026', from:2014.5, to:STRATEGY_DAY, color:'var(--ph1)',
@@ -592,7 +592,7 @@ const PHASES = [
     key:'post', label:'Post-CRQC', years:'After Q-Day (timing unknown)', from:QDAY_THEORETICAL, to:YEAR_MAX, color:'var(--ph5)',
     meaning:'starts at Q-Day; the date is unknown',
     tense:'Risk after Q-Day',
-    story:'Q-Day is the day a CRQC exists. The operator may not announce it. Estimates from 2029 to 2035 overlap the migration window, so a CRQC can arrive before the work finishes. Migrated systems stay protected. Unmigrated systems fail. Stored traffic becomes readable. Forgery is the larger operational problem: a CRQC can sign as a commander, ship a trusted-looking update, and inject false orders into C2. Harvested traffic exposes the past. Forged signatures break current operations. Programs need modular crypto and a way to swap algorithms.'
+    story:'Q-Day is the day a CRQC exists. The operator may not announce it. Estimates from 2029 to 2035 overlap the migration window, so a CRQC can arrive before the work finishes. Migrated systems stay protected. Unmigrated systems fail. A CRQC derives private keys from public keys, so harvested ciphertext can be decrypted. Forgery is the larger operational problem: an attacker can sign as a commander, ship a trusted-looking update, and inject false orders into C2. Harvested traffic exposes the past. Forged signatures break current operations. Programs need modular crypto and a way to swap algorithms.'
   }
 ];
 
