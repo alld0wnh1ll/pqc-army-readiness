@@ -470,7 +470,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   </div>
 
   <div class="cow-callout" style="margin-top:28px">
-    <p><strong>Army PQC work applies these lessons now.</strong> Discovery and validation tools find crypto on the network. New vendor solutions go through <a href="#atlas" style="color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)">ATLAS</a> before test, buy, or fielding.</p>
+    <p><strong>Army PQC work applies these lessons now.</strong> Discovery and validation tools find crypto on the network. New vendor solutions enter <a href="#atlas" style="color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)">ATLAS</a> before a Component considers them.</p>
   </div>
 
   <p class="cow-foot">The network keeps getting denser: more function in less gear, more apps on shared paths, less slack. A rushed PQC cutover repeats two failures: gear formations cannot use, and late-found apps, legacy links, ICS, and latency. Inventory shows those paths early.</p>
@@ -479,33 +479,32 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 <div class="sec-rule" aria-hidden="true"><i></i><span>04 · ATLAS</span><i></i></div>
 <section id="atlas">
   <div class="atlas-head">
-    <div class="eyebrow">How the Army takes in PQC products</div>
+    <div class="eyebrow">DoW intake and tracking for PQC solutions</div>
     <h2>What ATLAS is</h2>
-    <p>ATLAS means Acquisition, Testing, Licensing, and Security. It is the Department door for new PQC products. A vendor enters once. Army and other Components share one list of approved products and approved uses. ATLAS does not replace NIST standards, CNSA 2.0, or a program's own test. It is the gate a product passes before test, buy, or fielding.</p>
+    <p>ATLAS means Acquisition, Testing, Licensing, and Security. It is the Department of War intake and tracking process for post-quantum cryptography solutions and later work. Industry uses it as the front door for new solutions that use cryptography that is not quantum-vulnerable, before a Component considers the product. Components use it to track what is approved, from pre-testing through deployment, and to see certification status for national security systems plus test results from other Components.</p>
   </div>
   <div class="atlas-fit" aria-label="How ATLAS fits the migration">
     <div class="fit-cell">
-      <div class="tag">How it fits · now</div>
-      <h3>One door for the 2029 job</h3>
-      <p>The Department set 31 December 2029 as the date for core systems to run PQC. ATLAS keeps that work from turning into a pile of one-off pilots. Vendors enter here. The Army uses it to see what is approved and ready.</p>
+      <div class="tag">How it fits</div>
+      <h3>Front door before Component review</h3>
+      <p>Industry enters here first. ATLAS records intake and tracks status. A Component still decides whether to test, buy, or field the product. ATLAS does not replace NIST standards, CNSA 2.0, or a program's own test.</p>
     </div>
     <div class="fit-cell">
-      <div class="tag">Who does what</div>
-      <h3>The Army starts it; the vendor fills it</h3>
-      <p>An Army or other Component sponsor opens the request. The vendor submits one form per product and shows how the crypto actually works: algorithms, protocols, random numbers, and key storage. The process requires white papers and declines marketing-only packets.</p>
+      <div class="tag">Who submits</div>
+      <h3>The government sponsor files the form</h3>
+      <p>The government sponsor submits this questionnaire. The form collects common data points. The vendor receives the items in Question 13 and emails the accompanying documents. Incomplete packets close 7 days after the sponsor starts the submission.</p>
     </div>
     <div class="fit-cell">
-      <div class="tag">What approval means</div>
-      <h3>One approval, Department-wide</h3>
-      <p>Once ATLAS approves a product for a use, the rest of the Department can use it for that same use. Another office does not start over. ATLAS does not redesign the product or chase missing papers. Send a complete packet the first time.</p>
+      <div class="tag">What it tracks</div>
+      <h3>Status and results across Components</h3>
+      <p>ATLAS tracks approved solutions and their stage. It shows NSS certification status and performance-test outcomes from other Components. It is a reference map of cryptographic readiness and usability. It is not a blanket Department-wide approval.</p>
     </div>
   </div>
   <div class="atlas-actions">
     <a href="https://forms.osi.apps.mil/r/MuJFwCHiC7" target="_blank" rel="noopener">ATLAS intake questionnaire ↗</a>
-    <a href="https://dowcio.war.gov/Portals/0/Documents/Library/PreparingForMigrationPQC.pdf" target="_blank" rel="noopener">Memo · Preparing for Migration to PQC ↗</a>
     <a href="https://cybersecurityks.osd.mil/DoDcs/pqc" target="_blank" rel="noopener">DoW PQC site · CAC required ↗</a>
   </div>
-  <p class="atlas-note">The form sits on a CAC host. The November 2025 CIO memo has the detail. Vendors do not get the .mil site.</p>
+  <p class="atlas-note">If the solution is classified or uses classified algorithms, submit the answers on the network that matches that classification.</p>
 </section>
 
 <div class="sec-rule" aria-hidden="true"><i></i><span>05 · Working lists</span><i></i></div>
@@ -565,7 +564,7 @@ const PHASES = [
     key:'strat', label:'Strategy', years:'Jun 2026 to Dec 2029', from:STRATEGY_DAY, to:TARGET_STATE_DAY, color:'var(--ph2)',
     meaning:'this window is current',
     tense:'Current work',
-    story:'The Department published the PQC Strategy. Core systems move to PQC by 31 December 2029. Programs support or phase out the rest by 2030. National security systems use CNSA 2.0. The Department coordinates with industry. That date is earlier than the civilian 2035 target. Progress is inventories, contracts, and fielded gear. New products enter through ATLAS so the Army keeps one door in and one list of approved tools.'
+    story:'The Department published the PQC Strategy. Core systems move to PQC by 31 December 2029. Programs support or phase out the rest by 2030. National security systems use CNSA 2.0. The Department coordinates with industry. That date is earlier than the civilian 2035 target. Progress is inventories, contracts, and fielded gear. New products enter ATLAS so the Department can intake and track them before a Component considers them.'
   },
   {
     key:'impl', label:'Target State', years:'Dec 2029 →', from:TARGET_STATE_DAY, to:QDAY_THEORETICAL, color:'var(--ph3)',
@@ -744,7 +743,6 @@ DOCS.forEach(x=>{ x.date = decYear(x.d); });
 
 const HUBS = [
   {org:'DoW CIO', title:'ATLAS intake questionnaire (DoW Forms · CAC required)', url:'https://forms.osi.apps.mil/r/MuJFwCHiC7'},
-  {org:'DoW CIO', title:'ATLAS process · Preparing for Migration to PQC (memo)', url:'https://dowcio.war.gov/Portals/0/Documents/Library/PreparingForMigrationPQC.pdf'},
   {org:'DoW CIO', title:'PQC coordination site (DoW CAC required)', url:'https://cybersecurityks.osd.mil/DoDcs/pqc'},
   {org:'DoW CIO', title:'Department of War Post-Quantum Cryptography Strategy (PDF)', url:'https://dowcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
   {org:'DoW',  title:'News: PQC Strategy tag (ongoing coverage)', url:'https://www.war.gov/News/Tag/323123/post-quantum-cryptography-strategy/'},
