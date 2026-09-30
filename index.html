@@ -48,6 +48,15 @@ nav.jump a.on{color:var(--text);background:color-mix(in srgb,var(--army) 12%,tra
 .sec-rule{display:flex;align-items:center;gap:16px;padding:32px 6vw 0;background:var(--ink)}
 .sec-rule i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
 .sec-rule span{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--army);white-space:nowrap}
+details.fold{background:var(--ink);border-bottom:1px solid var(--line)}
+details.fold > summary.sec-rule{list-style:none;cursor:pointer;padding:18px 6vw;user-select:none}
+details.fold > summary.sec-rule::-webkit-details-marker{display:none}
+details.fold > summary.sec-rule:hover span{color:var(--text)}
+details.fold .fold-hint{font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);white-space:nowrap;margin-left:4px}
+details.fold .fold-hint .when-open{display:none}
+details.fold[open] .fold-hint .when-closed{display:none}
+details.fold[open] .fold-hint .when-open{display:inline}
+details.fold[open] > summary.sec-rule{padding-bottom:8px}
 #overview,#timeline,#manifest,#panic-curve,#atlas,#hubs{scroll-margin-top:calc(var(--jump-h) + 8px)}
 
 /* ---------- header ---------- */
@@ -195,7 +204,7 @@ nav.phases button:focus-visible{outline:2px solid var(--text);outline-offset:-2p
 #phase-key .key-chip em{font-style:normal;color:var(--text)}
 
 /* ---------- cost of waiting / lessons ---------- */
-#panic-curve{padding:52px 6vw;border-bottom:1px solid var(--line)}
+#panic-curve{padding:28px 6vw;border-bottom:1px solid var(--line)}
 #panic-curve .cow-head{text-align:center;max-width:78ch;margin:0 auto 28px}
 #panic-curve .cow-head h2{font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:10px 0 12px}
 #panic-curve .cow-head p{color:var(--muted);font-size:.98rem}
@@ -227,7 +236,7 @@ nav.phases button:focus-visible{outline:2px solid var(--text);outline-offset:-2p
 .cow-foot a{color:var(--army);font-family:var(--mono);font-size:.75rem}
 
 /* ---------- ATLAS: what it is, how it fits ---------- */
-#atlas{padding:52px 6vw;border-bottom:1px solid var(--line)}
+#atlas{padding:28px 6vw;border-bottom:1px solid var(--line)}
 #atlas .atlas-head{max-width:78ch;margin:0 auto 22px}
 #atlas .atlas-head h2{font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:10px 0 12px}
 #atlas .atlas-head p{color:var(--muted);font-size:.98rem}
@@ -367,7 +376,8 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   <p class="asof-note" id="manifest-asof"></p>
 </section>
 
-<div class="sec-rule" aria-hidden="true"><i></i><span>03 · Requirements</span><i></i></div>
+<details class="fold">
+<summary class="sec-rule"><i></i><span>03 · Requirements</span><em class="fold-hint"><span class="when-closed">Maximize to read</span><span class="when-open">Minimize</span></em><i></i></summary>
 <section id="panic-curve">
   <div class="cow-head">
     <div class="eyebrow">Do this before you cut over</div>
@@ -476,8 +486,10 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 
   <p class="cow-foot">The network keeps getting denser: more function in less gear, more apps on shared paths, less slack. A rushed PQC cutover repeats two failures: gear formations cannot use, and late-found apps, legacy links, ICS, and latency. Inventory shows those paths early.</p>
 </section>
+</details>
 
-<div class="sec-rule" aria-hidden="true"><i></i><span>04 · ATLAS</span><i></i></div>
+<details class="fold">
+<summary class="sec-rule"><i></i><span>04 · ATLAS</span><em class="fold-hint"><span class="when-closed">Maximize to read</span><span class="when-open">Minimize</span></em><i></i></summary>
 <section id="atlas">
   <div class="atlas-head">
     <div class="eyebrow">DoW intake and tracking for PQC solutions</div>
@@ -506,6 +518,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   </div>
   <p class="atlas-note">If the solution is classified or uses classified algorithms, submit the answers on the network that matches that classification.</p>
 </section>
+</details>
 
 <div class="sec-rule" aria-hidden="true"><i></i><span>05 · Working lists</span><i></i></div>
 <section id="hubs" style="padding:52px 6vw 80px">
@@ -1139,6 +1152,23 @@ document.getElementById('hubs-asof').textContent =
   }, {rootMargin:'-18% 0px -62% 0px', threshold:[0,.15,.4]});
   els.forEach(el=>spy.observe(el));
   links[0].classList.add('on');
+})();
+
+/* --- collapsed sections: open when a jump or in-page link targets them --- */
+(function(){
+  const openFold = hash => {
+    if(!hash || hash === '#') return;
+    const el = document.getElementById(hash.slice(1));
+    if(!el) return;
+    const fold = el.closest('details.fold');
+    if(fold) fold.open = true;
+  };
+  openFold(location.hash);
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if(a) openFold(a.getAttribute('href'));
+  });
+  window.addEventListener('hashchange', () => openFold(location.hash));
 })();
 </script>
 </body>
