@@ -325,7 +325,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
         </a>
         <a class="org-chip" href="https://www.war.gov/" target="_blank" rel="noopener" title="Department of War">
           <img src="assets/orgs/dod.svg" alt="" width="22" height="22">
-          <span>DoW</span>
+          <span>DOW</span>
         </a>
         <span class="org-chip text-only" title="Office of Management and Budget">OMB</span>
         <span class="org-chip text-only" title="Executive Office of the President">Exec. Office</span>
@@ -393,28 +393,31 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <p>Skip this and the Army fields gear it has to rework, then does the job again under a tighter clock.</p>
   </div>
 
-  <p class="cow-chart-title">Start now and stay gradual. Wait, and you rush, spend more, and may fail.</p>
-  <svg viewBox="0 0 880 360" width="100%" style="max-width:1100px;display:block;margin:0 auto;overflow:visible" role="img" aria-label="Two conceptual paths over time. The teal path starts early and stays a slow, steady climb. The red path waits, then rushes, uses more resources, and risks failure.">
+  <p class="cow-chart-title">Start now and stay gradual. Wait, and panic forces a rush that can fail.</p>
+  <svg viewBox="0 0 880 360" width="100%" style="max-width:1100px;display:block;margin:0 auto;overflow:visible" role="img" aria-label="Two conceptual paths over time. The teal path starts early and stays a slow, steady climb with no panic. The red path waits, then hits panic: a rush, more resources, and a risk of failure.">
     <defs>
       <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
         <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/>
       </marker>
     </defs>
+    <rect x="560" y="36" width="260" height="264" fill="var(--ph4)" opacity="0.08"/>
+    <text x="690" y="54" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--ph4)">Panic</text>
     <text x="36" y="170" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--muted)" transform="rotate(-90 36 170)">Resources</text>
     <line x1="88" y1="300" x2="88" y2="36" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
     <line x1="88" y1="300" x2="820" y2="300" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
     <text x="100" y="322" font-family="var(--mono)" font-size="12" fill="var(--muted)">Now</text>
-    <text x="454" y="338" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--muted)">Time</text>
-    <text x="808" y="322" text-anchor="end" font-family="var(--mono)" font-size="12" fill="var(--muted)">Later / cutover</text>
+    <text x="360" y="338" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--muted)">Time</text>
+    <text x="808" y="322" text-anchor="end" font-family="var(--mono)" font-size="12" fill="var(--ph4)">Later / panic</text>
     <path d="M88,248 C280,236 520,214 800,198" fill="none" stroke="var(--ph2)" stroke-width="3"/>
     <text x="210" y="214" font-family="var(--mono)" font-size="13" fill="var(--ph2)">Start now</text>
-    <text x="210" y="232" font-family="var(--mono)" font-size="11" fill="var(--text)">Slow and gradual</text>
+    <text x="210" y="232" font-family="var(--mono)" font-size="11" fill="var(--text)">Slow and gradual. No panic.</text>
     <path d="M88,278 C340,276 500,268 580,170 C680,55 740,32 792,24" fill="none" stroke="var(--ph4)" stroke-width="2.4"/>
     <path d="M780,12 L804,36 M804,12 L780,36" stroke="var(--ph4)" stroke-width="2.2"/>
-    <text x="560" y="48" font-family="var(--mono)" font-size="13" fill="var(--ph4)">Wait, then rush</text>
-    <text x="560" y="66" font-family="var(--mono)" font-size="11" fill="var(--text)">More resources. Risk of failure.</text>
+    <text x="430" y="258" font-family="var(--mono)" font-size="13" fill="var(--ph4)">Wait</text>
+    <text x="568" y="118" font-family="var(--mono)" font-size="13" fill="var(--ph4)">Rush under panic</text>
+    <text x="568" y="136" font-family="var(--mono)" font-size="11" fill="var(--text)">More resources. Risk of failure.</text>
   </svg>
-  <p class="cow-desc">Time runs left to right. The teal path starts early and stays a slow, steady climb. The red path waits. Then it has to rush, uses more people and money, and can fail before the work is done. These curves show the idea. They are not measured data.</p>
+  <p class="cow-desc">Time runs left to right. The teal path starts early and stays a slow, steady climb. The red path waits until the clock is short. Panic then forces a rush that uses more people and money and can fail before the work is done. These curves show the idea. They are not measured data.</p>
 
   <div class="lesson-grid">
     <div class="lesson" id="case-wint">
@@ -454,7 +457,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 <summary class="sec-rule"><i></i><span>04 · ATLAS</span><em class="fold-hint"><span class="when-closed">Maximize to read</span><span class="when-open">Minimize</span></em><i></i></summary>
 <section id="atlas">
   <div class="atlas-head">
-    <div class="eyebrow">DoW intake and tracking for PQC solutions</div>
+    <div class="eyebrow">DOW intake and tracking for PQC solutions</div>
     <h2>What ATLAS is</h2>
     <p>ATLAS means Acquisition, Testing, Licensing, and Security. It is the Department of War intake and tracking process for post-quantum cryptography solutions and later work. Industry uses it as the front door for new solutions that use cryptography that is not quantum-vulnerable, before a Component considers the product. Components use it to track what is approved, from pre-testing through deployment, and to see certification status for national security systems plus test results from other Components.</p>
   </div>
@@ -519,7 +522,7 @@ function decYear(iso){
   const start = Date.UTC(y,0,1), next = Date.UTC(y+1,0,1);
   return y + (Date.UTC(y,(m||1)-1,day||1) - start) / (next - start);
 }
-const STRATEGY_DAY = decYear('2026-06-23'); // DoW PQC Strategy release: the phase pivot
+const STRATEGY_DAY = decYear('2026-06-23'); // DOW PQC Strategy release: the phase pivot
 const TARGET_STATE_DAY = decYear('2029-12-31'); // core systems migrated to PQC-compliant algorithms
 const QDAY_THEORETICAL = decYear('2032-07-01'); // midpoint of the ~2030-2035 CRQC estimate band; the Q-Day phase opens here
 
@@ -616,7 +619,7 @@ const DOCS = [
    desc:'THE strategy: the document this timeline pivots on. Core systems migrated to PQC-compliant algorithms by 31 Dec 2029; PQC on high-impact systems by 2030; coordination with the defense industrial base. Cleared for publication 16 Apr 2026; released 23 Jun 2026, one day after the EO pair.',
    url:'https://dowcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
   {id:'PQC-015', d:'2030-12-31', label:'Dec 2030', phase:'impl', status:'milestone',
-   title:'Milestone: DoW High-Impact Systems Deadline',
+   title:'Milestone: DOW High-Impact Systems Deadline',
    desc:'Strategy target: PQC deployed on high-impact systems. Also NIST\u2019s deprecation date for classical asymmetric crypto. A point of prediction, not a dated document.',
    predLabel:'High-impact systems'},
   {id:'PQC-016', d:'2035-01-01', label:'2035', phase:'impl', status:'milestone',
@@ -645,10 +648,10 @@ const DOCS = [
    url:'https://www.whitehouse.gov/presidential-actions/2026/06/ushering-in-the-next-frontier-of-quantum-innovation/'},
   {id:'PQC-022', d:'2026-06-24', label:'Jun 2026', phase:'pre', supersedes:'PQC-006',
    title:'OMB M-26-15: Execution of the Migration to PQC',
-   desc:'OMB moves from planning (M-23-02) to execution: the memo that operationalizes the migration government-wide. Issued 24 Jun 2026, two days after the EO pair and one day after the DoW strategy.',
+   desc:'OMB moves from planning (M-23-02) to execution: the memo that operationalizes the migration government-wide. Issued 24 Jun 2026, two days after the EO pair and one day after the DOW strategy.',
    url:'https://www.whitehouse.gov/wp-content/uploads/2026/06/M-26-15-Execution-of-the-Migration-to-Post-Quantum-Cryptography.pdf'},
   {id:'PQC-023', d:'2026-06-23', label:'Jun 2026', phase:'strat', status:'press',
-   title:'DoW Release: Quantum Defense Strategy Announcement',
+   title:'DOW Release: Quantum Defense Strategy Announcement',
    desc:'Official press release accompanying the strategy, same day (23 Jun 2026): hardening networks and empowering the joint force.',
    url:'https://www.war.gov/News/Releases/Release/Article/4524599/securing-global-dominance-dow-unleashes-quantum-defense-strategy-to-harden-netw/'},
   {id:'PQC-024', d:'2025-06-01', label:'Jun 2025', phase:'pre', lastValidated:'Aug 2026',
@@ -657,7 +660,7 @@ const DOCS = [
    url:'https://www.rfc-editor.org/rfc/rfc9794.html'},
   {id:'PQC-025', d:'2026-06-19', label:'Jun 2026', phase:'pre', lastValidated:'Aug 2026',
    title:'RFC 9958: Post-Quantum Cryptography for Engineers',
-   desc:'IETF field guide (PQUIP WG) for the people who must actually ship the migration: why a CRQC breaks today\u2019s public-key crypto, why PQC is not a drop-in swap and may force protocol redesign, and how to plan the transition. Published 19 Jun 2026, days before the EO pair and the DoW strategy.',
+   desc:'IETF field guide (PQUIP WG) for the people who must actually ship the migration: why a CRQC breaks today\u2019s public-key crypto, why PQC is not a drop-in swap and may force protocol redesign, and how to plan the transition. Published 19 Jun 2026, days before the EO pair and the DOW strategy.',
    url:'https://www.rfc-editor.org/info/rfc9958'},
   {id:'PQC-026', d:'2016-01-01', label:'Jan 2016', phase:'pre', sourceTier:'mirror', supersededBy:'PQC-005', lastValidated:'Aug 2026',
    title:'NSA CNSA Suite 1.0 & Quantum Computing FAQ',
@@ -705,7 +708,7 @@ const DOCS = [
    url:'https://cims.nyu.edu/~regev/papers/qcrypto.pdf'},
   {id:'PQC-037', d:'2006-05-23', label:'2006', phase:'origins', lastValidated:'Aug 2026',
    title:'PQCrypto 2006: The Field Gets Its Name',
-   desc:'First International Workshop on Post-Quantum Cryptography (Leuven, May 2006). The research community organizes under the name "post-quantum cryptography," a decade before NIST\u2019s competition and two before the DoW strategy.',
+   desc:'First International Workshop on Post-Quantum Cryptography (Leuven, May 2006). The research community organizes under the name "post-quantum cryptography," a decade before NIST\u2019s competition and two before the DOW strategy.',
    url:'https://pqcrypto.org/conferences.html'}
 ];
 
@@ -714,9 +717,9 @@ DOCS.forEach(x=>{ x.date = decYear(x.d); });
 
 
 const HUBS = [
-  {org:'DoW CIO', title:'ATLAS intake questionnaire', url:'https://forms.osi.apps.mil/r/MuJFwCHiC7'},
-  {org:'DoW CIO', title:'Department of War Post-Quantum Cryptography Strategy (PDF)', url:'https://dowcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
-  {org:'DoW',  title:'News: PQC Strategy tag (ongoing coverage)', url:'https://www.war.gov/News/Tag/323123/post-quantum-cryptography-strategy/'},
+  {org:'DOW CIO', title:'ATLAS intake questionnaire', url:'https://forms.osi.apps.mil/r/MuJFwCHiC7'},
+  {org:'DOW CIO', title:'Department of War Post-Quantum Cryptography Strategy (PDF)', url:'https://dowcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
+  {org:'DOW',  title:'News: PQC Strategy tag (ongoing coverage)', url:'https://www.war.gov/News/Tag/323123/post-quantum-cryptography-strategy/'},
   {org:'NSA',  title:'Post-Quantum Cybersecurity Resources (incl. CNSA 2.0)', url:'https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/'},
   {org:'CNSS', title:'CNSS Policy Issuances (incl. CNSSP-15)', url:'https://www.cnss.gov/CNSS/issuances/Policies.cfm'},
   {org:'NIST', title:'Post-Quantum Cryptography Project | CSRC', url:'https://csrc.nist.gov/Projects/post-quantum-cryptography'},
@@ -921,7 +924,7 @@ const STARS = [
   },
   {
     d:'2026-06-23', year:'Jun 2026', label:'Strategy',
-    title:'DoW PQC Strategy released',
+    title:'DOW PQC Strategy released',
     desc:'The Department set the plan: move core systems to PQC by 31 Dec 2029, support or phase out the rest by 2030, use CNSA 2.0 on national security systems, and work with industry. Released 23 Jun 2026.',
     color:'var(--ph2)', docId:'PQC-014'
   },
