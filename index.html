@@ -45,23 +45,24 @@ nav.jump a.on{color:var(--text);background:color-mix(in srgb,var(--army) 12%,tra
 }
 
 /* ---------- section dividers ---------- */
-.sec-rule{display:flex;align-items:center;gap:16px;padding:32px 6vw 0;background:var(--ink)}
-.sec-rule i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
-.sec-rule span{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--army);white-space:nowrap}
-details.fold{background:var(--ink);border-bottom:1px solid var(--line)}
-details.fold > summary.sec-rule{list-style:none;cursor:pointer;padding:18px 6vw;user-select:none}
+.sec-rule{display:flex;align-items:center;gap:18px;padding:18px 6vw;background:color-mix(in srgb,var(--panel) 88%,var(--army));border-top:2px solid color-mix(in srgb,var(--army) 55%,var(--line));border-bottom:1px solid var(--line);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--army) 18%,transparent)}
+.sec-rule i{flex:1;height:2px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--army) 70%,var(--line)),transparent)}
+.sec-rule span{font-family:var(--disp);font-stretch:125%;font-weight:800;font-size:clamp(.95rem,1.6vw,1.2rem);letter-spacing:.08em;text-transform:uppercase;color:var(--text);white-space:nowrap}
+details.fold{background:var(--ink);border-bottom:none}
+details.fold > summary.sec-rule{list-style:none;cursor:pointer;user-select:none}
 details.fold > summary.sec-rule::-webkit-details-marker{display:none}
-details.fold > summary.sec-rule:hover span{color:var(--text)}
+details.fold > summary.sec-rule:hover{background:color-mix(in srgb,var(--panel-2) 80%,var(--army))}
+details.fold > summary.sec-rule:hover span{color:var(--army)}
 details.fold .fold-hint{font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);white-space:nowrap;margin-left:4px}
 details.fold .fold-hint .when-open{display:none}
 details.fold[open] .fold-hint .when-closed{display:none}
 details.fold[open] .fold-hint .when-open{display:inline}
-details.fold[open] > summary.sec-rule{padding-bottom:8px}
-#overview,#timeline,#manifest,#panic-curve,#atlas,#hubs{scroll-margin-top:calc(var(--jump-h) + 8px)}
+details.fold[open] > summary.sec-rule{padding-bottom:18px}
+#overview,#origins,#timeline,#manifest,#panic-curve,#atlas,#hubs{scroll-margin-top:calc(var(--jump-h) + 8px)}
 
 /* ---------- header ---------- */
 header{padding:28px 6vw 40px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
-header::after{content:'';position:absolute;right:6%;top:28%;width:min(420px,46vw);height:240px;background:radial-gradient(ellipse at center,color-mix(in srgb,var(--ph4) 26%,transparent),transparent 72%);filter:blur(8px);pointer-events:none;z-index:1}
+header::after{content:none}
 .masthead{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:28px;position:relative;z-index:2}
 .mast-aci{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
 .mast-aci img{width:72px;height:auto;display:block;flex-shrink:0}
@@ -81,7 +82,22 @@ header .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bot
 header .brand-mark{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--army);border:1px solid color-mix(in srgb,var(--army) 55%,transparent);padding:6px 10px}
 header h1{font-family:var(--disp);font-stretch:125%;font-weight:800;font-size:clamp(2.2rem,5.5vw,4.4rem);line-height:1.02;letter-spacing:-.01em;margin:14px 0 18px;text-transform:uppercase;position:relative;z-index:2}
 header h1 .qd{color:var(--ph4);text-shadow:0 0 28px color-mix(in srgb,var(--ph4) 50%,transparent),0 0 8px color-mix(in srgb,var(--ph4) 35%,transparent)}
-header p.lede{max-width:64ch;color:var(--muted);font-size:1.02rem;position:relative;z-index:2}
+header .lede-row{position:relative;z-index:2;display:grid;grid-template-columns:minmax(28ch,58ch) minmax(22ch,1fr);gap:28px 40px;align-items:start}
+header .lede-block{max-width:none}
+header .lede-block p{color:var(--muted);font-size:1.02rem;margin-bottom:14px}
+header .lede-block p:last-child{margin-bottom:0}
+.origins-strip{margin:0;padding:16px 18px;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 86%,transparent);max-width:none;position:relative;z-index:2}
+@media (max-width:900px){header .lede-row{grid-template-columns:1fr}}
+.origins-strip .kicker{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ph0);margin-bottom:8px}
+.origins-strip p{color:var(--muted);font-size:.9rem;margin-bottom:10px;line-height:1.5}
+.origin-chips{display:flex;flex-wrap:wrap;gap:6px}
+.origin-chips a{font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ph0);text-decoration:none;border:1px solid var(--line);padding:4px 8px}
+.origin-chips a:hover{color:var(--text);border-color:var(--text)}
+header .lede-art{position:absolute;right:-6%;bottom:-10%;width:min(780px,68vw);margin:0;pointer-events:none;z-index:1}
+header .lede-art img{display:block;width:100%;height:auto;border:0;opacity:.78;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 18%,#000 38%),linear-gradient(180deg,transparent 0%,#000 16%,#000 78%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 18%,#000 38%),linear-gradient(180deg,transparent 0%,#000 16%,#000 78%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
+@media (max-width:900px){
+  header .lede-art{width:min(560px,92vw);bottom:-14%}
+}
 .cipher{position:absolute;inset:0;pointer-events:none;opacity:.14;font-family:var(--mono);font-size:.7rem;line-height:1.9;color:#5a7a62;white-space:pre;user-select:none}
 @media (max-width:720px){
   .masthead{flex-direction:column;align-items:stretch}
@@ -163,7 +179,7 @@ nav.phases button:focus-visible{outline:2px solid var(--text);outline-offset:-2p
 
 
 /* ---------- stories under timeline phases ---------- */
-#phase-stories{display:flex;width:100%;border-top:1px solid var(--line);background:var(--ink)}
+#phase-stories{display:flex;align-items:flex-start;width:100%;border-top:1px solid var(--line);background:var(--ink)}
 .phase-story{display:block;width:auto;text-align:left;font:inherit;color:inherit;background:transparent;padding:16px 14px 20px;border:none;border-right:1px solid var(--line);border-top:3px solid transparent;cursor:pointer;transition:background .2s,border-color .2s;min-width:0}
 .phase-story:last-child{border-right:none}
 .phase-story:hover{background:rgba(255,255,255,.02)}
@@ -176,7 +192,7 @@ nav.phases button:focus-visible{outline:2px solid var(--text);outline-offset:-2p
 @media (max-width:760px){#phase-stories,.story-flag{min-width:900px}}
 
 /* narrow phase columns: keep the date-true column, move the story text below */
-.phase-story.slim{padding:16px 4px 20px;text-align:center}
+.phase-story.slim{padding:16px 4px 20px;text-align:left}
 .phase-story.slim .tense{font-size:.52rem;letter-spacing:.06em}
 .phase-story.slim .s-label{font-size:.78rem}
 .phase-story.slim .s-below{font-family:var(--mono);font-size:.7rem;color:var(--nc);margin-top:10px}
@@ -193,14 +209,13 @@ nav.phases button:focus-visible{outline:2px solid var(--text);outline-offset:-2p
 .story-flag .flag-card:hover{background:var(--panel-2)}
 .story-flag .flag-card:focus-visible{outline:2px solid var(--text);outline-offset:-2px}
 
-/* ---------- legend: phases + marker types ---------- */
-#phase-key{display:flex;flex-direction:column;gap:10px;padding:14px 6vw 16px;border-top:1px solid var(--line);background:linear-gradient(180deg,color-mix(in srgb,var(--panel) 70%,transparent),var(--ink));font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-#phase-key .key-group{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
-#phase-key .key-group + .key-group{padding-top:8px;border-top:1px solid var(--line)}
-#phase-key .key-title{color:var(--army);letter-spacing:.2em;flex-shrink:0;min-width:66px}
-#phase-key .key-chip{white-space:nowrap;padding:4px 8px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 80%,transparent)}
-#phase-key .key-chip i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px}
-#phase-key .key-chip .key-glyph{margin-right:6px;font-size:.75rem;vertical-align:-1px}
+/* ---------- legend: compact stack, above the track, right ---------- */
+#phase-key{position:absolute;top:10px;right:10px;z-index:8;display:flex;font-family:var(--mono);font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+#phase-key .key-group{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:158px;padding:6px 8px;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 88%,transparent);backdrop-filter:blur(8px)}
+#phase-key .key-title{color:var(--army);letter-spacing:.16em;font-size:.5rem;margin-bottom:2px}
+#phase-key .key-chip{white-space:nowrap;padding:1px 0;border:none;background:none;line-height:1.35}
+#phase-key .key-chip i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+#phase-key .key-chip .key-glyph{margin-right:5px;font-size:.7rem;vertical-align:-1px}
 #phase-key .key-chip em{font-style:normal;color:var(--text)}
 
 /* ---------- cost of waiting / lessons ---------- */
@@ -281,9 +296,10 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 <nav class="jump" id="jumpNav" aria-label="On this page">
   <span class="jump-label">On this page</span>
   <a href="#overview">Overview</a>
+  <a href="#origins">Origin Story</a>
   <a href="#timeline">Timeline</a>
   <a href="#manifest">Manifest</a>
-  <a href="#panic-curve">Do this first</a>
+  <a href="#panic-curve">Requirements</a>
   <a href="#atlas">ATLAS</a>
   <a href="#hubs">Working lists</a>
 </nav>
@@ -339,7 +355,29 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <div class="eyebrow">1994 → Q-DAY · Army cryptographic readiness</div>
   </div>
   <h1>The road to <span class="qd">Q&#8209;Day</span></h1>
-  <p class="lede">From August 2015, the government has been on a road to preparing for a quantum threat. NSA and CNSS directed programs to stop new investment in the public-key crypto that protects command and control and to prepare for quantum-resistant algorithms. This page records that path for the Army. A cryptographically relevant quantum computer (CRQC) makes it easy to derive a private key from a public key. Harvested ciphertext can then be decrypted. An attacker can also sign new orders, forge credentials, and ship software updates that verify as authentic. Forgery is the operational problem.</p>
+  <figure class="lede-art" aria-hidden="true">
+    <img src="assets/key-lattice.jpg" alt="" width="720" height="405">
+  </figure>
+  <div class="lede-row">
+    <div class="lede-block">
+      <p>Since August 2015, the government has been preparing for a quantum threat. This quantum threat is created by the potential of a future capable cryptographically relevant quantum computer (CRQC) having the capability of breaking modern asymmetric cryptographic suites (e.g., elliptic-curve cryptography (ECC) and RSA). Many security experts have estimated this threat to be as soon as 2030; whereas some estimate the threat much further out.</p>
+      <p>NSA and the Committee on National Security Systems (CNSS) have mandated programs to cease new investments into asymmetric public-key cryptography that protects command and control (C2) systems and prepares quantum-resistant algorithms. The following timeline illustrates this roadmap or course that the government has taken towards a quantum resistant future. There is a legend above the timeline that explains what all the marks mean.</p>
+      <p>Each dot has a link to a government document on this roadmap. Dashed diamonds are planned dates, not documents. Origins highlight the seminal academic achievements that led to the discovery of this threat. Pre-strategy shows the documents and initiatives that led to our current strategy. Target-state and post-CRQC show the target dates and predictions for a CRQC to be available to a nation-state or terrorist actor.</p>
+    </div>
+    <div class="origins-strip" id="origins">
+        <div class="kicker">Origin Story · Finding the threat · 1994–2015</div>
+        <p>Petr Shor in 1994 showed a CRQC can break RSA, Diffie-Hellman, and ECC with relative ease. Grover soon after showed a quantum computer could cut symmetric key strength in half. Grover’s is a security concern, but less of one than Shor’s algorithm as we can double the key for symmetric encryption and get similar security guarantees as originally. Shor's algorithm takes an encryption under today's standards and classical computers that would take thousands of years to break and reduces that time down to less than a day if a capable quantum computer existed. </p>
+        <p>Hardware changes started chasing the math around 2001. Regev’s lattices (2005) are what today’s PQC standards stand on. Most NIST PQC standards rely on the assumption that quantum computers will have difficulty breaking cryptographic schemes based on lattice problems. </p>
+        <p>The field related to quantum computer resistant algorithms adopted the name “post-quantum cryptography” in 2006. The community identified many threats that a CRQC could pose, but the main one of the concerns at the time was attackers (nation states) storing large amounts of encrypted data and waiting for the day that they invent a CRQC which is also known as harvest now and decrypt it later (HNDL).The day this computer becomes available is known as Q-day. The links below are seminal papers that led to the post-quantum cryptography field. </p>
+        <div class="origin-chips">
+          <a href="https://arxiv.org/abs/quant-ph/9508027" target="_blank" rel="noopener">1994 Shor</a>
+          <a href="https://arxiv.org/abs/quant-ph/9605043" target="_blank" rel="noopener">1996 Grover</a>
+          <a href="https://arxiv.org/abs/quant-ph/0112176" target="_blank" rel="noopener">2001 Hardware</a>
+          <a href="https://cims.nyu.edu/~regev/papers/qcrypto.pdf" target="_blank" rel="noopener">2005 LWE</a>
+          <a href="https://pqcrypto.org/conferences.html" target="_blank" rel="noopener">2006 PQCrypto</a>
+        </div>
+    </div>
+  </div>
 </header>
 
 <div class="sec-rule" aria-hidden="true"><i></i><span>01 · Timeline</span><i></i></div>
@@ -351,9 +389,9 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <div id="track">
       <svg id="lattice" xmlns="http://www.w3.org/2000/svg"></svg>
       <div id="axis"></div>
+      <div id="phase-key" aria-label="Timeline markers"></div>
     </div>
     <div id="phase-stories" aria-live="polite"></div>
-    <div id="phase-key" aria-label="Phase color key"></div>
   </div>
 </div>
 </section>
@@ -363,7 +401,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 <div class="sec-rule" aria-hidden="true"><i></i><span>02 · Document manifest</span><i></i></div>
 <section id="manifest">
   <div class="eyebrow">Document manifest · newest first</div>
-  <h2>ID → Document</h2>
+  <h2>Documents on this timeline</h2>
   <table>
     <thead><tr><th>ID</th><th>Date</th><th>Document</th><th>Phase</th><th>Source</th></tr></thead>
     <tbody id="mbody"></tbody>
@@ -375,26 +413,26 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 <summary class="sec-rule"><i></i><span>03 · Requirements</span><em class="fold-hint"><span class="when-closed">Maximize to read</span><span class="when-open">Minimize</span></em><i></i></summary>
 <section id="panic-curve">
   <div class="cow-head">
-    <div class="eyebrow">Do this before you cut over</div>
+    <div class="eyebrow">Map the network before PQC migration</div>
     <h2>Map the network first</h2>
-    <p>Do not wait to buy PQC. Wait only long enough to know your network. If you skip inventory and rush the cutover, you pay twice. Time spent now on inventory, latency, whether systems still talk to each other, and how Soldiers actually use the gear is cheap. Army programs already learned this on <a href="#case-wint">WIN-T</a> and <a href="#case-jrss">JRSS</a>. Write the hard requirements first. Then field PQC.</p>
+    <p>An inventory is a live list of every place the old public-key crypto algorithms still run and still are used: apps, tactical radios, enterprise gateways, network devices (e.g., routers, switches, and firewalls), industrial controllers, and small devices. We begin building that list thoroughly now. We do not field PQC until we know what the network will do when keys get bigger and handshakes get slower. These unknown effects create an uncertainty gap. If we skip understanding the effects and rush the PQC migration, we will pay a second cost as we have seen with past migrations (once to field, and again to fix what we missed). Time spent now on inventory, latency, interoperability, and how Soldiers use the new equipment is cheap compared with a late re-fielding (tech refresh). The Army already paid for that lesson on <a href="#case-wint">WIN-T</a> (tactical networking) and <a href="#case-jrss">JRSS</a> (enterprise security stacks). We are already taking proactive measures to ensure we find as many hidden requirements as possible, for it is absolutely necessary to migrate.</p>
   </div>
 
   <div class="cow-callout">
-    <p><strong>Spend early money on requirements. Do not rush the cutover.</strong> Finish this list first:</p>
+    <p><strong>Spend the early money on requirements and discovery, not on a rushed PQC migration later.</strong> Finish this list first:</p>
     <ul>
-      <li>Find every place RSA and ECC still live</li>
-      <li>Map apps and old networks that depend on that crypto</li>
+      <li>Find every place RSA and ECC still run</li>
+      <li>Map the apps and older networks that depend on that crypto</li>
       <li>Set latency and throughput limits for bigger keys and slower handshakes</li>
-      <li>Include ICS, OT, and small devices</li>
-      <li>Account for tactical conditions and what operators can handle</li>
-      <li>Get vendor support and a path to swap algorithms later</li>
+      <li>Include industrial control systems (ICS), operational technology (OT), and small devices</li>
+      <li>Account for tactical conditions and what operators can actually handle</li>
+      <li>Get vendor support and a way to swap algorithms later without replacing the box</li>
     </ul>
-    <p>Skip this and the Army fields gear it has to rework, then does the job again under a tighter clock.</p>
+    <p>Skip this list and the Army fields gear it has to rework, then does the job again with less time on the clock.</p>
   </div>
 
-  <p class="cow-chart-title">Start now and stay gradual. Wait, and panic forces a rush that can fail.</p>
-  <svg viewBox="0 0 880 360" width="100%" style="max-width:1100px;display:block;margin:0 auto;overflow:visible" role="img" aria-label="Two conceptual paths over time. The teal path starts early and stays a slow, steady climb with no panic. The red path waits, then hits panic: a rush, more resources, and a risk of failure.">
+  <p class="cow-chart-title">Start the inventory now. Waiting until a CRQC is close forces a rush.</p>
+  <svg viewBox="0 0 880 360" width="100%" style="max-width:1100px;display:block;margin:0 auto;overflow:visible" role="img" aria-label="Two conceptual paths over time. The teal path starts early and stays a systematic, steady climb with no panic. The red path waits, then hits panic: a rush, more resources, and a risk of failure.">
     <defs>
       <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
         <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/>
@@ -410,20 +448,20 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <text x="808" y="322" text-anchor="end" font-family="var(--mono)" font-size="12" fill="var(--ph4)">Later / panic</text>
     <path d="M88,248 C280,236 520,214 800,198" fill="none" stroke="var(--ph2)" stroke-width="3"/>
     <text x="210" y="214" font-family="var(--mono)" font-size="13" fill="var(--ph2)">Start now</text>
-    <text x="210" y="232" font-family="var(--mono)" font-size="11" fill="var(--text)">Slow and gradual. No panic.</text>
+    <text x="210" y="232" font-family="var(--mono)" font-size="11" fill="var(--text)">Systematic and gradual work. No panic.</text>
     <path d="M88,278 C340,276 500,268 580,170 C680,55 740,32 792,24" fill="none" stroke="var(--ph4)" stroke-width="2.4"/>
     <path d="M780,12 L804,36 M804,12 L780,36" stroke="var(--ph4)" stroke-width="2.2"/>
     <text x="430" y="258" font-family="var(--mono)" font-size="13" fill="var(--ph4)">Wait</text>
     <text x="568" y="118" font-family="var(--mono)" font-size="13" fill="var(--ph4)">Rush under panic</text>
     <text x="568" y="136" font-family="var(--mono)" font-size="11" fill="var(--text)">More resources. Risk of failure.</text>
   </svg>
-  <p class="cow-desc">Time runs left to right. The teal path starts early and stays a slow, steady climb. The red path waits until the clock is short. Panic then forces a rush that uses more people and money and can fail before the work is done. These curves show the idea. They are not measured data.</p>
+  <p class="cow-desc">Time runs left to right. The teal path is a PQC migration that starts with a thorough inventory: fewer surprises later, and a steady climb in cost. The red path waits until a CRQC looks close. Then the remaining requirements hit at once, the bill jumps, and the work can fail before it finishes. The more we requirements we find now, the less requirements that surprise us later. These curves only illustrate a concept. They are not based on measured data.</p>
 
   <div class="lesson-grid">
     <div class="lesson" id="case-wint">
       <div class="tag">Lessons · WIN-T Inc 2</div>
       <h3>Field gear that formations can use</h3>
-      <p>WIN-T put mobile tactical networking in the field at a scale no one had done before. Testing showed early nodes asked more of formations than operations allow. Army leadership paused, moved about $2.3B, and redesigned the approach. For PQC, write C2, mobility, and Soldier load as hard requirements from day one. Field crypto that units can operate.</p>
+      <p>Warfighter Information Network-Tactical (WIN-T) Increment 2 put mobile tactical networking in the field at a scale the Army had not done before. Testing showed early nodes required too much on the operator for the system to function properly. Army leadership pivoted and redesigned the approach, which proved to be costly. For PQC, the operator needs to be a consideration as hard requirements from day one. Crypto solutions must be able to be implemented efficiently and effectively at every level of formation.</p>
       <div class="cites">
         <a href="https://www.dote.osd.mil/Portals/97/pub/reports/FY2013/army/2013win-t.pdf" target="_blank" rel="noopener">DOT&amp;E FY2013</a>
         <a href="https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Science_and_Technology/16-F-0250_(REPORT)_Operational_Evaluation_of_Warfighter_Information-Tactical_(WIN-T)_Inc_2.pdf" target="_blank" rel="noopener">FOT&amp;E 2</a>
@@ -435,7 +473,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <div class="lesson" id="case-jrss">
       <div class="tag">Lessons · JRSS</div>
       <h3>The hard problems show up when you move at scale</h3>
-      <p>JRSS set out to put enterprise security on one modern stack. The stack worked. The hard part showed up during the move: old apps, old networks, ICS and OT paths, and latency. DISA closed those gaps as it went. PQC will hit the same edges because keys get bigger and handshakes get heavier. Find those paths now.</p>
+      <p>Joint Regional Security Stacks (JRSS) set out to put enterprise security on one modern stack after incidents on 9/11. The stack itself worked and provided a redundant, self-healing network for the Pentagon preventing single points of failure. The hard part showed up when trying to scale this system globally. The government ran into issues with old apps, older networks, ICS and OT paths, and extra delay (latency) on long-haul links. DISA closed those gaps as it assisted with the transition. PQC will hit the same issues because keys get bigger and handshakes get heavier and the underlying cryptographic schema, algorithms, protocols, and functions will change. We must find those paths now, while there is still time to write them as requirements. Every requirement we miss will leave a gap in the network, or have to be cleaned up during or after the migration, which adds scope to PQC migration projects.</p>
       <div class="cites">
         <a href="https://www.dodig.mil/reports.html/Article/1867983/audit-of-the-dods-implementation-of-the-joint-regional-security-stacks-dodig-20/" target="_blank" rel="noopener">DODIG-2019-089</a>
         <a href="https://www.dote.osd.mil/Portals/97/pub/reports/FY2020/dod/2020jrss.pdf" target="_blank" rel="noopener">DOT&amp;E FY2020</a>
@@ -446,10 +484,10 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   </div>
 
   <div class="cow-callout" style="margin-top:28px">
-    <p><strong>Army PQC work applies these lessons now.</strong> Discovery and validation tools find crypto on the network. New vendor solutions enter <a href="#atlas" style="color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)">ATLAS</a> before a Component considers them.</p>
+    <p><strong>Army PQC work is using those lessons now.</strong> Discovery and validation tools scan the network for the old crypto. New vendor products go into <a href="#atlas" style="color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)">ATLAS</a> before a Component (a Service or agency) considers a buy.</p>
   </div>
 
-  <p class="cow-foot">The network keeps getting denser: more function in less gear, more apps on shared paths, less slack. A rushed PQC cutover repeats two failures: gear formations cannot use, and late-found apps, legacy links, ICS, and latency. Inventory shows those paths early.</p>
+  <p class="cow-foot">The network keeps getting tighter: more function in less gear, more apps on shared paths, and less slack for delay or extra complexity. A rushed PQC migration repeats two costly transitions the Army has already seen and experienced: gear formations cannot use in the field, and apps, older links, ICS, and latency that nobody mapped until the move was underway. Inventory is how those paths and requirements show up early.</p>
 </section>
 </details>
 
@@ -459,13 +497,13 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   <div class="atlas-head">
     <div class="eyebrow">DOW intake and tracking for PQC solutions</div>
     <h2>What ATLAS is</h2>
-    <p>ATLAS means Acquisition, Testing, Licensing, and Security. It is the Department of War intake and tracking process for post-quantum cryptography solutions and later work. Industry uses it as the front door for new solutions that use cryptography that is not quantum-vulnerable, before a Component considers the product. Components use it to track what is approved, from pre-testing through deployment, and to see certification status for national security systems plus test results from other Components.</p>
+    <p>ATLAS means Acquisition, Testing, Licensing, and Security. It is the Department of War's gateway for PQC products (and later related work) before a Component (department nested in the DOW) looks at a buy. DOW has mandated that they are made aware of any PQC products being used or acquired. A government sponsor files the packet, ATLAS records intake and status, and Components will eventually see what is approved, how far it has gone (pre-test through fielding), national security system certification, and test results from other Components. This will prevent multiple Components from having to redundantly test products. However, it is important to ensure that the products another entity has tested fit the same characteristics as the environment it is going to be used on.</p>
   </div>
   <div class="atlas-fit" aria-label="How ATLAS fits the migration">
     <div class="fit-cell">
       <div class="tag">How it fits</div>
       <h3>Front door before Component review</h3>
-      <p>Industry enters here first. ATLAS records intake and tracks status. A Component still decides whether to test, buy, or field the product. ATLAS does not replace NIST standards, CNSA 2.0, or a program's own test.</p>
+      <p>New products come here first. ATLAS records the intake and tracks status. A Component still decides whether to test, buy, or field the product. ATLAS does not replace NIST standards, CNSA 2.0, or a program's own test.</p>
     </div>
     <div class="fit-cell">
       <div class="tag">Who submits</div>
@@ -475,7 +513,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <div class="fit-cell">
       <div class="tag">What it tracks</div>
       <h3>Status and results across Components</h3>
-      <p>ATLAS tracks approved solutions and their stage. It shows NSS certification status and performance-test outcomes from other Components. It is a reference map of cryptographic readiness and usability. It is not a blanket Department-wide approval.</p>
+      <p>ATLAS tracks approved solutions and what stage they are in. It shows national security system (NSS) certification status and performance-test outcomes from other Components. It is a shared map of what has been tried and how usable it was. It is not a blanket Department-wide approval to field.</p>
     </div>
   </div>
   <div class="atlas-actions">
@@ -489,13 +527,13 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 <section id="hubs" style="padding:52px 6vw 80px">
   <div class="eyebrow">Working lists</div>
   <h2 style="font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(1.1rem,2.2vw,1.5rem);margin:10px 0 8px">Working lists, not on the timeline</h2>
-  <p style="max-width:70ch;color:var(--muted);font-size:.88rem;margin-bottom:20px">These pages change often. The timeline does not pin them to a date. Use them as the live working list.</p>
+  <p style="max-width:70ch;color:var(--muted);font-size:.88rem;margin-bottom:20px">These pages change often, so the timeline does not pin them to one date. Use them as the live working list of current guidance and intake links.</p>
   <table><thead><tr><th>Org</th><th>Resource</th><th>Source</th></tr></thead><tbody id="hbody"></tbody></table>
   <p class="asof-note" id="hubs-asof"></p>
   <p class="asof-note">Special PQC-related documents sit on <a href="https://www.intelink.gov/" target="_blank" rel="noopener">intelink.gov</a>. CAC registration takes about 24 hours.</p>
 </section>
 
-<footer>U.S. ARMY · CRYPTOGRAPHIC READINESS · Q-DAY IS A POINT. ITS TIMING IS A BAND.</footer>
+<footer>U.S. Army · cryptographic readiness · Q-Day is a point in time. The date of that point is still a range.</footer>
 
 <script>
 /* ============================================================
@@ -503,16 +541,9 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
    dates are decimal years (2022.85 ≈ Nov 2022) for positioning.
 ============================================================ */
 const YEAR_MIN = 2014.5, YEAR_MAX = 2037;
-/* Prologue: the 1994-2015 foundations era is real but would flatten the modern
-   detail if drawn to scale, so it is compressed into a fixed share of the track
-   and the seam is marked with an axis break. Wide enough that the Origins
-   narration sits in-line with the other phase stories. YEAR_MAX is clipped
-   just past 2035 so that civilian-migration mark sits on the right of the axis. */
-const YEAR_PRO_MIN = 1994.0;
-const PRO_SHARE = 16; // % of track width given to the compressed 1994-2015 prologue
 
 /* Site-level governance: when the links and metadata below were last checked by a human. */
-const META = { validatedAsOf: 'Jul 2026' };
+const META = { validatedAsOf: 'Oct 2026' };
 
 /* Invisible day-level graduations: every record carries a real calendar date (d:'YYYY-MM-DD')
    and is converted to a fractional year at day precision, so dots snap to the exact day
@@ -522,34 +553,28 @@ function decYear(iso){
   const start = Date.UTC(y,0,1), next = Date.UTC(y+1,0,1);
   return y + (Date.UTC(y,(m||1)-1,day||1) - start) / (next - start);
 }
-const STRATEGY_DAY = decYear('2026-06-23'); // DOW PQC Strategy release: the phase pivot
+const STRATEGY_DAY = decYear('2026-04-16'); // DOW PQC Strategy: cleared for publication 16 Apr 2026
 const TARGET_STATE_DAY = decYear('2029-12-31'); // core systems migrated to PQC-compliant algorithms
 const QDAY_THEORETICAL = decYear('2032-07-01'); // midpoint of the ~2030-2035 CRQC estimate band; the Q-Day phase opens here
 
 const PHASES = [
   {
-    key:'origins', label:'Origins', years:'1994 to 2015 · compressed', from:YEAR_PRO_MIN, to:2014.5, color:'var(--ph0)',
-    meaning:'how the threat started',
-    tense:'Where it began',
-    story:'The threat started long before the policy memos. In 1994 Peter Shor showed a quantum computer can break RSA, Diffie-Hellman, and ECC once the machine exists. Researchers worked that problem for twenty years. Policy caught up in 2015. Anyone who stored old encrypted traffic during those years can wait and decrypt it later. The axis compresses this stretch.'
-  },
-  {
-    key:'pre', label:'Pre-Strategy', years:'Aug 2015 to Jun 2026', from:2014.5, to:STRATEGY_DAY, color:'var(--ph1)',
+    key:'pre', label:'Pre-Strategy', years:'Aug 2015 to Apr 2026', from:YEAR_MIN, to:STRATEGY_DAY, color:'var(--ph1)',
     meaning:'policy and standards',
     tense:'What programs assumed',
-    story:'Programs treated the threat as 15 to 30 years out. Near-term funding followed that view. Federal rules and NIST standards aimed at about 2035 for civilian systems. Briefings stressed harvest-now-decrypt-later. Signature forgery received little attention outside academic work. Army C2 and logistics stayed on classical crypto with no firm Army date.'
+    story:'Programs always treated the threat as 15 to 30 years out. In about 2025, real initiatives started pushing towards a post-quantum migration strategy.  The original target for Federal and NIST transition was 2025. However, recent breakthroughs and estimates have pushed the transition to begin much sooner and start looking at full migrations as early as 2029. Briefings for the longest time stressed HNDL. Signature forgery received little attention outside academic work until recently. Army C2 and logistics have stayed on classical crypto with no firm Army date.'
   },
   {
-    key:'strat', label:'Strategy', years:'Jun 2026 to Dec 2029', from:STRATEGY_DAY, to:TARGET_STATE_DAY, color:'var(--ph2)',
+    key:'strat', label:'Strategy', years:'Apr 2026 to Dec 2029', from:STRATEGY_DAY, to:TARGET_STATE_DAY, color:'var(--ph2)',
     meaning:'this window is current',
     tense:'Current work',
-    story:'The Department published the PQC Strategy. Core systems move to PQC by 31 December 2029. Programs support or phase out the rest by 2030. National security systems use CNSA 2.0. The Department coordinates with industry. That date is earlier than the civilian 2035 target. Progress is inventories, contracts, and fielded gear. New products enter ATLAS so the Department can intake and track them before a Component considers them.'
+    story:'The Department of War published the PQC Strategy. Soon after, the Army published its own. Core systems move to PQC resistant algorithms (i.e., FIPS 203 and 204) by 31 December 2029. Other programs and systems must either keep running with approved network security measures or come off the network by 2030. National security systems use CNSA 2.0. The Department of War coordinates with industry to meet this requirement. The 2029 target is aggressively accelerated versus the previous 2035 target. Progress is tracked through roadmaps. These roadmaps are thorough and track inventories, contracts, and fielded gear. New products proposed for the DOW network enter ATLAS so the Department can intake and track them before the appropriate component considers them.'
   },
   {
     key:'impl', label:'Target State', years:'Dec 2029 →', from:TARGET_STATE_DAY, to:QDAY_THEORETICAL, color:'var(--ph3)',
     meaning:'the planned end state',
     tense:'Planned end state',
-    story:'By this date, inventoried core systems run PQC and the managed network retires classical public-key crypto. That holds only if the inventory is complete. Platforms, operational technology, and vendor-built crypto still need work.'
+    story:'By this date, inventorying of core systems has begun, and managed enterprise networks begin retiring classical cryptography. This state only can transition properly if inventory is completed thoroughly. Any unmigrated crypto systems leave a potential hole for an adversary to penetrate the enterprise network. After this phase is complete, many legacy platforms, operational technology and vendor-built crypto will still be sandboxed by network security within the enterprise network which will have to be watched closely.'
   },
   {
     /* Q-Day is a point, not a phase: the moment a peer holds a CRQC, Post-CRQC begins.
@@ -557,18 +582,14 @@ const PHASES = [
     key:'post', label:'Post-CRQC', years:'After Q-Day (timing unknown)', from:QDAY_THEORETICAL, to:YEAR_MAX, color:'var(--ph5)',
     meaning:'starts at Q-Day; the date is unknown',
     tense:'Risk after Q-Day',
-    story:'Q-Day is the day a CRQC exists. The operator may not announce it. Estimates from 2029 to 2035 overlap the migration window, so a CRQC can arrive before the work finishes. Migrated systems stay protected. Unmigrated systems fail. A CRQC derives private keys from public keys, so harvested ciphertext can be decrypted. Forgery is the larger operational problem: an attacker can sign as a commander, ship a trusted-looking update, and inject false orders into C2. Harvested traffic exposes the past. Forged signatures break current operations. Programs need modular crypto and a way to swap algorithms.'
+    story:'Q-Day is the day a CRQC exists.  Estimates from 2029 to 2035 overlap the migration window; therefore, a CRQC can arrive before the work finishes. Migrated systems stay protected. Unmigrated systems remain vulnerable and provide a potential gateway for an attacker. A CRQC easily derives private keys from public keys, so harvested ciphertext that was once transmitted through a key exchange process can be decrypted. Forgery is the larger operational problem: an attacker can sign as a commander, ship a trusted-looking update, and inject false orders into C2 systems. Harvested traffic exposes past collected encrypted information, which could unveil symmetric keys which protect messages and sensitive data. Forged signatures break current operations by allowing mimicking attacks. Because CRQCs can unravel private keys from public keys, attacks will look like normal operations. Because of the adaptive nature of this new era of crypto, all systems must maintain crypto agility and modular approach to updating cryptographic means.'
   }
 ];
 
 const DOCS = [
-  {id:'PQC-000', d:'1994-11-20', label:'Nov 1994', phase:'origins',
-   title:'Shor\u2019s Algorithm: Quantum Factoring in Polynomial Time',
-   desc:'Peter Shor presents "Algorithms for Quantum Computation: Discrete Logarithms and Factoring" at IEEE FOCS (Nov 1994), proving a sufficiently large quantum computer breaks RSA, Diffie-Hellman, and ECC. Every document on this timeline is downstream of this result. Link is the expanded journal version on arXiv.',
-   url:'https://arxiv.org/abs/quant-ph/9508027'},
   {id:'PQC-001', d:'2015-08-11', label:'Aug 2015', phase:'pre', sourceTier:'mirror', bibKey:'cnss2015am0215',
    title:'CNSS Advisory Memorandum 02-15: Quantum Transition',
-   desc:'CNSS Advisory Memorandum 02-15 (11 Aug 2015): an advisory memo, not a directive. NSA/CNSS announce the coming transition to quantum-resistant algorithms and advise against major new Suite B (ECC) investment. The starting gun. Link is an archived mirror; the original CNSS posting requires navigation from cnss.gov.',
+   desc:'CNSS Advisory Memorandum 02-15 (11 Aug 2015): an advisory memo, not a directive. NSA/CNSS announce the coming transition to quantum-resistant algorithms and advise against major new Suite B (ECC) investment. This document marks a new era. Link is an archived mirror; the original CNSS posting requires navigation from cnss.gov.',
    url:'https://cryptome.org/2015/08/CNSS_Advisory_Memo_02-15.pdf'},
   {id:'PQC-002', d:'2016-04-28', label:'Apr 2016', phase:'pre',
    title:'NISTIR 8105: Report on Post-Quantum Cryptography',
@@ -614,9 +635,9 @@ const DOCS = [
    title:'NIST Selects HQC as Backup KEM',
    desc:'A fifth algorithm chosen from a different math family (codes, not lattices), a hedge against a lattice break.',
    url:'https://www.nist.gov/news-events/news/2025/03/nist-selects-hqc-fifth-algorithm-post-quantum-encryption'},
-  {id:'PQC-014', d:'2026-06-23', label:'Jun 2026', phase:'strat',
+  {id:'PQC-014', d:'2026-04-16', label:'Apr 2026', phase:'strat',
    title:'Department of War Post-Quantum Cryptography Strategy',
-   desc:'THE strategy: the document this timeline pivots on. Core systems migrated to PQC-compliant algorithms by 31 Dec 2029; PQC on high-impact systems by 2030; coordination with the defense industrial base. Cleared for publication 16 Apr 2026; released 23 Jun 2026, one day after the EO pair.',
+   desc:'THE strategy: the document this timeline pivots on. Cleared for publication 16 April 2026. Core systems migrated to PQC-compliant algorithms by 31 Dec 2029; PQC on high-impact systems by 2030; coordination with the defense industrial base. The public announcement followed on 23 June 2026.',
    url:'https://dowcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
   {id:'PQC-015', d:'2030-12-31', label:'Dec 2030', phase:'impl', status:'milestone',
    title:'Milestone: DOW High-Impact Systems Deadline',
@@ -638,29 +659,29 @@ const DOCS = [
    title:'CISA: Post-Quantum Considerations for Operational Technology',
    desc:'First dedicated look at the OT/ICS long tail: constrained devices, decades-long lifecycles, and why the hardest migration is not IT.',
    url:'https://www.cisa.gov/resources-tools/resources/post-quantum-considerations-operational-technology'},
-  {id:'PQC-020', d:'2026-06-22', label:'Jun 2026', phase:'pre',
+  {id:'PQC-020', d:'2026-06-22', label:'Jun 2026', phase:'strat',
    title:'EO 14412: Securing the Nation Against Advanced Cryptographic Attacks',
    desc:'Executive order on defending against cryptographic attack, the defensive half of the June 2026 EO pair that set conditions for the strategy.',
    url:'https://www.whitehouse.gov/presidential-actions/2026/06/securing-the-nation-against-advanced-cryptographic-attacks/'},
-  {id:'PQC-021', d:'2026-06-22', label:'Jun 2026', phase:'pre',
+  {id:'PQC-021', d:'2026-06-22', label:'Jun 2026', phase:'strat',
    title:'EO 14413: Ushering in the Next Frontier of Quantum Innovation',
    desc:'The offensive/industrial half of the EO pair: advancing U.S. quantum capability alongside the defensive migration.',
    url:'https://www.whitehouse.gov/presidential-actions/2026/06/ushering-in-the-next-frontier-of-quantum-innovation/'},
-  {id:'PQC-022', d:'2026-06-24', label:'Jun 2026', phase:'pre', supersedes:'PQC-006',
+  {id:'PQC-022', d:'2026-06-24', label:'Jun 2026', phase:'strat', supersedes:'PQC-006',
    title:'OMB M-26-15: Execution of the Migration to PQC',
-   desc:'OMB moves from planning (M-23-02) to execution: the memo that operationalizes the migration government-wide. Issued 24 Jun 2026, two days after the EO pair and one day after the DOW strategy.',
+   desc:'OMB moves from planning (M-23-02) to execution: the memo that operationalizes the migration government-wide. Issued 24 Jun 2026, two days after the EO pair and after the April DOW strategy.',
    url:'https://www.whitehouse.gov/wp-content/uploads/2026/06/M-26-15-Execution-of-the-Migration-to-Post-Quantum-Cryptography.pdf'},
   {id:'PQC-023', d:'2026-06-23', label:'Jun 2026', phase:'strat', status:'press',
    title:'DOW Release: Quantum Defense Strategy Announcement',
-   desc:'Official press release accompanying the strategy, same day (23 Jun 2026): hardening networks and empowering the joint force.',
+   desc:'Official press release announcing the DOW PQC Strategy to the public on 23 June 2026. The strategy document itself is dated 16 April 2026 (PQC-014).',
    url:'https://www.war.gov/News/Releases/Release/Article/4524599/securing-global-dominance-dow-unleashes-quantum-defense-strategy-to-harden-netw/'},
   {id:'PQC-024', d:'2025-06-01', label:'Jun 2025', phase:'pre', lastValidated:'Aug 2026',
    title:'RFC 9794: Terminology for PQ/Traditional Hybrid Schemes',
    desc:'IETF informational RFC (PQUIP WG) that fixes a shared vocabulary for hybrid schemes pairing post-quantum and traditional algorithms, the transition pattern most protocols use on the way to pure PQC. Standards bodies agreeing on words is a real milestone: it is how interoperable implementations get built.',
    url:'https://www.rfc-editor.org/rfc/rfc9794.html'},
-  {id:'PQC-025', d:'2026-06-19', label:'Jun 2026', phase:'pre', lastValidated:'Aug 2026',
+  {id:'PQC-025', d:'2026-06-19', label:'Jun 2026', phase:'strat', lastValidated:'Aug 2026',
    title:'RFC 9958: Post-Quantum Cryptography for Engineers',
-   desc:'IETF field guide (PQUIP WG) for the people who must actually ship the migration: why a CRQC breaks today\u2019s public-key crypto, why PQC is not a drop-in swap and may force protocol redesign, and how to plan the transition. Published 19 Jun 2026, days before the EO pair and the DOW strategy.',
+   desc:'IETF field guide (PQUIP WG) for the people who must actually ship the migration: why a CRQC breaks today\u2019s public-key crypto, why PQC is not a drop-in swap and may force protocol redesign, and how to plan the transition. Published 19 Jun 2026, after the April DOW strategy and days before the EO pair.',
    url:'https://www.rfc-editor.org/info/rfc9958'},
   {id:'PQC-026', d:'2016-01-01', label:'Jan 2016', phase:'pre', sourceTier:'mirror', supersededBy:'PQC-005', lastValidated:'Aug 2026',
    title:'NSA CNSA Suite 1.0 & Quantum Computing FAQ',
@@ -694,22 +715,6 @@ const DOCS = [
    title:'NIST PQC Competition: Round 3 Finalists (7 + 8 alternates)',
    desc:'Seven finalists and eight alternates announced (NISTIR 8309). Finalist Rainbow and alternate SIKE were later broken during evaluation, proof that candidates can fail late. Resolved by the 2024 FIPS standards.',
    url:'https://www.nist.gov/news-events/news/2020/07/pqc-standardization-process-third-round-candidate-announcement'},
-  {id:'PQC-034', d:'1996-05-29', label:'1996', phase:'origins', lastValidated:'Aug 2026',
-   title:'Grover\u2019s Algorithm: Quantum Search Speedup',
-   desc:'Lov Grover shows a quantum computer searches unsorted data quadratically faster, effectively halving symmetric key strength. The reason CNSA mandates AES-256: symmetric crypto survives the quantum era, but only at doubled key sizes.',
-   url:'https://arxiv.org/abs/quant-ph/9605043'},
-  {id:'PQC-035', d:'2001-12-19', label:'2001', phase:'origins', lastValidated:'Aug 2026',
-   title:'IBM/Stanford: Shor\u2019s Algorithm Runs on Real Hardware',
-   desc:'Vandersypen et al. factor 15 with Shor\u2019s algorithm on a 7-qubit NMR quantum computer (Nature, Dec 2001). Trivial number, profound point: the hardware started chasing the math, and it has not stopped.',
-   url:'https://arxiv.org/abs/quant-ph/0112176'},
-  {id:'PQC-036', d:'2005-05-22', label:'2005', phase:'origins', lastValidated:'Aug 2026',
-   title:'Regev: Learning With Errors (LWE)',
-   desc:'Oded Regev introduces the learning-with-errors problem and its lattice hardness reduction (STOC 2005). This is the math ML-KEM and ML-DSA stand on: the defense was on paper two decades before it was mandated.',
-   url:'https://cims.nyu.edu/~regev/papers/qcrypto.pdf'},
-  {id:'PQC-037', d:'2006-05-23', label:'2006', phase:'origins', lastValidated:'Aug 2026',
-   title:'PQCrypto 2006: The Field Gets Its Name',
-   desc:'First International Workshop on Post-Quantum Cryptography (Leuven, May 2006). The research community organizes under the name "post-quantum cryptography," a decade before NIST\u2019s competition and two before the DOW strategy.',
-   url:'https://pqcrypto.org/conferences.html'}
 ];
 
 /* snap every document to its day graduation */
@@ -732,11 +737,16 @@ const HUBS = [
 
 /* ============================================================ */
 const AXIS_Y = 228;
-const NOW_DAY = decYear('2026-09-03'); // briefing date: you-are-here pin
-/* percent of track width: compressed prologue before YEAR_MIN, linear after */
-const pct = yr => yr < YEAR_MIN
-  ? ((yr - YEAR_PRO_MIN) / (YEAR_MIN - YEAR_PRO_MIN)) * PRO_SHARE
-  : PRO_SHARE + ((yr - YEAR_MIN) / (YEAR_MAX - YEAR_MIN)) * (100 - PRO_SHARE);
+const now = new Date();
+const nowIso = [
+  now.getFullYear(),
+  String(now.getMonth() + 1).padStart(2, '0'),
+  String(now.getDate()).padStart(2, '0')
+].join('-');
+const NOW_DAY = decYear(nowIso);
+
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const pct = yr => ((yr - YEAR_MIN) / (YEAR_MAX - YEAR_MIN)) * 100;
 const track = document.getElementById('track');
 
 /* --- header cipher texture: ciphertext degrading to plaintext --- */
@@ -784,19 +794,16 @@ document.getElementById('axis').style.background =
 const tabs = document.getElementById('phaseTabs');
 const stories = document.getElementById('phase-stories');
 const phaseKey = document.getElementById('phase-key');
-/* legend reads in two rows: what the colors mean, then what the shapes mean */
-const keyPhases = document.createElement('div');
-keyPhases.className = 'key-group';
-keyPhases.innerHTML = '<span class="key-title">Phases</span>';
+/* Markers only. The colored tabs above the track already name the phases. */
 const keyMarks = document.createElement('div');
 keyMarks.className = 'key-group';
-keyMarks.innerHTML = '<span class="key-title">Markers</span>';
-phaseKey.append(keyPhases, keyMarks);
+keyMarks.innerHTML = '<span class="key-title">Key</span>';
+phaseKey.append(keyMarks);
   keyMarks.insertAdjacentHTML('beforeend',
-  `<span class="key-chip"><i style="background:var(--text)"></i><em>Dot, above axis</em> · a published document. Click it to open the source</span>` +
-  `<span class="key-chip"><span class="key-glyph" style="color:var(--ph4)">★</span><em>Star, on axis</em> · a turning point</span>` +
-  `<span class="key-chip"><i style="background:transparent;border:1.5px dashed var(--text);border-radius:0;transform:rotate(45deg);width:7px;height:7px"></i><em>Dashed diamond, below axis</em> · a planned date, not a document</span>` +
-  `<span class="key-chip"><i style="width:1px;height:11px;border-radius:0;background:var(--ph2);box-shadow:0 0 0 1px color-mix(in srgb,var(--ph2) 40%,transparent)"></i><em>Dashed teal line</em> · today</span>`);
+  `<span class="key-chip"><i style="background:var(--text)"></i><em>Dot</em> · document</span>` +
+  `<span class="key-chip"><span class="key-glyph" style="color:var(--ph4)">★</span><em>Star</em> · turning point</span>` +
+  `<span class="key-chip"><i style="background:transparent;border:1.5px dashed var(--text);border-radius:0;transform:rotate(45deg);width:6px;height:6px"></i><em>Diamond</em> · planned date</span>` +
+  `<span class="key-chip"><i style="width:1px;height:9px;border-radius:0;background:var(--ph2);box-shadow:0 0 0 1px color-mix(in srgb,var(--ph2) 40%,transparent)"></i><em>Teal line</em> · today</span>`);
 const ORDINALS = ['first','second','third','fourth','fifth'];
 /* Three layers share one ruler: tabs, track bands, and story columns are all cut
    at the same date graduations (pct of the year axis). Story text that cannot fit
@@ -812,7 +819,6 @@ PHASES.forEach((ph,i)=>{
   band.style.left = pct(ph.from)+'%';
   band.style.width = wsh+'%';
   band.style.setProperty('--bc', ph.color);
-  band.innerHTML = `<div class="band-head"><span class="band-label">${ph.label}</span><span class="band-years">${ph.years}</span></div>`;
   track.appendChild(band);
 
   const b = document.createElement('button');
@@ -848,11 +854,6 @@ PHASES.forEach((ph,i)=>{
   }
   cell.addEventListener('click', ()=>setPhase(i));
   stories.appendChild(cell);
-
-  const chip = document.createElement('span');
-  chip.className = 'key-chip';
-  chip.innerHTML = `<i style="background:${ph.color}"></i><em>${ph.label}</em> · ${ph.meaning}`;
-  keyPhases.appendChild(chip);
 });
 stories.after(...storyFlags);
 
@@ -871,35 +872,21 @@ stories.after(...storyFlags);
 
   const qchip = document.createElement('span');
   qchip.className = 'key-chip';
-  qchip.innerHTML = `<i style="background:repeating-linear-gradient(-55deg,rgba(236,108,108,.55) 0 3px,transparent 3px 6px)"></i><em>Hatched strip</em> · where Q-Day may land, 2030-2035`;
+  qchip.innerHTML = `<i style="background:repeating-linear-gradient(-55deg,rgba(236,108,108,.55) 0 3px,transparent 3px 6px)"></i><em>Hatch</em> · CRQC 2030-35`;
   keyMarks.appendChild(qchip);
 })();
 
-/* --- you-are-here pin: Sep 2026 sits inside the Strategy window --- */
+/* --- you-are-here pin: today's date, inside the Strategy window --- */
 (function(){
   const n = document.createElement('div');
   n.className = 'now-mark';
   n.style.left = pct(NOW_DAY)+'%';
-  n.innerHTML = '<span class="now-flag">Now · Sep 2026</span>';
+  n.innerHTML = `<span class="now-flag">Now · ${MONTHS[now.getMonth()]} ${now.getFullYear()}</span>`;
   n.setAttribute('aria-hidden','true');
   track.appendChild(n);
 })();
 
 /* --- year ticks --- */
-/* prologue tick + axis break at the compression seam */
-(function(){
-  const t=document.createElement('div');
-  t.className='year-tick';
-  t.style.left = pct(YEAR_PRO_MIN)+'%';
-  t.style.transform='translateX(0)'; // left edge: don't center off-track
-  t.textContent = 1994;
-  track.appendChild(t);
-  const br=document.createElement('div');
-  br.className='axis-break';
-  br.style.left = pct(YEAR_MIN)+'%';
-  br.title='Axis compressed: 1994-2015 is not to scale';
-  track.appendChild(br);
-})();
 for(let y=2015; y<=Math.floor(YEAR_MAX); y++){
   const m=document.createElement('div');
   m.className='year-mark';
@@ -919,13 +906,13 @@ const STARS = [
   {
     d:'2024-08-13', year:'Aug 2024', label:'FIPS standards',
     title:'FIPS 203 / 204 / 205 established',
-    desc:'First NIST PQC standards finalized (ML-KEM, ML-DSA, SLH-DSA). "Prepare" becomes an engineering task.',
+    desc:'NIST published the first PQC standards: FIPS 203 (ML-KEM) for key exchange, and FIPS 204 (ML-DSA) and FIPS 205 (SLH-DSA) for signatures. The star marks that turning point. The matching dot above the axis is the document you can open.',
     color:'var(--ph1)', docId:'PQC-010'
   },
   {
-    d:'2026-06-23', year:'Jun 2026', label:'Strategy',
-    title:'DOW PQC Strategy released',
-    desc:'The Department set the plan: move core systems to PQC by 31 Dec 2029, support or phase out the rest by 2030, use CNSA 2.0 on national security systems, and work with industry. Released 23 Jun 2026.',
+    d:'2026-04-16', year:'Apr 2026', label:'Strategy',
+    title:'DOW PQC Strategy published',
+    desc:'The Department of War set the plan on 16 April 2026: move core systems to PQC by 31 December 2029. Systems outside that core set must either keep operating with PQC support or be retired by 2030. National security systems must use CNSA 2.0 and any proposed alternatives must be approved through the NSA. The DOW PQC Directorate has placed themselves as a gatekeeper for all DOW systems to mitigate any threats potentially posted by industry (e.g., software and hardware vendors selling quantum resitant technologies to Army organizations).',
     color:'var(--ph2)', docId:'PQC-014'
   },
   {
@@ -953,6 +940,7 @@ function seedRand(str){
   for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619); }
   return (n)=>{ h=Math.imul(h^(h>>>15),2246822507); h=Math.imul(h^(h>>>13),3266489909); return (((h^=h>>>16)>>>0)%1000)/1000 * n; };
 }
+const placedDots = [];
 DOCS.forEach((d,i)=>{
   /* url-less entries are prediction milestones: rendered below the axis as dashed diamonds */
   if(!d.url){
@@ -971,17 +959,22 @@ DOCS.forEach((d,i)=>{
     return;
   }
   const rnd = seedRand(d.id);
-  // all dots above the axis; neighbors cycle through 5 height steps so labels never collide
-  const off = 34 + (i%5)*30 + rnd(10);
+  const x0 = pct(d.date);
+  /* keep the true date on the x-axis; same-week dots stack a little, but stay under the band labels */
+  let bump = 0;
+  placedDots.forEach(p=>{ if(Math.abs(x0 - p.x0) < 0.7) bump++; });
+  const maxOff = AXIS_Y - 78;
+  const off = Math.min(maxOff, 40 + (bump ? bump * 20 : (i%4)*20 + rnd(6)));
   const size = 11 + rnd(6);
   const dot=document.createElement('a');
   dot.className='dot '+((i%5)%2===0 ? 'up':'dn');
-  if(pct(d.date) < 3) dot.classList.add('edge');
+  if(x0 < 3) dot.classList.add('edge');
   dot.href = d.url;
   dot.target = '_blank';
   dot.rel = 'noopener noreferrer';
-  dot.style.left = pct(d.date)+'%';
+  dot.style.left = x0+'%';
   dot.style.top = (AXIS_Y - off)+'px';
+  placedDots.push({x0});
   dot.style.width = size+'px'; dot.style.height = size+'px';
   dot.style.setProperty('--dc', phaseOf(d.phase).color);
   dot.dataset.id = d.id;
