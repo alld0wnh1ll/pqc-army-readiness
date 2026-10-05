@@ -568,13 +568,13 @@ const PHASES = [
     key:'strat', label:'Strategy', years:'Apr 2026 to Dec 2029', from:STRATEGY_DAY, to:TARGET_STATE_DAY, color:'var(--ph2)',
     meaning:'this window is current',
     tense:'Current work',
-    story:'The Department of War published the PQC Strategy. Soon after, the Army published its own (not public). Core systems move to PQC resistant algorithms (i.e., FIPS 203 and 204) by 31 December 2029. Other programs and systems must either keep running with approved network security measures or come off the network by 2030. National security systems use CNSA 2.0. The Department of War coordinates with industry to meet this requirement. The 2029 target is aggressively accelerated versus the previous 2035 target. Progress is tracked through roadmaps. These roadmaps are thorough and track inventories, contracts, and fielded gear. New products proposed for the DOW network enter ATLAS so the DOW can intake and track them before the appropriate component considers them.'
+    story:'The DoW published the PQC strategy in June 2026 directing core systems move to PQC resistant algorithms by 31 Dec 2029. Units should begin active inventory of systems requiring transition along with determining system capability to support to quantum-resistant algorithms. For systems unable to transition, a plan to replace, secure through other means, or remove entirely must be made. Early inventory and assessment is critical for making the 31 Dec 2029 timeline.'
   },
   {
     key:'impl', label:'Target State', years:'Dec 2029 →', from:TARGET_STATE_DAY, to:QDAY_THEORETICAL, color:'var(--ph3)',
     meaning:'the planned end state',
     tense:'Planned end state',
-    story:'By this date, inventorying of all systems has been completed, and core systems are completely migrated. Then, managed enterprise networks begin retiring classical cryptography. This state only can transition properly if inventory is completed thoroughly. Any unmigrated crypto systems leave a potential hole for an adversary to penetrate the enterprise network. After this phase is complete, many legacy platforms, operational technology and vendor-built crypto will still be sandboxed by network security within the enterprise network which will have to be watched closely.'
+    story:'By 1 Jan, 2030 all core systems are completely migrated to quantum-resistant algorithms. Legacy platforms and OT unable to support this transition will require sandboxing or controls through standard network security practices. These systems will require close monitoring." - i think it says the same thing, but its more focused and simpler. I think you can do the same for strategy and post CRQC sections also. e.g. "Q-day arrives. Migrated systems are protected. Estimates for Q-day range from 2029-2035."'
   },
   {
     /* Q-Day is a point, not a phase: the moment a peer holds a CRQC, Post-CRQC begins.
