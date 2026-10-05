@@ -341,7 +341,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
         </a>
         <a class="org-chip" href="https://www.war.gov/" target="_blank" rel="noopener" title="Department of War">
           <img src="assets/orgs/dod.svg" alt="" width="22" height="22">
-          <span>DOW</span>
+          <span>DoW</span>
         </a>
         <span class="org-chip text-only" title="Office of Management and Budget">OMB</span>
         <span class="org-chip text-only" title="Executive Office of the President">Exec. Office</span>
@@ -495,9 +495,9 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 <summary class="sec-rule"><i></i><span>04 · ATLAS</span><em class="fold-hint"><span class="when-closed">Maximize to read</span><span class="when-open">Minimize</span></em><i></i></summary>
 <section id="atlas">
   <div class="atlas-head">
-    <div class="eyebrow">DOW intake and tracking for PQC solutions</div>
+    <div class="eyebrow">DoW intake and tracking for PQC solutions</div>
     <h2>What ATLAS is</h2>
-    <p>ATLAS means Acquisition, Testing, Licensing, and Security. It is the Department of War's gateway for PQC products (and later related work) before a Component (department nested in the DOW) looks at a buy. DOW has mandated that they are made aware of any PQC products being used or acquired. A government sponsor files the packet, ATLAS records intake and status, and Components will eventually see what is approved, how far it has gone (pre-test through fielding), national security system certification, and test results from other Components. This will prevent multiple Components from having to redundantly test products. However, it is important to ensure that the products another entity has tested fit the same characteristics as the environment it is going to be used on.</p>
+    <p>ATLAS means Acquisition, Testing, Licensing, and Security. It is the Department of War's gateway for PQC products (and later related work) before a Component (department nested in the DoW) looks at a buy. DoW has mandated that they are made aware of any PQC products being used or acquired. A government sponsor files the packet, ATLAS records intake and status, and Components will eventually see what is approved, how far it has gone (pre-test through fielding), national security system certification, and test results from other Components. This will prevent multiple Components from having to redundantly test products. However, it is important to ensure that the products another entity has tested fit the same characteristics as the environment it is going to be used on.</p>
   </div>
   <div class="atlas-fit" aria-label="How ATLAS fits the migration">
     <div class="fit-cell">
@@ -513,7 +513,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <div class="fit-cell">
       <div class="tag">What it tracks</div>
       <h3>Status and results across Components</h3>
-      <p>ATLAS tracks approved solutions and what stage they are in. It shows national security system (NSS) certification status and performance-test outcomes from other Components. It is a shared map of what has been tried and how usable it was. It is not a blanket DOW-wide approval to field.</p>
+      <p>ATLAS tracks approved solutions and what stage they are in. It shows national security system (NSS) certification status and performance-test outcomes from other Components. It is a shared map of what has been tried and how usable it was. It is not a blanket DoW-wide approval to field.</p>
     </div>
   </div>
   <div class="atlas-actions">
@@ -553,7 +553,7 @@ function decYear(iso){
   const start = Date.UTC(y,0,1), next = Date.UTC(y+1,0,1);
   return y + (Date.UTC(y,(m||1)-1,day||1) - start) / (next - start);
 }
-const STRATEGY_DAY = decYear('2026-04-16'); // DOW PQC Strategy: cleared for publication 16 Apr 2026
+const STRATEGY_DAY = decYear('2026-04-16'); // DoW PQC Strategy: cleared for publication 16 Apr 2026
 const TARGET_STATE_DAY = decYear('2029-12-31'); // core systems migrated to PQC-compliant algorithms
 const QDAY_THEORETICAL = decYear('2032-07-01'); // midpoint of the ~2030-2035 CRQC estimate band; the Q-Day phase opens here
 
@@ -638,9 +638,9 @@ const DOCS = [
   {id:'PQC-014', d:'2026-04-16', label:'Apr 2026', phase:'strat',
    title:'Department of War Post-Quantum Cryptography Strategy',
    desc:'THE strategy: the document this timeline pivots on. Cleared for publication 16 April 2026. Core systems migrated to PQC-compliant algorithms by 31 Dec 2029; PQC on high-impact systems by 2030; coordination with the defense industrial base. The public announcement followed on 23 June 2026.',
-   url:'https://dowcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
+   url:'https://DoWcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
   {id:'PQC-015', d:'2030-12-31', label:'Dec 2030', phase:'impl', status:'milestone',
-   title:'Milestone: DOW High-Impact Systems Deadline',
+   title:'Milestone: DoW High-Impact Systems Deadline',
    desc:'Strategy target: PQC deployed on high-impact systems. Also NIST\u2019s deprecation date for classical asymmetric crypto. A point of prediction, not a dated document.',
    predLabel:'High-impact systems'},
   {id:'PQC-016', d:'2035-01-01', label:'2035', phase:'impl', status:'milestone',
@@ -669,19 +669,19 @@ const DOCS = [
    url:'https://www.whitehouse.gov/presidential-actions/2026/06/ushering-in-the-next-frontier-of-quantum-innovation/'},
   {id:'PQC-022', d:'2026-06-24', label:'Jun 2026', phase:'strat', supersedes:'PQC-006',
    title:'OMB M-26-15: Execution of the Migration to PQC',
-   desc:'OMB moves from planning (M-23-02) to execution: the memo that operationalizes the migration government-wide. Issued 24 Jun 2026, two days after the EO pair and after the April DOW strategy.',
+   desc:'OMB moves from planning (M-23-02) to execution: the memo that operationalizes the migration government-wide. Issued 24 Jun 2026, two days after the EO pair and after the April DoW strategy.',
    url:'https://www.whitehouse.gov/wp-content/uploads/2026/06/M-26-15-Execution-of-the-Migration-to-Post-Quantum-Cryptography.pdf'},
   {id:'PQC-023', d:'2026-06-23', label:'Jun 2026', phase:'strat', status:'press',
-   title:'DOW Release: Quantum Defense Strategy Announcement',
-   desc:'Official press release announcing the DOW PQC Strategy to the public on 23 June 2026. The strategy document itself is dated 16 April 2026 (PQC-014).',
-   url:'https://www.war.gov/News/Releases/Release/Article/4524599/securing-global-dominance-dow-unleashes-quantum-defense-strategy-to-harden-netw/'},
+   title:'DoW Release: Quantum Defense Strategy Announcement',
+   desc:'Official press release announcing the DoW PQC Strategy to the public on 23 June 2026. The strategy document itself is dated 16 April 2026 (PQC-014).',
+   url:'https://www.war.gov/News/Releases/Release/Article/4524599/securing-global-dominance-DoW-unleashes-quantum-defense-strategy-to-harden-netw/'},
   {id:'PQC-024', d:'2025-06-01', label:'Jun 2025', phase:'pre', lastValidated:'Aug 2026',
    title:'RFC 9794: Terminology for PQ/Traditional Hybrid Schemes',
    desc:'IETF informational RFC (PQUIP WG) that fixes a shared vocabulary for hybrid schemes pairing post-quantum and traditional algorithms, the transition pattern most protocols use on the way to pure PQC. Standards bodies agreeing on words is a real milestone: it is how interoperable implementations get built.',
    url:'https://www.rfc-editor.org/rfc/rfc9794.html'},
   {id:'PQC-025', d:'2026-06-19', label:'Jun 2026', phase:'strat', lastValidated:'Aug 2026',
    title:'RFC 9958: Post-Quantum Cryptography for Engineers',
-   desc:'IETF field guide (PQUIP WG) for the people who must actually ship the migration: why a CRQC breaks today\u2019s public-key crypto, why PQC is not a drop-in swap and may force protocol redesign, and how to plan the transition. Published 19 Jun 2026, after the April DOW strategy and days before the EO pair.',
+   desc:'IETF field guide (PQUIP WG) for the people who must actually ship the migration: why a CRQC breaks today\u2019s public-key crypto, why PQC is not a drop-in swap and may force protocol redesign, and how to plan the transition. Published 19 Jun 2026, after the April DoW strategy and days before the EO pair.',
    url:'https://www.rfc-editor.org/info/rfc9958'},
   {id:'PQC-026', d:'2016-01-01', label:'Jan 2016', phase:'pre', sourceTier:'mirror', supersededBy:'PQC-005', lastValidated:'Aug 2026',
    title:'NSA CNSA Suite 1.0 & Quantum Computing FAQ',
@@ -912,7 +912,7 @@ const STARS = [
   {
     d:'2026-04-16', year:'Apr 2026', label:'Strategy',
     title:'DOW PQC Strategy published',
-    desc:'The Department of War set the plan on 16 April 2026: move core systems to PQC by 31 December 2029. Systems outside that core set must either keep operating with PQC support or be retired by 2030. National security systems must use CNSA 2.0 and any proposed alternatives must be approved through the NSA. The DOW PQC Directorate has placed themselves as a gatekeeper for all DOW systems to mitigate any threats potentially posted by industry (e.g., software and hardware vendors selling quantum resitant technologies to Army organizations).',
+    desc:'The Department of War set the plan on 16 April 2026: move core systems to PQC by 31 December 2029. Systems outside that core set must either keep operating with PQC support or be retired by 2030. National security systems must use CNSA 2.0 and any proposed alternatives must be approved through the NSA. The DoW PQC Directorate has placed themselves as a gatekeeper for all DoW systems to mitigate any threats potentially posted by industry (e.g., software and hardware vendors selling quantum resitant technologies to Army organizations).',
     color:'var(--ph2)', docId:'PQC-014'
   },
   {
