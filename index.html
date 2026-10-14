@@ -360,15 +360,17 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   </figure>
   <div class="lede-row">
     <div class="lede-block">
-      <p>Since August 2015, the government has been preparing for a quantum threat. This quantum threat is created by the potential of a future capable cryptographically relevant quantum computer (CRQC) having the capability of breaking modern asymmetric cryptographic suites (e.g., elliptic-curve cryptography (ECC) and RSA). Many security experts have estimated this threat to be as soon as 2030; whereas some estimate the threat much further out.</p>
-      <p>NSA and the Committee on National Security Systems (CNSS) have mandated programs to cease new investments into asymmetric public-key cryptography that protects command and control (C2) systems and prepares quantum-resistant algorithms. The following timeline illustrates this roadmap or course that the government has taken towards a quantum resistant future. There is a legend above the timeline that explains what all the marks mean.</p>
-      <p>Each dot has a link to a government document on this roadmap. Dashed diamonds are planned dates, not documents. Origins highlight the seminal academic achievements that led to the discovery of this threat. Pre-strategy shows the documents and initiatives that led to our current strategy. Target-state and post-CRQC show the target dates and predictions for a CRQC to be available to a nation-state or terrorist actor.</p>
+      <p>Since August 2015, the U.S. government has been preparing for the potential emergence of a cryptographically relevant quantum computer (CRQC). Such a computer could compromise widely used public-key cryptographic algorithms, including RSA and elliptic-curve cryptography (ECC). Estimates of when this capability might emerge vary considerably, with some experts projecting its arrival around 2030 and others anticipating a longer timeline.</p>
+      <p>The National Security Agency (NSA) and Committee on National Security Systems (CNSS) began addressing this threat by advising against significant new investments in quantum-vulnerable cryptography and encouraging preparation for quantum-resistant alternatives. Subsequent government policies, standards, and strategies have established requirements and milestones for transitioning to post-quantum cryptography (PQC).</p>
+      <p>The timeline below traces these developments, from foundational research through current government migration efforts and future milestones.</p>
+      <p><em>Each point links to a supporting document or reference. Dashed diamonds indicate planned milestones rather than published documents.</em></p>
     </div>
     <div class="origins-strip" id="origins">
-        <div class="kicker">Origin Story · Finding the threat · 1994–2015</div>
-        <p>Peter Shor in 1994 showed a CRQC can break RSA, Diffie-Hellman, and ECC with relative ease. Grover soon after showed a quantum computer could cut symmetric key strength in half. Grover’s is a security concern, but less of one than Shor’s algorithm as we can double the key for symmetric encryption and get similar security guarantees as originally. If a CRQC existed, Shor's algorithm could break today's assymetric encryption in a day or less; a modern super comupter would take thousands of years or more to break the same encryption. </p>
-        <p>Hardware changes started chasing the math around 2001. Regev’s lattices (2005) are what today’s PQC standards stand on. Most NIST PQC standards rely on the assumption that quantum computers will have difficulty breaking cryptographic schemes based on lattice problems. </p>
-        <p>The field related to quantum computer resistant algorithms adopted the name “post-quantum cryptography” in 2006. The community identified many threats that a CRQC could pose, but the main one of the concerns at the time was attackers (nation states) storing large amounts of encrypted data and waiting for the day that they invent a CRQC which is also known as harvest now and decrypt it later (HNDL). The day this computer becomes available is known as Q-day. The links below are seminal papers that led to the post-quantum cryptography field. </p>
+        <div class="kicker">Origin Story · Identifying the threat · 1994–2015</div>
+        <p>In 1994, Peter Shor demonstrated that a sufficiently capable quantum computer could efficiently break widely used public-key cryptographic systems, including RSA, Diffie-Hellman, and ECC. Two years later, Lov Grover developed an algorithm that could accelerate certain cryptographic attacks, effectively reducing the security strength of symmetric keys against exhaustive search. Unlike the threat posed by Shor’s algorithm, Grover’s impact can largely be mitigated through appropriate symmetric key lengths.</p>
+        <p>These discoveries established the theoretical threat of quantum computing to modern cryptography, although practical implementation requires quantum computing capabilities that remain technically challenging to achieve. Research into quantum-resistant alternatives subsequently expanded, including Oded Regev’s 2005 work on learning with errors (LWE), which helped establish the mathematical foundations of modern lattice-based cryptography. The field became widely known as post-quantum cryptography during this period.</p>
+        <p>One major concern is harvest now, decrypt later (HNDL), in which adversaries collect encrypted information today in anticipation of decrypting it when sufficiently capable quantum computers become available. The anticipated emergence of that capability is commonly referred to as <strong>Q-Day</strong>.</p>
+        <p>The references below highlight foundational developments in post-quantum cryptography.</p>
         <div class="origin-chips">
           <a href="https://arxiv.org/abs/quant-ph/9508027" target="_blank" rel="noopener">1994 Shor</a>
           <a href="https://arxiv.org/abs/quant-ph/9605043" target="_blank" rel="noopener">1996 Grover</a>
@@ -415,23 +417,25 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   <div class="cow-head">
     <div class="eyebrow">Map the network before PQC migration</div>
     <h2>Map the network first</h2>
-    <p>An inventory is a live list of every place the old public-key crypto algorithms still run and still are used: apps, tactical radios, enterprise gateways, network devices (e.g., routers, switches, and firewalls), industrial controllers, and small devices. We begin building that list thoroughly now. We do not field PQC until we know what the network will do when keys get bigger and handshakes get slower. These unknown effects create an uncertainty gap. If we skip understanding the effects and rush the PQC migration, we will pay a second cost as we have seen with past migrations (once to field, and again to fix what we missed). Time spent now on inventory, latency, interoperability, and how Soldiers use the new equipment is cheap compared with a late re-fielding (tech refresh). The Army already paid for that lesson on <a href="#case-wint">WIN-T</a> (tactical networking) and <a href="#case-jrss">JRSS</a> (enterprise security stacks). We are already taking proactive measures to ensure we find as many hidden requirements as possible, for it is absolutely necessary to migrate.</p>
+    <p>A cryptographic inventory identifies where vulnerable public-key algorithms are used across an organization’s systems, applications, and infrastructure. This includes tactical radios, enterprise gateways, network devices, industrial controllers, operational technology, and other connected equipment. Understanding these dependencies is essential because migrating to PQC may affect key sizes, communication protocols, processing requirements, and network performance.</p>
+    <p>Without adequate discovery and testing, organizations risk introducing compatibility problems, degraded performance, or operational limitations that require costly corrections after deployment. Previous Army network modernization efforts, including <a href="#case-wint">WIN-T</a> and <a href="#case-jrss">JRSS</a>, demonstrate the importance of identifying technical and operational requirements early.</p>
+    <p><strong>Cryptographic inventories, performance assessments, interoperability testing, and operator evaluations can help reduce these risks while supporting timely migration.</strong></p>
   </div>
 
   <div class="cow-callout">
-    <p><strong>Spend the early money on requirements and discovery, not on a rushed PQC migration later.</strong> Finish this list first:</p>
+    <p><strong>Prioritize requirements discovery and assessment early to reduce the risk of costly rework during PQC migration. Key activities include:</strong></p>
     <ul>
-      <li>Find every place RSA and ECC still run</li>
-      <li>Map the apps and older networks that depend on that crypto</li>
-      <li>Set latency and throughput limits for bigger keys and slower handshakes</li>
-      <li>Include industrial control systems (ICS), operational technology (OT), and small devices</li>
-      <li>Account for tactical conditions and what operators can actually handle</li>
-      <li>Get vendor support and a way to swap algorithms later without replacing the box</li>
+      <li><strong>Inventory:</strong> Identify systems, applications, and devices that use quantum-vulnerable cryptography, including RSA and ECC.</li>
+      <li><strong>Dependencies:</strong> Map applications, services, and legacy networks that rely on these algorithms.</li>
+      <li><strong>Performance:</strong> Establish acceptable latency, throughput, and processing requirements to account for changes in key sizes and cryptographic operations.</li>
+      <li><strong>Legacy systems:</strong> Assess industrial control systems (ICS), operational technology (OT), and resource-constrained devices for migration compatibility.</li>
+      <li><strong>Operational suitability:</strong> Evaluate the effects of PQC implementation on tactical communications, mission requirements, and operator workload.</li>
+      <li><strong>Vendor readiness:</strong> Identify vendor support, upgrade pathways, and cryptographic agility requirements to enable future algorithm changes without replacing equipment.</li>
     </ul>
-    <p>Skip this list and the Army fields gear it has to rework, then does the job again with less time on the clock.</p>
+    <p><em>Incomplete discovery increases the risk of fielding systems that require costly modifications, potentially delaying migration and affecting operational readiness.</em></p>
   </div>
 
-  <p class="cow-chart-title">Start the inventory now. Waiting until a CRQC is close forces a rush.</p>
+  <p class="cow-chart-title">Two illustrative approaches</p>
   <svg viewBox="0 0 880 360" width="100%" style="max-width:1100px;display:block;margin:0 auto;overflow:visible" role="img" aria-label="Two conceptual paths over time. The teal path starts early and stays a systematic, steady climb with no panic. The red path waits, then hits panic: a rush, more resources, and a risk of failure.">
     <defs>
       <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
@@ -455,13 +459,14 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <text x="568" y="118" font-family="var(--mono)" font-size="13" fill="var(--ph4)">Rush under panic</text>
     <text x="568" y="136" font-family="var(--mono)" font-size="11" fill="var(--text)">More resources. Risk of failure.</text>
   </svg>
-  <p class="cow-desc">Time runs left to right. The teal path is a PQC migration that starts with a thorough inventory: fewer surprises later, and a steady climb in cost. The red path waits until a CRQC looks close. Then the remaining requirements hit at once, the bill jumps, and the work can fail before it finishes. The more requirements we find now, the less requirements that surprise us later. These curves only illustrate a concept. They are not based on measured data.</p>
+  <p class="cow-desc">The graphic compares two illustrative approaches. The teal curve represents a migration that begins with comprehensive discovery and progresses through planned implementation. The red curve represents a delayed migration in which unresolved requirements and compatibility issues accumulate, increasing the potential for costly rework and schedule disruptions. <em>These curves are conceptual illustrations, not projections based on measured data.</em></p>
 
   <div class="lesson-grid">
     <div class="lesson" id="case-wint">
       <div class="tag">Lessons · WIN-T Inc 2</div>
-      <h3>Field gear that formations can use</h3>
-      <p>Warfighter Information Network-Tactical (WIN-T) Increment 2 put mobile tactical networking in the field at a scale the Army had not done before. Testing showed early nodes required too much on the operator for the system to function properly. Army leadership pivoted and redesigned the approach, which proved to be costly. For PQC, the operator needs to be a consideration as hard requirements from day one. Crypto solutions must be able to be implemented efficiently and effectively at every level of formation.</p>
+      <h3>Outpacing the Operator</h3>
+      <p>Warfighter Information Network-Tactical (WIN-T) Increment 2 introduced mobile tactical networking capabilities intended to improve communications across Army formations. Operational testing identified challenges involving equipment complexity, usability, and the demands placed on Soldiers operating the system. These findings contributed to subsequent changes in the Army’s approach to tactical networking.</p>
+      <p>The lesson for PQC migration is the importance of incorporating operational requirements into system design and evaluation. Cryptographic solutions must function reliably under realistic tactical conditions without imposing unacceptable burdens on operators or degrading mission performance.</p>
       <div class="cites">
         <a href="https://www.dote.osd.mil/Portals/97/pub/reports/FY2013/army/2013win-t.pdf" target="_blank" rel="noopener">DOT&amp;E FY2013</a>
         <a href="https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Science_and_Technology/16-F-0250_(REPORT)_Operational_Evaluation_of_Warfighter_Information-Tactical_(WIN-T)_Inc_2.pdf" target="_blank" rel="noopener">FOT&amp;E 2</a>
@@ -472,8 +477,10 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     </div>
     <div class="lesson" id="case-jrss">
       <div class="tag">Lessons · JRSS</div>
-      <h3>The hard problems show up when you move at scale</h3>
-      <p>Joint Regional Security Stacks (JRSS) set out to put enterprise security on one modern stack after incidents on 9/11. The stack itself worked and provided a redundant, self-healing network for the Pentagon preventing single points of failure. The hard part showed up when trying to scale this system globally. The government ran into issues with old apps, older networks, ICS and OT paths, and extra delay (latency) on long-haul links. DISA closed those gaps as it assisted with the transition. PQC will hit the same issues because keys get bigger and handshakes get heavier and the underlying cryptographic schema, algorithms, protocols, and functions will change. We must find those paths now, while there is still time to write them as requirements. Every requirement we miss will leave a gap in the network, or have to be cleaned up during or after the migration, which adds scope to PQC migration projects.</p>
+      <h3>Complexity Revealed at Scale</h3>
+      <p>The Joint Regional Security Stacks (JRSS) initiative sought to consolidate and modernize security capabilities across Department of Defense networks. Implementing these capabilities at enterprise scale introduced challenges involving legacy applications, network dependencies, interoperability, and performance.</p>
+      <p>These challenges illustrate the complexity of integrating new technologies into established operational environments.</p>
+      <p>PQC migration may encounter similar difficulties. Changes to cryptographic algorithms, protocols, key sizes, and processing requirements can affect applications and infrastructure in ways that are not immediately apparent. Identifying these dependencies early allows organizations to incorporate them into system requirements, evaluate potential impacts, and reduce the likelihood of unexpected problems during deployment.</p>
       <div class="cites">
         <a href="https://www.dodig.mil/reports.html/Article/1867983/audit-of-the-dods-implementation-of-the-joint-regional-security-stacks-dodig-20/" target="_blank" rel="noopener">DODIG-2019-089</a>
         <a href="https://www.dote.osd.mil/Portals/97/pub/reports/FY2020/dod/2020jrss.pdf" target="_blank" rel="noopener">DOT&amp;E FY2020</a>
@@ -484,10 +491,12 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   </div>
 
   <div class="cow-callout" style="margin-top:28px">
-    <p><strong>Army PQC work is using those lessons now.</strong> Discovery and validation tools scan the network for the old crypto. New vendor products go into <a href="#atlas" style="color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)">ATLAS</a> before a Component (a Service or agency) considers a buy.</p>
+    <p><em>Current Army PQC readiness efforts emphasize cryptographic discovery, technical validation, and evaluation of proposed solutions.</em> Discovery tools help identify vulnerable algorithms and dependencies across existing systems, while the Department’s <a href="#atlas" style="color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)">ATLAS</a> process provides a mechanism for tracking proposed PQC solutions and their evaluation status.</p>
   </div>
 
-  <p class="cow-foot">The network keeps getting tighter: more function in less gear, more apps on shared paths, and less slack for delay or extra complexity. A rushed PQC migration repeats two costly transitions the Army has already seen and experienced: gear formations cannot use in the field, and apps, older links, ICS, and latency that nobody mapped until the move was underway. Inventory is how those paths and requirements show up early.</p>
+  <p class="cow-foot">As military networks become increasingly mature, changes to cryptographic infrastructure can affect systems well beyond their immediate point of implementation. The experiences of WIN-T and JRSS reinforce the importance of understanding operational requirements and system dependencies before large-scale deployment.</p>
+  <p class="cow-foot"><em>Early discovery and testing can help the Army identify these challenges while sufficient time remains to address them.</em></p>
+  <p class="cow-foot"><em>Lessons drawn from WIN-T Increment 2 and JRSS are based on historical program findings. Their application to PQC migration is an analytical assessment intended to illustrate potential implementation challenges and does not predict specific outcomes.</em></p>
 </section>
 </details>
 
@@ -495,45 +504,46 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 <summary class="sec-rule"><i></i><span>04 · ATLAS</span><em class="fold-hint"><span class="when-closed">Maximize to read</span><span class="when-open">Minimize</span></em><i></i></summary>
 <section id="atlas">
   <div class="atlas-head">
-    <div class="eyebrow">DoW intake and tracking for PQC solutions</div>
-    <h2>What ATLAS is</h2>
-    <p>ATLAS means Acquisition, Testing, Licensing, and Security. It is the Department of War's gateway for PQC products (and later related work) before a Component (department nested in the DoW) looks at a buy. DoW has mandated that they are made aware of any PQC products being used or acquired. A government sponsor files the packet, ATLAS records intake and status, and Components will eventually see what is approved, how far it has gone (pre-test through fielding), national security system certification, and test results from other Components. This will prevent multiple Components from having to redundantly test products. However, it is important to ensure that the products another entity has tested fit the same characteristics as the environment it is going to be used on.</p>
+    <div class="eyebrow">ATLAS Defined</div>
+    <h2>DOW intake and tracking for PQC solutions</h2>
+    <p>Acquisition, Testing, Licensing, and Security (ATLAS) provides a centralized process for submitting and tracking post-quantum cryptography solutions across the Department of War. The Department requires visibility into PQC products being evaluated, acquired, or deployed by its Components.</p>
+    <p>Government sponsors submit proposed solutions through ATLAS, which records their status and supporting documentation. The system is intended to provide Components with visibility into product evaluations, testing results, certification status, and implementation progress. Sharing this information can reduce redundant testing and support more informed acquisition decisions. However, Components must still determine whether existing evaluation results adequately address their specific operational and technical requirements.</p>
   </div>
   <div class="atlas-fit" aria-label="How ATLAS fits the migration">
     <div class="fit-cell">
       <div class="tag">How it fits</div>
-      <h3>Front door before Component review</h3>
-      <p>New products come here first. ATLAS records the intake and tracks status. A Component still decides whether to test, buy, or field the product. ATLAS does not replace NIST standards, CNSA 2.0, or a program's own test.</p>
+      <h3>ATLAS provides a centralized intake and tracking process</h3>
+      <p>ATLAS provides a centralized intake and tracking process for proposed PQC solutions. Individual Components retain responsibility for determining whether a product meets their acquisition, testing, certification, and operational requirements. <em>Submission through ATLAS does not constitute authorization to acquire or field a product, nor does it replace applicable NIST standards, CNSA 2.0 requirements, or Component-specific evaluations.</em></p>
     </div>
     <div class="fit-cell">
       <div class="tag">Who submits</div>
-      <h3>The government sponsor files the form</h3>
-      <p>The government sponsor submits this questionnaire. The form collects common data points. The vendor receives the items in Question 13 and emails the accompanying documents. Incomplete packets close 7 days after the sponsor starts the submission.</p>
+      <h3>A government sponsor initiates the submission</h3>
+      <p>A government sponsor initiates the ATLAS submission using the designated intake questionnaire. The questionnaire collects standardized information about the proposed solution. Vendors provide the supporting documentation identified in Question 13. <em>Submissions that remain incomplete seven days after initiation are closed.</em></p>
     </div>
     <div class="fit-cell">
       <div class="tag">What it tracks</div>
       <h3>Status and results across Components</h3>
-      <p>ATLAS tracks approved solutions and what stage they are in. It shows national security system (NSS) certification status and performance-test outcomes from other Components. It is a shared map of what has been tried and how usable it was. It is not a blanket DoW-wide approval to field.</p>
+      <p>ATLAS tracks submitted PQC solutions, their evaluation status, and available testing results across Department Components. This includes information about national security system certification and product performance, where applicable. The shared record helps Components identify previously evaluated solutions and determine whether existing results can inform their own assessments. <em>An ATLAS record does not constitute Department-wide approval for fielding.</em></p>
     </div>
   </div>
   <div class="atlas-actions">
     <a href="https://forms.osi.apps.mil/r/MuJFwCHiC7" target="_blank" rel="noopener">ATLAS intake questionnaire ↗</a>
   </div>
-  <p class="atlas-note">If the solution is classified or uses classified algorithms, submit the answers on the network that matches that classification.</p>
+  <p class="atlas-note">Responses to the questionnaire must be provided on a network that supports such classification.</p>
 </section>
 </details>
 
 <div class="sec-rule" aria-hidden="true"><i></i><span>05 · Working lists</span><i></i></div>
 <section id="hubs" style="padding:52px 6vw 80px">
   <div class="eyebrow">Working lists</div>
-  <h2 style="font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(1.1rem,2.2vw,1.5rem);margin:10px 0 8px">Working lists, not on the timeline</h2>
-  <p style="max-width:70ch;color:var(--muted);font-size:.88rem;margin-bottom:20px">These pages change often, so the timeline does not pin them to one date. Use them as the live working list of current guidance and intake links.</p>
+  <h2 style="font-family:var(--disp);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(1.1rem,2.2vw,1.5rem);margin:10px 0 8px">Working lists</h2>
+  <p style="max-width:70ch;color:var(--muted);font-size:.88rem;margin-bottom:20px">The following resources provide access to current government policies, technical guidance, implementation tools, and PQC-related initiatives. These resources are updated periodically as government migration efforts progress.</p>
   <table><thead><tr><th>Org</th><th>Resource</th><th>Source</th></tr></thead><tbody id="hbody"></tbody></table>
   <p class="asof-note" id="hubs-asof"></p>
   <p class="asof-note">Special PQC-related documents sit on <a href="https://www.intelink.gov/" target="_blank" rel="noopener">intelink.gov</a>. CAC registration takes about 24 hours.</p>
 </section>
 
-<footer>U.S. Army · cryptographic readiness · Q-Day is a point in time. The date of that point is still a range.</footer>
+<footer>U.S. Army · Post-Quantum Cryptography Readiness</footer>
 
 <script>
 /* ============================================================
@@ -561,28 +571,28 @@ const PHASES = [
   {
     key:'pre', label:'Pre-Strategy', years:'Aug 2015 to Apr 2026', from:YEAR_MIN, to:STRATEGY_DAY, color:'var(--ph1)',
     meaning:'policy and standards',
-    tense:'What programs assumed',
-    story:'For the longest time the threat seemed theoretical and anywhere from 15 to 30 years out to being a possibility. In about 2025, real initiatives started pushing towards a post-quantum migration strategy.  The original target for Federal and NIST transition was 2035. However, recent breakthroughs and estimates have pushed the transition to begin much sooner and start looking at full migrations as early as 2029. Briefings for the longest time stressed HNDL. Signature forgery received little attention outside academic work until recently. Army C2 and logistics have stayed on classical crypto with no firm Army date.'
+    tense:'Initial Response',
+    story:'For decades, the threat posed by quantum computing remained largely theoretical, with practical capabilities often estimated to be 15 to 30 years away. Nevertheless, the U.S. government began preparing for this threat well before the development of standardized post-quantum algorithms. Early guidance focused on limiting investments in vulnerable cryptography, establishing alternative standards, and preparing organizations for eventual migration. Federal planning initially emphasized a transition through 2035. More recent government initiatives have established earlier milestones for selected defense systems, including migration targets beginning in 2029. While early discussions focused on the HNDL risk, more recent guidance recognizes the operational consequences of compromised digital signatures, including authentication failures and forged communications.'
   },
   {
     key:'strat', label:'Strategy', years:'Apr 2026 to Dec 2029', from:STRATEGY_DAY, to:TARGET_STATE_DAY, color:'var(--ph2)',
     meaning:'this window is current',
     tense:'Current work',
-    story:'The DoW published the PQC strategy in June 2026 directing core systems move to PQC resistant algorithms by 31 Dec 2029. Units should begin active inventory of systems requiring transition along with determining system capability to support to quantum-resistant algorithms. For systems unable to transition, a plan to replace, secure through other means, or remove entirely must be made. Early inventory and assessment is critical for making the 31 Dec 2029 timeline.'
+    story:'The Department of War\'s April 2026 Post-Quantum Cryptography Strategy establishes a target of 31 December 2029 for transitioning core systems to quantum-resistant cryptographic algorithms. Organizations must identify systems that rely on vulnerable cryptography and assess their ability to support approved replacements. Systems unable to transition may require replacement, compensating security controls, or retirement. Early inventory and technical assessment are essential to identifying dependencies, establishing requirements, and meeting migration milestones.'
   },
   {
     key:'impl', label:'Target State', years:'Dec 2029 →', from:TARGET_STATE_DAY, to:QDAY_THEORETICAL, color:'var(--ph3)',
     meaning:'the planned end state',
     tense:'Planned end state',
-    story:'By 1 Jan, 2030 all core systems are completely migrated to quantum-resistant algorithms. Legacy platforms and OT unable to support this transition will require sandboxing or controls through standard network security practices. These systems will require close monitoring.'
+    story:'By 31 December 2029, PQC migration is completed for all core DOW systems. Legacy platforms and operational technology that cannot support approved quantum-resistant algorithms have identified alternative protections, including network isolation, compensating security controls, or eventual replacement. These systems will require continued risk assessment and monitoring until their vulnerabilities can be adequately addressed.'
   },
   {
     /* Q-Day is a point, not a phase: the moment a peer holds a CRQC, Post-CRQC begins.
        The star marks the theoretical point; the hatched strip shows where it may land. */
-    key:'post', label:'Post-CRQC', years:'After Q-Day (timing unknown)', from:QDAY_THEORETICAL, to:YEAR_MAX, color:'var(--ph5)',
+    key:'post', label:'Post-CRQC', years:'After Q-Day (date unknown)', from:QDAY_THEORETICAL, to:YEAR_MAX, color:'var(--ph5)',
     meaning:'starts at Q-Day; the date is unknown',
     tense:'Risk after Q-Day',
-    story:'Q-Day is the day a CRQC exists.  Estimates for Q-day range from 2029-2035.  Migrated systems stay protected. Unmigrated systems remain vulnerable and provide a potential gateway for an attacker. A CRQC easily derives private keys from public keys, so harvested ciphertext that was once transmitted through a key exchange process can be decrypted. Forgery is the larger operational problem: an attacker can sign as a commander, ship a trusted-looking update, and inject false orders into C2 systems. Harvested traffic exposes past collected encrypted information, which could unveil symmetric keys which protect messages and sensitive data. '
+    story:'Q-Day refers to the emergence of a cryptographically relevant quantum computer capable of breaking widely deployed public-key cryptographic algorithms. Although estimates vary, some projections place this event between 2029 and 2035. Systems that continue to rely on vulnerable algorithms may face significant security risks, while those migrated to approved quantum-resistant cryptography will be resistant against these attacks. The consequences extend beyond the disclosure of encrypted information. An adversary capable of breaking vulnerable public-key cryptography could potentially recover previously protected information, impersonate trusted entities, or forge digital signatures. Secondary effects could undermine confidence in command-and-control (C2) systems, software updates, and other mission-critical systems. Previously collected encrypted traffic may also become accessible if its confidentiality depended on vulnerable key-establishment mechanisms.'
   }
 ];
 
@@ -593,127 +603,127 @@ const DOCS = [
    url:'https://cryptome.org/2015/08/CNSS_Advisory_Memo_02-15.pdf'},
   {id:'PQC-002', d:'2016-04-28', label:'Apr 2016', phase:'pre',
    title:'NISTIR 8105: Report on Post-Quantum Cryptography',
-   desc:'NIST frames the quantum threat and announces intent to standardize PQC algorithms via open competition.',
+   desc:'Examines the anticipated threat of quantum computing to existing cryptographic algorithms and outlines NIST\'s approach to evaluating and standardizing quantum-resistant alternatives.',
    url:'https://nvlpubs.nist.gov/nistpubs/ir/2016/NIST.IR.8105.pdf'},
   {id:'PQC-003', d:'2016-12-20', label:'Dec 2016', phase:'pre',
    title:'NIST Call for PQC Standardization Submissions',
-   desc:'Formal call for proposals opens the multi-round global competition; 82 submissions follow.',
+   desc:'NIST formally initiated its public PQC standardization process by soliciting candidate quantum-resistant cryptographic algorithms for evaluation and potential standardization.',
    url:'https://csrc.nist.gov/projects/post-quantum-cryptography'},
   {id:'PQC-004', d:'2022-05-04', label:'May 2022', phase:'pre',
    title:'NSM-10: National Security Memorandum on Quantum',
-   desc:'White House directs federal migration to PQC, sets ~2035 goal, and orders annual cryptographic inventories. Linked: NIST briefing on the government transition under NSM-10.',
+   desc:'Directs federal agencies to prepare for the transition to quantum-resistant cryptography, including cryptographic inventories, migration planning, and coordination with federal standards development. Establishes a federal migration objective extending through 2035.',
    url:'https://csrc.nist.gov/csrc/media/Presentations/2024/u-s-government-s-transition-to-pqc/images-media/presman-govt-transition-pqc2024.pdf'},
   {id:'PQC-005', d:'2022-09-07', label:'Sep 2022', phase:'pre', supersedes:'PQC-026',
    title:'NSA CNSA 2.0 Advisory',
-   desc:'NSA specifies quantum-resistant algorithm requirements and timelines for national security systems. Replaces the interim CNSA 1.0 suite.',
+   desc:'Defines updated cryptographic algorithm requirements and transition timelines for national security systems. Establishes quantum-resistant alternatives to the algorithms identified in the earlier CNSA 1.0 suite.',
    url:'https://media.defense.gov/2025/May/30/2003728741/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS.PDF'},
   {id:'PQC-006', d:'2022-11-18', label:'Nov 2022', phase:'pre', supersededBy:'PQC-022', bibKey:'omb2023m2302',
    title:'OMB M-23-02: Migrating to PQC',
-   desc:'Binding OMB memorandum: agencies must inventory quantum-vulnerable cryptography and plan migration. Governed the civilian planning phase until M-26-15 moved the effort to execution.',
+   desc:'Establishes requirements for federal agencies to inventory quantum-vulnerable cryptographic systems and develop migration plans. Provided government-wide planning guidance before the issuance of OMB M-26-15.',
    url:'https://bidenwhitehouse.archives.gov/wp-content/uploads/2022/11/M-23-02-M-Memo-on-Migrating-to-Post-Quantum-Cryptography.pdf'},
   {id:'PQC-007', d:'2022-12-21', label:'Dec 2022', phase:'pre',
    title:'Quantum Computing Cybersecurity Preparedness Act',
-   desc:'Public Law 117-260 writes the PQC migration mandate into statute.',
+   desc:'Public Law 117-260 establishes statutory requirements supporting the federal transition to PQC, including cryptographic inventory and migration planning activities.',
    url:'https://www.congress.gov/bill/117th-congress/house-bill/7535'},
   {id:'PQC-008', d:'2023-08-21', label:'Aug 2023', phase:'pre',
    title:'CISA/NSA/NIST Quantum-Readiness Factsheet',
-   desc:'Joint guidance: build a quantum-readiness roadmap, inventory cryptography, engage vendors on harvest-now-decrypt-later risk.',
+   desc:'Joint federal guidance recommending that organizations develop quantum-readiness roadmaps, inventory vulnerable cryptographic systems, assess data protection requirements, and coordinate migration planning with technology vendors.',
    url:'https://www.cisa.gov/resources-tools/resources/quantum-readiness-migration-post-quantum-cryptography'},
   {id:'PQC-009', d:'2024-07-15', label:'Jul 2024', phase:'pre',
    title:'White House Report on PQC Migration (Cost Estimate)',
-   desc:'Estimates ~$7.1B (2024 dollars) to migrate civilian federal systems, 2025-2035. NSS costs estimated separately, classified.',
+   desc:'Provides an estimated cost of approximately $7.1 billion, in 2024 dollars, to migrate civilian federal information systems to PQC between 2025 and 2035. National security system migration costs are addressed separately.',
    url:'https://bidenwhitehouse.archives.gov/wp-content/uploads/2024/07/REF_PQC-Report_FINAL_Send.pdf'},
   {id:'PQC-010', d:'2024-08-13', label:'Aug 2024', phase:'pre', supersedes:'PQC-033',
    title:'FIPS 203 / 204 / 205: First PQC Standards',
-   desc:'ML-KEM (Kyber), ML-DSA (Dilithium), SLH-DSA (SPHINCS+) finalized. "Prepare" becomes an engineering task. Resolves the competition\u2019s round-3 field.',
+   desc:'NIST finalized its first three post-quantum cryptographic standards: ML-KEM for key encapsulation, and ML-DSA and SLH-DSA for digital signatures. These standards provide a foundation for federal PQC implementation.',
    url:'https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization'},
   {id:'PQC-011', d:'2024-11-12', label:'Nov 2024', phase:'pre', status:'draft',
    title:'NIST IR 8547 (Draft): Transition to PQC Standards',
-   desc:'Deprecation schedule for quantum-vulnerable algorithms: deprecated after 2030, disallowed after 2035.',
+   desc:'Proposes a transition schedule for quantum-vulnerable cryptographic algorithms, including deprecation after 2030 and disallowance after 2035.',
    url:'https://csrc.nist.gov/pubs/ir/8547/ipd'},
   {id:'PQC-012', d:'2025-03-11', label:'Mar 2025', phase:'pre',
    title:'NIST Selects HQC as Backup KEM',
-   desc:'A fifth algorithm chosen from a different math family (codes, not lattices), a hedge against a lattice break.',
+   desc:'NIST selected HQC, a code-based key-encapsulation mechanism, for additional standardization. Its selection provides an alternative mathematical foundation to lattice-based algorithms, supporting cryptographic diversity.',
    url:'https://www.nist.gov/news-events/news/2025/03/nist-selects-hqc-fifth-algorithm-post-quantum-encryption'},
   {id:'PQC-014', d:'2026-04-16', label:'Apr 2026', phase:'strat',
    title:'Department of War Post-Quantum Cryptography Strategy',
-   desc:'THE strategy: the document this timeline pivots on. Cleared for publication 16 April 2026. Core systems migrated to PQC-compliant algorithms by 31 Dec 2029; PQC on high-impact systems by 2030; coordination with the defense industrial base. The public announcement followed on 23 June 2026.',
+   desc:'Establishes Department-wide PQC migration priorities and implementation milestones, including the 31 December 2029 target for core systems and the 2030 target for high-impact systems. Also addresses coordination with the defense industrial base.',
    url:'https://DoWcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
   {id:'PQC-015', d:'2030-12-31', label:'Dec 2030', phase:'impl', status:'milestone',
    title:'Milestone: DoW High-Impact Systems Deadline',
-   desc:'Strategy target: PQC deployed on high-impact systems. Also NIST\u2019s deprecation date for classical asymmetric crypto. A point of prediction, not a dated document.',
+   desc:'The DOW PQC Strategy establishes a 2030 implementation target for high-impact systems. This milestone also coincides with NIST\'s proposed deprecation of quantum-vulnerable public-key cryptographic algorithms.',
    predLabel:'High-impact systems'},
   {id:'PQC-016', d:'2035-01-01', label:'2035', phase:'impl', status:'milestone',
    title:'Milestone: Federal Migration Complete / Classical Disallowed',
-   desc:'NSM-10 target for civilian migration; NIST IR 8547 disallows quantum-vulnerable algorithms. A compliance milestone, not a Q-Day event; it sits inside the CRQC estimate band by calendar, not by nature. A point of prediction, not a dated document.',
+   desc:'The federal migration target established under NSM-10 aligns with NIST\'s proposed 2035 deadline for disallowing quantum-vulnerable cryptographic algorithms. This milestone represents a planned compliance deadline rather than a prediction of when a cryptographically relevant quantum computer (CRQC) will become available.',
    predLabel:'Civilian migration complete'},
   {id:'PQC-017', d:'2021-07-15', label:'2021', phase:'pre',
    title:'NCCoE Project Launch: Migration to Post-Quantum Cryptography',
-   desc:'NIST NCCoE stands up the applied migration project: discovery tooling, interoperability demos, and practice guides. The go-to site for migration execution.',
+   desc:'Establishes NIST\'s National Cybersecurity Center of Excellence project supporting practical PQC migration. The initiative develops implementation guidance, cryptographic discovery approaches, and interoperability demonstrations.',
    url:'https://www.nccoe.nist.gov/applied-cryptography/migration-to-pqc'},
   {id:'PQC-018', d:'2021-10-15', label:'Oct 2021', phase:'pre',
    title:'DHS Infographic: Preparing for Post-Quantum Cryptography',
-   desc:'DHS/CISA one-page roadmap: inventory, engage standards, prioritize by data lifetime. An early, unusually clear articulation of the migration playbook.',
+   desc:'Provides an early federal roadmap for PQC preparation, emphasizing cryptographic inventories, engagement with standards development, and prioritization based on the sensitivity and required protection lifetime of information.',
    url:'https://www.dhs.gov/sites/default/files/publications/post-quantum_cryptography_infographic_october_2021_508.pdf'},
   {id:'PQC-019', d:'2023-09-15', label:'Sep 2023', phase:'pre',
    title:'CISA: Post-Quantum Considerations for Operational Technology',
-   desc:'First dedicated look at the OT/ICS long tail: constrained devices, decades-long lifecycles, and why the hardest migration is not IT.',
+   desc:'Examines PQC migration challenges affecting operational technology (OT) and industrial control systems (ICS), including resource constraints, extended equipment lifecycles, and compatibility with existing infrastructure.',
    url:'https://www.cisa.gov/resources-tools/resources/post-quantum-considerations-operational-technology'},
   {id:'PQC-020', d:'2026-06-22', label:'Jun 2026', phase:'strat',
    title:'EO 14412: Securing the Nation Against Advanced Cryptographic Attacks',
-   desc:'Executive order on defending against cryptographic attack, the defensive half of the June 2026 EO pair that set conditions for the strategy.',
+   desc:'Executive order establishing federal measures to strengthen cryptographic security against emerging threats, including those associated with advances in quantum computing.',
    url:'https://www.whitehouse.gov/presidential-actions/2026/06/securing-the-nation-against-advanced-cryptographic-attacks/'},
   {id:'PQC-021', d:'2026-06-22', label:'Jun 2026', phase:'strat',
    title:'EO 14413: Ushering in the Next Frontier of Quantum Innovation',
-   desc:'The offensive/industrial half of the EO pair: advancing U.S. quantum capability alongside the defensive migration.',
+   desc:'Executive order supporting U.S. quantum science, technology development, and innovation. Complements federal cybersecurity initiatives by addressing broader national quantum capabilities.',
    url:'https://www.whitehouse.gov/presidential-actions/2026/06/ushering-in-the-next-frontier-of-quantum-innovation/'},
   {id:'PQC-022', d:'2026-06-24', label:'Jun 2026', phase:'strat', supersedes:'PQC-006',
    title:'OMB M-26-15: Execution of the Migration to PQC',
-   desc:'OMB moves from planning (M-23-02) to execution: the memo that operationalizes the migration government-wide. Issued 24 Jun 2026, two days after the EO pair and after the April DoW strategy.',
+   desc:'Issued 24 June 2026, this memorandum establishes government-wide implementation guidance for PQC migration, advancing the planning requirements previously established under OMB M-23-02.',
    url:'https://www.whitehouse.gov/wp-content/uploads/2026/06/M-26-15-Execution-of-the-Migration-to-Post-Quantum-Cryptography.pdf'},
   {id:'PQC-023', d:'2026-06-23', label:'Jun 2026', phase:'strat', status:'press',
    title:'DoW Release: Quantum Defense Strategy Announcement',
-   desc:'Official press release announcing the DoW PQC Strategy to the public on 23 June 2026. The strategy document itself is dated 16 April 2026 (PQC-014).',
+   desc:'Official press release announcing the DoW PQC Strategy to the public on 23 June 2026. The underlying strategy document itself is dated 16 April 2026 (PQC-014).',
    url:'https://www.war.gov/News/Releases/Release/Article/4524599/securing-global-dominance-DoW-unleashes-quantum-defense-strategy-to-harden-netw/'},
   {id:'PQC-024', d:'2025-06-01', label:'Jun 2025', phase:'pre', lastValidated:'Aug 2026',
    title:'RFC 9794: Terminology for PQ/Traditional Hybrid Schemes',
-   desc:'IETF informational RFC (PQUIP WG) that fixes a shared vocabulary for hybrid schemes pairing post-quantum and traditional algorithms, the transition pattern most protocols use on the way to pure PQC. Standards bodies agreeing on words is a real milestone: it is how interoperable implementations get built.',
+   desc:'Establishes standardized terminology for hybrid cryptographic schemes combining traditional and post-quantum algorithms. Provides a common technical vocabulary to support interoperable implementations and migration planning.',
    url:'https://www.rfc-editor.org/rfc/rfc9794.html'},
   {id:'PQC-025', d:'2026-06-19', label:'Jun 2026', phase:'strat', lastValidated:'Aug 2026',
    title:'RFC 9958: Post-Quantum Cryptography for Engineers',
-   desc:'IETF field guide (PQUIP WG) for the people who must actually ship the migration: why a CRQC breaks today\u2019s public-key crypto, why PQC is not a drop-in swap and may force protocol redesign, and how to plan the transition. Published 19 Jun 2026, after the April DoW strategy and days before the EO pair.',
+   desc:'IETF guidance describing the technical implications of migrating from quantum-vulnerable public-key cryptography to PQC. Addresses algorithm selection, protocol compatibility, implementation considerations, and migration planning.',
    url:'https://www.rfc-editor.org/info/rfc9958'},
   {id:'PQC-026', d:'2016-01-01', label:'Jan 2016', phase:'pre', sourceTier:'mirror', supersededBy:'PQC-005', lastValidated:'Aug 2026',
    title:'NSA CNSA Suite 1.0 & Quantum Computing FAQ',
-   desc:'NSA\u2019s public explanation of the CNSA 1.0 suite named in CNSS AM 02-15 and of why the quantum warning came when it did: advances in quantum computing plus the October 2015 ECC deadline made it the moment to stop investing in doomed crypto. CNSA 1.0 was interim guidance by design, replaced by CNSA 2.0 in 2022. Link is an archived mirror.',
+   desc:'Advises national security system stakeholders of the emerging quantum computing threat and recommends limiting significant new investments in Suite B elliptic-curve cryptography. Represents an early formal acknowledgment of the need to transition toward quantum-resistant cryptographic algorithms.',
    url:'https://cryptome.org/2016/01/CNSA-Suite-and-Quantum-Computing-FAQ.pdf'},
   {id:'PQC-027', d:'2016-10-01', label:'Oct 2016', phase:'pre', lastValidated:'Aug 2026',
    title:'CNSSP-15 Update: CNSA Suite Codified for NSS',
-   desc:'CNSS re-issues Policy 15, writing the CNSA 1.0 algorithms into binding policy for national security systems as the authorized bridge "until acceptable public standards for quantum resistant cryptography exist." Its algorithm guidance was later overtaken by CNSA 2.0.',
+   desc:'Updates Committee on National Security Systems Policy No. 15 to incorporate CNSA 1.0 cryptographic requirements for national security systems. Establishes an interim cryptographic framework pending the availability of acceptable quantum-resistant standards.',
    url:'https://www.cnss.gov/CNSS/issuances/Policies.cfm'},
   {id:'PQC-028', d:'2017-12-20', label:'Dec 2017', phase:'pre', supersededBy:'PQC-032', lastValidated:'Aug 2026',
    title:'NIST PQC Competition: Round 1 Candidates (69)',
-   desc:'82 submissions arrived by the November 2017 deadline; 69 were accepted as first-round candidates on 20 Dec 2017. The global competition becomes real. Candidate list superseded as each round narrowed the field.',
+   desc:'NIST accepted 69 candidate algorithms from 82 submissions for the first round of its PQC standardization process. The candidates underwent public evaluation of their security, performance, and implementation characteristics.',
    url:'https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-1-submissions'},
   {id:'PQC-029', d:'2018-04-11', label:'Apr 2018', phase:'pre', lastValidated:'Aug 2026',
    title:'First NIST PQC Standardization Conference',
-   desc:'Submitters present all 69 first-round candidates publicly (11-13 Apr 2018). The open-review machinery that later killed Rainbow and SIKE starts turning here.',
+   desc:'NIST convened researchers and algorithm developers in April 2018 to present and evaluate the 69 first-round submissions to its PQC standardization process. The conference supported open technical review and cryptographic analysis.',
    url:'https://csrc.nist.gov/projects/post-quantum-cryptography/workshops-and-timeline'},
   {id:'PQC-030', d:'2018-12-01', label:'Dec 2018', phase:'pre', lastValidated:'Aug 2026',
    title:'National Academies: Quantum Computing Progress & Prospects',
-   desc:'ODNI-sponsored independent assessment of CRQC feasibility (prepublication Dec 2018, published 2019). The report that anchored serious harvest-now-decrypt-later discussion and CRQC timeline estimates in government planning.',
+   desc:'Independent assessment of quantum computing capabilities, technical challenges, and future development prospects. Provides a foundation for evaluating the feasibility and potential timelines of cryptographically relevant quantum computing.',
    url:'https://nap.nationalacademies.org/catalog/25196/quantum-computing-progress-and-prospects'},
   {id:'PQC-031', d:'2018-12-21', label:'Dec 2018', phase:'pre', lastValidated:'Aug 2026',
    title:'National Quantum Initiative Act',
-   desc:'Public Law 115-368: the 10-year federal framework coordinating quantum R&D across NIST, NSF, DOE, defense, and intelligence. The legislative bookend to the 2022 Quantum Computing Cybersecurity Preparedness Act.',
+   desc:'Public Law 115-368 establishes a coordinated federal framework for quantum information science research and development, involving agencies including NIST, NSF, and DOE. The legislation supports broader national quantum capabilities rather than establishing specific PQC migration requirements.',
    url:'https://www.congress.gov/bill/115th-congress/house-bill/6227'},
   {id:'PQC-032', d:'2019-01-30', label:'Jan 2019', phase:'pre', supersedes:'PQC-028', supersededBy:'PQC-033', lastValidated:'Aug 2026',
    title:'NIST PQC Competition: Round 2 Candidates (26)',
-   desc:'Field cut from 69 to 26, including the eventual winners Kyber, Dilithium, Falcon, and SPHINCS+. Documented in NISTIR 8240.',
+   desc:'NIST selected 26 algorithms from the original 69 first-round candidates for continued security and performance evaluation. The remaining candidates included algorithms subsequently selected for standardization.',
    url:'https://csrc.nist.gov/News/2019/pqc-standardization-process-2nd-round-candidates'},
   {id:'PQC-033', d:'2020-07-22', label:'Jul 2020', phase:'pre', supersedes:'PQC-032', supersededBy:'PQC-010', lastValidated:'Aug 2026',
    title:'NIST PQC Competition: Round 3 Finalists (7 + 8 alternates)',
-   desc:'Seven finalists and eight alternates announced (NISTIR 8309). Finalist Rainbow and alternate SIKE were later broken during evaluation, proof that candidates can fail late. Resolved by the 2024 FIPS standards.',
+   desc:'NIST advanced seven finalists and eight alternate candidates for further evaluation during the third round of its PQC standardization process. Subsequent cryptanalysis of candidates, including Rainbow and SIKE, demonstrated the importance of continued security evaluation before standardization.',
    url:'https://www.nist.gov/news-events/news/2020/07/pqc-standardization-process-third-round-candidate-announcement'},
 ];
 
