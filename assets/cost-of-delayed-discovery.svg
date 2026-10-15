@@ -1,7 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 930" width="1200" height="930" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 78 1200 772" width="1200" height="772" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e8716b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5fd0b0"/></marker><linearGradient id="gap" x1="0" x2="1"><stop offset="0" stop-color="#e8716b" stop-opacity="0"/><stop offset="1" stop-color="#e8716b" stop-opacity="0.22"/></linearGradient></defs>
 <rect width="1200" height="930" fill="#121a17"/>
-<text x="40" y="62" fill="#f2f4f3" font-size="34" font-weight="700" letter-spacing="-0.5">The Cost of Delayed Discovery</text>
 <rect x="110.0" y="100" width="178.0" height="580" fill="#17211d"/>
 <g transform="translate(199.0,134)"><g fill="none" stroke="#c7d1cd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M-6,4 C-11,0 -10,-12 0,-12 C10,-12 11,0 6,4 V8 H-6 Z"/><path d="M-4,12 H4 M-2,15 H2"/></g></g>
 <text x="199.0" y="180" text-anchor="middle" fill="#e9ecea" font-size="15" font-weight="600">Discovery</text>
@@ -99,7 +98,4 @@
 <text x="48" y="31" fill="#f0918b" font-size="14" font-weight="600">Delayed discovery path</text>
 <text x="226" y="31" fill="#9fb0aa" font-size="12.5">Same issues surface later, when changes cost significantly more</text>
 </g>
-<line x1="40" x2="1160" y1="866" y2="866" stroke="#2a3632"/>
-<text x="40" y="892" fill="#9fb0aa" font-size="12"><tspan fill="#e9ecea" font-weight="700">Figure 3.</tspan> Conceptual illustration; curves are illustrative, not empirical PQC migration cost data. Adapted from the Defense Acquisition University (1993) model,</text>
-<text x="40" y="910" fill="#9fb0aa" font-size="12">as reproduced in <a href="https://www.wiley.com/en-us/INCOSE+Systems+Engineering+Handbook%2C+5th+Edition-p-9781119814290" xlink:href="https://www.wiley.com/en-us/INCOSE+Systems+Engineering+Handbook%2C+5th+Edition-p-9781119814290" target="_blank"><tspan fill="#7fc7f0" text-decoration="underline">INCOSE Systems Engineering Handbook, 5th ed. (Wiley, 2023), Fig. 1.4</tspan></a>.</text>
 </svg>
