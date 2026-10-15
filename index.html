@@ -289,6 +289,14 @@ td.m-link a{font-family:var(--mono);font-size:.7rem;color:var(--mc);text-decorat
 .m-meta{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
 .m-meta strong{color:var(--army);font-weight:500}
 .m-verified{font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-top:6px;white-space:nowrap}
+.m-desc{display:block;color:var(--muted);font-size:.8rem;margin-top:4px}
+.m-more{display:none}
+@media (max-width:760px){
+  #manifest .m-desc,#manifest .m-meta,#manifest .m-verified{display:none}
+  #manifest tr.expanded .m-desc{display:block}
+  #manifest tr.expanded .m-meta,#manifest tr.expanded .m-verified{display:block}
+  #manifest .m-more{display:inline-block;margin-top:8px;background:none;border:1px solid var(--line);color:var(--army);font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;cursor:pointer}
+}
 .asof-note{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px}
 .asof-note a{color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)}
 
@@ -1140,11 +1148,19 @@ const mbody = document.getElementById('mbody');
     d.sourceTier === 'mirror' ? `<span class="status-chip">archived mirror</span>` : ''
   ].filter(Boolean).join(' ');
   tr.innerHTML = `<td class="m-id">${d.id}</td><td class="m-date">${d.label}</td>
-    <td><strong>${d.title}</strong><br><span style="color:var(--muted);font-size:.8rem">${d.desc}</span>${rel?`<div class="m-meta">${rel}</div>`:''}</td>
+    <td><strong>${d.title}</strong><span class="m-desc">${d.desc}</span>${rel?`<div class="m-meta">${rel}</div>`:''}<button type="button" class="m-more">More</button></td>
     <td><span class="phase-chip">${ph.label}</span>${chips?`<div>${chips}</div>`:''}</td>
     <td class="m-link">${d.url ? `<a href="${d.url}" target="_blank" rel="noopener">OPEN ↗</a><div class="m-verified">✓ ${d.lastValidated || META.validatedAsOf}</div>` : `<span style="font-family:var(--mono);font-size:.7rem;color:var(--muted)">PREDICTED</span>`}</td>`;
+  tr.setAttribute('aria-expanded','false');
   tr.addEventListener('click', e=>{
     if(e.target.closest('a')) return;
+    if(phoneLayout()){
+      const open = tr.classList.toggle('expanded');
+      tr.setAttribute('aria-expanded', open ? 'true' : 'false');
+      const more = tr.querySelector('.m-more');
+      if(more) more.textContent = open ? 'Less' : 'More';
+      return;
+    }
     const mark = track.querySelector(`.dot[data-id="${d.id}"], .pred-mark[data-id="${d.id}"]`);
     if(!mark) return;
     document.getElementById('timeline-wrap').scrollIntoView({behavior:'smooth', block:'center'});
