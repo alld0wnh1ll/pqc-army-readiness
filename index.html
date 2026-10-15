@@ -34,7 +34,7 @@ a{color:inherit}
 .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 
 /* ---------- on-this-page jump bar ---------- */
-nav.jump{position:sticky;top:0;z-index:40;display:flex;flex-wrap:wrap;align-items:center;gap:0;padding:0 4vw;background:color-mix(in srgb,var(--ink) 94%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.jump{position:sticky;top:0;z-index:40;display:flex;flex-wrap:wrap;align-items:center;gap:0;padding:0 4vw;background:var(--ink);border-bottom:1px solid var(--line)}
 nav.jump .jump-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--army);padding:11px 14px 11px 0;margin-right:4px;border-right:1px solid var(--line);white-space:nowrap}
 nav.jump a{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:11px 14px;border-right:1px solid var(--line);transition:color .15s,background .15s}
 nav.jump a:hover,nav.jump a:focus-visible{color:var(--text);background:rgba(255,255,255,.03);outline:none}
@@ -58,10 +58,13 @@ details.fold .fold-hint .when-open{display:none}
 details.fold[open] .fold-hint .when-closed{display:none}
 details.fold[open] .fold-hint .when-open{display:inline}
 details.fold[open] > summary.sec-rule{padding-bottom:18px}
-#overview,#origins,#timeline,#manifest,#panic-curve,#atlas,#hubs{scroll-margin-top:calc(var(--jump-h) + 8px)}
+#overview{scroll-margin-top:8px}
+#origins,#timeline,#manifest,#panic-curve,#atlas,#hubs{scroll-margin-top:calc(var(--jump-h) + 8px)}
 
 /* ---------- header ---------- */
-header{padding:28px 6vw 40px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.site-mast{padding:22px 6vw 16px;background:var(--ink);position:relative;z-index:2}
+.site-mast .masthead{margin-bottom:0}
+header{padding:18px 6vw 40px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
 header::after{content:none}
 .masthead{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:28px;position:relative;z-index:2}
 .mast-aci{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
@@ -120,6 +123,13 @@ nav.phases button:focus-visible{outline:2px solid var(--text);outline-offset:-2p
 #timeline-scroll{overflow:visible}
 #track{position:relative;height:318px;width:100%}
 @media (max-width:760px){#timeline-scroll{overflow-x:auto}#track{min-width:900px}}
+/* phone: wide tables scroll inside their section, so the page itself stays the width of the screen */
+@media (max-width:760px){
+  html,body{overflow-x:clip}
+  #manifest,#hubs{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #tooltip{max-width:min(320px,calc(100vw - 16px));max-height:46vh;overflow:auto}
+  .dot::after,.star-mark::after,.pred-mark::after{content:'';position:absolute;inset:-8px}
+}
 #lattice{height:318px}
 #lattice{position:absolute;inset:0;pointer-events:none}
 .phase-band{position:absolute;top:0;bottom:0;overflow:hidden;border-left:2px solid var(--bc);background:linear-gradient(90deg, color-mix(in srgb, var(--bc) 10%, transparent), color-mix(in srgb, var(--bc) 3%, transparent) 40%, transparent 85%);transition:background .25s,box-shadow .25s}
@@ -293,19 +303,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 </head>
 <body>
 
-<nav class="jump" id="jumpNav" aria-label="On this page">
-  <span class="jump-label">On this page</span>
-  <a href="#overview">Overview</a>
-  <a href="#origins">Origin Story</a>
-  <a href="#timeline">Timeline</a>
-  <a href="#manifest">Manifest</a>
-  <a href="#panic-curve">Requirements</a>
-  <a href="#atlas">ATLAS</a>
-  <a href="#hubs">Working lists</a>
-</nav>
-
-<header id="overview">
-  <div class="cipher" id="cipher"></div>
+<div class="site-mast" id="overview">
   <div class="masthead">
     <a class="mast-aci" href="https://cyber.army.mil/" target="_blank" rel="noopener" title="Army Cyber Institute at West Point">
       <img src="assets/aci-west-point.png" alt="The Army Cyber Institute at West Point" width="72" height="72">
@@ -350,6 +348,21 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
       </div>
     </div>
   </div>
+</div>
+
+<nav class="jump" id="jumpNav" aria-label="On this page">
+  <span class="jump-label">On this page</span>
+  <a href="#overview">Overview</a>
+  <a href="#origins">Origin Story</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#manifest">Manifest</a>
+  <a href="#panic-curve">Requirements</a>
+  <a href="#atlas">ATLAS</a>
+  <a href="#hubs">Working lists</a>
+</nav>
+
+<header>
+  <div class="cipher" id="cipher"></div>
   <div class="brand">
     <span class="brand-mark">U.S. Army</span>
     <div class="eyebrow">1994 → Q-DAY · Army cryptographic readiness</div>
@@ -965,6 +978,7 @@ DOCS.forEach((d,i)=>{
     pm.addEventListener('mouseenter', e=>showTip(d,e));
     pm.addEventListener('mousemove', e=>moveTip(e));
     pm.addEventListener('mouseleave', hideTip);
+    pm.addEventListener('click', e=>holdMark(pm, ()=>showTip(d,e), e));
     track.appendChild(pm);
     return;
   }
@@ -995,6 +1009,7 @@ DOCS.forEach((d,i)=>{
   dot.addEventListener('mouseleave', hideTip);
   dot.addEventListener('focus', e=>showTip(d, {clientX: dot.getBoundingClientRect().x, clientY: dot.getBoundingClientRect().y}));
   dot.addEventListener('blur', hideTip);
+  dot.addEventListener('click', e=>holdMark(dot, ()=>showTip(d,e), e));
   track.appendChild(dot);
 });
 
@@ -1020,26 +1035,58 @@ STARS.forEach(s=>{
   el.addEventListener('mouseenter', e=>showStarTip(tip,e));
   el.addEventListener('mousemove', e=>moveTip(e));
   el.addEventListener('mouseleave', hideTip);
+  el.addEventListener('click', e=>{
+    if(phoneLayout()){
+      holdMark(el, ()=>showStarTip(tip,e), e);
+      return;
+    }
+    if(s.static) return;
+    const ph = PHASES.findIndex(p=>p.key===tip.phase);
+    if(ph>=0) setPhase(ph);
+  });
   if(!s.static){
     el.addEventListener('focus', e=>showStarTip(tip,{clientX:el.getBoundingClientRect().x, clientY:el.getBoundingClientRect().y}));
     el.addEventListener('blur', hideTip);
-    el.addEventListener('click', ()=>{
-      const ph = PHASES.findIndex(p=>p.key===tip.phase);
-      if(ph>=0) setPhase(ph);
-    });
   }
   track.appendChild(el);
 });
 
+const phoneLayout = () => window.matchMedia('(max-width: 760px)').matches;
+let pinnedMark = null;
+function dismissTip(){ pinnedMark = null; tooltip.style.display = 'none'; }
+function hideTip(){ if(pinnedMark) return; tooltip.style.display = 'none'; }
+/* phone: a tap reads the mark and stays on the page. Desktop clicks still follow the link. */
+function holdMark(el, draw, e){
+  if(!phoneLayout()) return;
+  e.preventDefault();
+  e.stopPropagation();
+  if(pinnedMark === el){ dismissTip(); return; }
+  draw();
+  pinnedMark = el;
+  const r = el.getBoundingClientRect();
+  const w = tooltip.offsetWidth, h = tooltip.offsetHeight;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  let lx = r.left + r.width / 2 - w / 2;
+  lx = Math.max(8, Math.min(lx, vw - w - 8));
+  let ly = r.bottom + 12;
+  if(ly + h > vh - 8) ly = Math.max(8, r.top - h - 12);
+  tooltip.style.left = lx + 'px';
+  tooltip.style.top = ly + 'px';
+}
+document.addEventListener('click', e=>{
+  if(!pinnedMark) return;
+  if(e.target.closest('.dot, .star-mark, .pred-mark, #tooltip')) return;
+  dismissTip();
+});
 function showTip(d,e){
   tooltip.style.setProperty('--tc', phaseOf(d.phase).color);
-  const open = d.url ? `<div class="tt-open">CLICK TO OPEN ↗</div>` : `<div class="tt-open">PLANNED DATE · NOT A DOCUMENT</div>`;
+  const open = d.url ? (phoneLayout() ? '' : `<div class="tt-open">CLICK TO OPEN ↗</div>`) : `<div class="tt-open">PLANNED DATE · NOT A DOCUMENT</div>`;
   tooltip.innerHTML = `<div class="tt-id">${d.id} · ${d.label}</div><div class="tt-title">${d.title}</div><div class="tt-desc">${d.desc}</div>${open}`;
   tooltip.style.display='block'; moveTip(e);
 }
 function showStarTip(t,e){
   tooltip.style.setProperty('--tc', t.color);
-  const open = t.url ? `<div class="tt-open">CLICK TO OPEN ↗</div>` : `<div class="tt-open">TURNING POINT</div>`;
+  const open = t.url ? (phoneLayout() ? '' : `<div class="tt-open">CLICK TO OPEN ↗</div>`) : `<div class="tt-open">TURNING POINT</div>`;
   tooltip.innerHTML = `<div class="tt-id">★ CRITICAL · ${t.label}</div><div class="tt-title">${t.title}</div><div class="tt-desc">${t.desc}</div>${open}`;
   tooltip.style.display='block'; moveTip(e);
 }
@@ -1049,17 +1096,33 @@ function moveTip(e){
   let ly = e.clientY + 16; if(ly + tooltip.offsetHeight > window.innerHeight - 12) ly = e.clientY - tooltip.offsetHeight - 16;
   tooltip.style.left = lx+'px'; tooltip.style.top = ly+'px';
 }
-function hideTip(){ tooltip.style.display='none'; }
 
 let activePhase = -1;
-function setPhase(i){
-  if(i===activePhase) return;
-  activePhase = i;
-  [...tabs.children].forEach((b,j)=>b.classList.toggle('active', j===i));
-  [...stories.children].forEach((s,j)=>s.classList.toggle('active', j===i));
-  document.querySelectorAll('.phase-band').forEach((b,j)=>b.classList.toggle('on', j===i));
+/* phone: the phase names stay put, and the wide track slides to the one that was tapped */
+function panToPhase(i, behavior){
+  if(!phoneLayout()) return;
+  const scroller = document.getElementById('timeline-scroll');
+  if(!scroller || scroller.scrollWidth <= scroller.clientWidth + 1) return;
+  const ph = PHASES[i];
+  if(!ph) return;
+  const w = track.getBoundingClientRect().width;
+  const left = (pct(ph.from) / 100) * w;
+  const span = ((pct(ph.to) - pct(ph.from)) / 100) * w;
+  const view = scroller.clientWidth;
+  const target = span <= view ? left - (view - span) / 2 : left;
+  const max = Math.max(0, scroller.scrollWidth - view);
+  scroller.scrollTo({left: Math.max(0, Math.min(max, target)), behavior: behavior || 'smooth'});
 }
-setPhase(PHASES.findIndex(p=>p.key==='strat')); // default: Strategy, where we are now
+function setPhase(i, behavior){
+  if(i!==activePhase){
+    activePhase = i;
+    [...tabs.children].forEach((b,j)=>b.classList.toggle('active', j===i));
+    [...stories.children].forEach((s,j)=>s.classList.toggle('active', j===i));
+    document.querySelectorAll('.phase-band').forEach((b,j)=>b.classList.toggle('on', j===i));
+  }
+  panToPhase(i, behavior);
+}
+setPhase(PHASES.findIndex(p=>p.key==='strat'), 'auto'); // default: Strategy, where we are now
 
 /* --- manifest (newest first) --- */
 const mbody = document.getElementById('mbody');
@@ -1106,6 +1169,15 @@ document.getElementById('manifest-asof').textContent =
   `Links and metadata last validated ${META.validatedAsOf}. Superseded documents stay listed for the historical record.`;
 document.getElementById('hubs-asof').textContent =
   `Reference hubs last validated ${META.validatedAsOf}.`;
+
+/* --- jump bar height: phase tabs sit under the real bar, including when it wraps --- */
+(function(){
+  const nav = document.getElementById('jumpNav');
+  if(!nav) return;
+  const sync = () => document.documentElement.style.setProperty('--jump-h', nav.offsetHeight + 'px');
+  sync();
+  new ResizeObserver(sync).observe(nav);
+})();
 
 /* --- on-this-page: highlight the section in view --- */
 (function(){
