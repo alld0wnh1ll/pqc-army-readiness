@@ -246,12 +246,39 @@ nav.phases button:focus-visible{outline:2px solid var(--text);outline-offset:-2p
 .lesson .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--army);margin-bottom:8px}
 .lesson h3{font-size:1.05rem;font-weight:600;margin-bottom:10px}
 .lesson p{font-size:.88rem;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.lesson strong,.cost-prose strong{font-weight:700;color:var(--text)}
+.lesson strong .g-tie{font-weight:700}
 .lesson .cites{display:flex;flex-wrap:wrap;gap:6px 10px}
 .lesson .cites a{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)}
 .lesson .cites a:hover{color:var(--text)}
-.cow-chart-title{max-width:70ch;margin:0 auto 10px;text-align:center;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text)}
-.cow-desc{max-width:70ch;margin:16px auto 0;color:var(--muted);font-size:.9rem;line-height:1.55;text-align:left}
-.cow-desc strong{color:var(--text);font-weight:600}
+.cost-fig{max-width:1100px;margin:18px auto 0}
+.cost-fig img,.cost-fig svg{display:block;width:100%;height:auto;background:#121a16;border:1px solid var(--line)}
+.cost-fig figcaption{margin-top:12px;color:var(--muted);font-size:.84rem;line-height:1.55}
+.cost-fig figcaption strong{color:var(--text);font-weight:600}
+.cost-fig figcaption a{color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)}
+.cost-fig figcaption a:hover{color:var(--text)}
+.cost-prose{max-width:78ch;margin:0 auto;text-align:left;color:var(--muted);font-size:.98rem;line-height:1.65}
+.cost-prose p+p,.vignette-lead p+p{margin-top:14px}
+.vignette-lead{max-width:78ch;margin:26px auto 0;text-align:left;color:var(--muted);font-size:.98rem;line-height:1.65}
+.g-tie{font-weight:600}
+.g-early{color:#5cd4b4}
+.g-late{color:#ec6c6c}
+.g-name{font-style:normal;font-weight:600;font-size:.84rem;margin-left:.35em;padding:1px 7px 2px;border-radius:3px;background:color-mix(in srgb,currentColor 14%,transparent)}
+.g-key{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:1100px;margin:18px auto 0}
+.g-key li{padding:14px 16px 15px;background:color-mix(in srgb,var(--panel) 75%,var(--ink));border:1px solid var(--line);border-top-width:4px}
+.g-key li.g-early{border-top-color:#5cd4b4}
+.g-key li.g-late{border-top-color:#ec6c6c}
+.g-key b{display:block;font-size:1.02rem;font-weight:600;line-height:1.3;margin-bottom:6px}
+.g-key li.g-early b{color:#5cd4b4}
+.g-key li.g-late b{color:#ec6c6c}
+.g-key span{display:block;color:var(--muted);font-size:.86rem;line-height:1.45;font-weight:400}
+@media (max-width:760px){
+  .g-key{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .cost-fig{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .cost-fig img,.cost-fig svg{min-width:960px}
+}
 .cow-foot{max-width:78ch;margin:24px auto 0;color:var(--muted);font-size:.88rem;text-align:center}
 .cow-foot a{color:var(--army);font-family:var(--mono);font-size:.75rem}
 
@@ -436,58 +463,35 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
 <summary class="sec-rule"><i></i><span>03 · Requirements</span><em class="fold-hint"><span class="when-closed">Maximize to read</span><span class="when-open">Minimize</span></em><i></i></summary>
 <section id="panic-curve">
   <div class="cow-head">
-    <div class="eyebrow">Map the network before PQC migration</div>
-    <h2>Map the network first</h2>
-    <p>A cryptographic inventory identifies where vulnerable public-key algorithms are used across an organization’s systems, applications, and infrastructure. This includes tactical radios, enterprise gateways, network devices, industrial controllers, operational technology, and other connected equipment. Understanding these dependencies is essential because migrating to PQC may affect key sizes, communication protocols, processing requirements, and network performance.</p>
-    <p>Without adequate discovery and testing, organizations risk introducing compatibility problems, degraded performance, or operational limitations that require costly corrections after deployment. Previous Army network modernization efforts, including <a href="#case-wint">WIN-T</a> and <a href="#case-jrss">JRSS</a>, demonstrate the importance of identifying technical and operational requirements early.</p>
-    <p><strong>Cryptographic inventories, performance assessments, interoperability testing, and operator evaluations can help reduce these risks while supporting timely migration.</strong></p>
+    <div class="eyebrow">Requirements before the cost is committed</div>
+    <h2>The cost of delayed discovery</h2>
   </div>
-
-  <div class="cow-callout">
-    <p><strong>Prioritize requirements discovery and assessment early to reduce the risk of costly rework during PQC migration. Key activities include:</strong></p>
-    <ul>
-      <li><strong>Inventory:</strong> Identify systems, applications, and devices that use quantum-vulnerable cryptography, including RSA and ECC.</li>
-      <li><strong>Dependencies:</strong> Map applications, services, and legacy networks that rely on these algorithms.</li>
-      <li><strong>Performance:</strong> Establish acceptable latency, throughput, and processing requirements to account for changes in key sizes and cryptographic operations.</li>
-      <li><strong>Legacy systems:</strong> Assess industrial control systems (ICS), operational technology (OT), and resource-constrained devices for migration compatibility.</li>
-      <li><strong>Operational suitability:</strong> Evaluate the effects of PQC implementation on tactical communications, mission requirements, and operator workload.</li>
-      <li><strong>Vendor readiness:</strong> Identify vendor support, upgrade pathways, and cryptographic agility requirements to enable future algorithm changes without replacing equipment.</li>
-    </ul>
-    <p><em>Incomplete discovery increases the risk of fielding systems that require costly modifications, potentially delaying migration and affecting operational readiness.</em></p>
+  <div class="cost-prose">
+    <p>Systems engineering research has long recognized that correcting requirements and integration problems can become <span class="g-tie g-late">increasingly expensive as systems mature</span>. A cost-of-change model originating with the Defense Acquisition University in 1993, and retained in the 2023 INCOSE Systems Engineering Handbook, illustrates how <span class="g-tie g-early">early engineering decisions commit substantial lifecycle costs</span> while <span class="g-tie g-late">later corrections can require extensive rework</span>.</p>
   </div>
+  <ul class="g-key">
+    <li class="g-late"><b>Delayed discovery</b><span>Correcting requirements and integration problems becomes increasingly expensive as systems mature.</span></li>
+    <li class="g-early"><b>Early discovery</b><span>Early engineering decisions commit substantial lifecycle costs.</span></li>
+    <li class="g-late"><b>Fielded system changes</b><span>Later corrections can require extensive rework.</span></li>
+  </ul>
 
-  <p class="cow-chart-title">Two illustrative approaches</p>
-  <svg viewBox="0 0 880 360" width="100%" style="max-width:1100px;display:block;margin:0 auto;overflow:visible" role="img" aria-label="Two conceptual paths over time. The teal path starts early and stays a systematic, steady climb with no panic. The red path waits, then hits panic: a rush, more resources, and a risk of failure.">
-    <defs>
-      <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/>
-      </marker>
-    </defs>
-    <rect x="560" y="36" width="260" height="264" fill="var(--ph4)" opacity="0.08"/>
-    <text x="690" y="54" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--ph4)">Panic</text>
-    <text x="36" y="170" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--muted)" transform="rotate(-90 36 170)">Resources</text>
-    <line x1="88" y1="300" x2="88" y2="36" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
-    <line x1="88" y1="300" x2="820" y2="300" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
-    <text x="100" y="322" font-family="var(--mono)" font-size="12" fill="var(--muted)">Now / no panic</text>
-    <text x="360" y="338" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--muted)">Time</text>
-    <text x="808" y="322" text-anchor="end" font-family="var(--mono)" font-size="12" fill="var(--ph4)">Later / panic</text>
-    <path d="M88,248 C280,236 520,214 800,198" fill="none" stroke="var(--ph2)" stroke-width="3"/>
-    <text x="210" y="214" font-family="var(--mono)" font-size="13" fill="var(--ph2)">Start now</text>
-    <text x="210" y="232" font-family="var(--mono)" font-size="11" fill="var(--text)">Systematic and gradual work.</text>
-    <path d="M88,278 C340,276 500,268 580,170 C680,55 740,32 792,24" fill="none" stroke="var(--ph4)" stroke-width="2.4"/>
-    <path d="M780,12 L804,36 M804,12 L780,36" stroke="var(--ph4)" stroke-width="2.2"/>
-    <text x="430" y="258" font-family="var(--mono)" font-size="13" fill="var(--ph4)">Wait</text>
-    <text x="568" y="118" font-family="var(--mono)" font-size="13" fill="var(--ph4)">Rush under panic</text>
-    <text x="568" y="136" font-family="var(--mono)" font-size="11" fill="var(--text)">More resources. Risk of failure.</text>
-  </svg>
-  <p class="cow-desc">The graphic compares two illustrative approaches. The teal curve represents a migration that begins with comprehensive discovery and progresses through planned implementation. The red curve represents a delayed migration in which unresolved requirements and compatibility issues accumulate, increasing the potential for costly rework and schedule disruptions. <em>These curves are conceptual illustrations, not projections based on measured data.</em></p>
+  <figure class="cost-fig">
+    <img src="assets/cost-of-delayed-discovery.svg" alt="The Cost of Delayed Discovery. Early and delayed paths across discovery, requirements, validation, implementation, and fielding. Points mark Issues unknown, Early discovery, Issues discovered late, Informed implementation, Fielded system changes, and Delayed discovery.">
+  </figure>
+
+  <div class="cost-prose" style="margin-top:22px">
+    <p>This principle is particularly relevant to PQC migration. Replacing vulnerable cryptography across existing Army systems may affect established architectures, network dependencies, operational requirements, and fielded equipment. <span class="g-tie g-early">Discovering these constraints early</span> allows the Army to address them before implementation decisions and schedules become difficult to change.</p>
+  </div>
+  <div class="vignette-lead">
+    <p>The Army’s experience with complex network modernization demonstrates two ways that unresolved requirements can complicate implementation. WIN-T Increment 2 illustrates the importance of operational suitability, while the Joint Regional Security Stacks (JRSS) initiative highlights the challenges of enterprise integration. Both provide lessons for identifying PQC migration requirements before widespread deployment.</p>
+  </div>
 
   <div class="lesson-grid">
     <div class="lesson" id="case-wint">
       <div class="tag">Lessons · WIN-T Inc 2</div>
       <h3>Outpacing the Operator</h3>
-      <p>Warfighter Information Network-Tactical (WIN-T) Increment 2 introduced mobile tactical networking capabilities intended to improve communications across Army formations. Operational testing identified challenges involving equipment complexity, usability, and the demands placed on Soldiers operating the system. These findings contributed to subsequent changes in the Army’s approach to tactical networking.</p>
-      <p>The lesson for PQC migration is the importance of incorporating operational requirements into system design and evaluation. Cryptographic solutions must function reliably under realistic tactical conditions without imposing unacceptable burdens on operators or degrading mission performance.</p>
+      <p>Warfighter Information Network-Tactical (WIN-T) Increment 2 introduced mobile tactical networking capabilities intended to improve communications across Army formations. Operational testing revealed challenges involving equipment complexity, usability, and the demands placed on Soldiers operating the system. These findings contributed to subsequent changes in the Army’s approach to tactical networking.</p>
+      <p><strong>The lesson for PQC migration is that technical capability alone does not establish <span class="g-tie g-early">operational suitability</span>.</strong> <i class="g-name g-early">Informed implementation</i> Cryptographic solutions must function within realistic tactical conditions, including constrained processing resources, network limitations, and operator workload. <span class="g-tie g-early">Identifying these requirements before fielding</span> reduces the risk of discovering <span class="g-tie g-late">costly operational constraints after implementation</span>.</p>
       <div class="cites">
         <a href="https://www.dote.osd.mil/Portals/97/pub/reports/FY2013/army/2013win-t.pdf" target="_blank" rel="noopener">DOT&amp;E FY2013</a>
         <a href="https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Science_and_Technology/16-F-0250_(REPORT)_Operational_Evaluation_of_Warfighter_Information-Tactical_(WIN-T)_Inc_2.pdf" target="_blank" rel="noopener">FOT&amp;E 2</a>
@@ -499,9 +503,8 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     <div class="lesson" id="case-jrss">
       <div class="tag">Lessons · JRSS</div>
       <h3>Complexity Revealed at Scale</h3>
-      <p>The Joint Regional Security Stacks (JRSS) initiative sought to consolidate and modernize security capabilities across Department of Defense networks. Implementing these capabilities at enterprise scale introduced challenges involving legacy applications, network dependencies, interoperability, and performance.</p>
-      <p>These challenges illustrate the complexity of integrating new technologies into established operational environments.</p>
-      <p>PQC migration may encounter similar difficulties. Changes to cryptographic algorithms, protocols, key sizes, and processing requirements can affect applications and infrastructure in ways that are not immediately apparent. Identifying these dependencies early allows organizations to incorporate them into system requirements, evaluate potential impacts, and reduce the likelihood of unexpected problems during deployment.</p>
+      <p>The Joint Regional Security Stacks (JRSS) initiative sought to consolidate and modernize security capabilities across Department of Defense networks. Implementing these capabilities at enterprise scale introduced challenges involving legacy applications, network dependencies, interoperability, and performance. These difficulties illustrate how integrating new technologies into established infrastructure can <span class="g-tie g-late">reveal requirements</span> <i class="g-name g-late">Issues discovered late</i> that were <span class="g-tie g-late">not fully understood during planning</span> <i class="g-name g-late">Issues unknown</i>.</p>
+      <p><strong>PQC migration presents similar integration risks.</strong> Changes to cryptographic algorithms, protocols, key sizes, and processing requirements can affect interconnected applications, devices, and network services. <span class="g-tie g-late">Dependencies discovered after implementation begins</span> may require additional engineering, testing, or modifications to deployed systems. <span class="g-tie g-early">Identifying these relationships early</span> allows the Army to incorporate them into requirements and evaluate their operational consequences before widespread deployment.</p>
       <div class="cites">
         <a href="https://www.dodig.mil/reports.html/Article/1867983/audit-of-the-dods-implementation-of-the-joint-regional-security-stacks-dodig-20/" target="_blank" rel="noopener">DODIG-2019-089</a>
         <a href="https://www.dote.osd.mil/Portals/97/pub/reports/FY2020/dod/2020jrss.pdf" target="_blank" rel="noopener">DOT&amp;E FY2020</a>
@@ -511,13 +514,23 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
     </div>
   </div>
 
-  <div class="cow-callout" style="margin-top:28px">
-    <p><em>Current Army PQC readiness efforts emphasize cryptographic discovery, technical validation, and evaluation of proposed solutions.</em> Discovery tools help identify vulnerable algorithms and dependencies across existing systems, while the Department’s <a href="#atlas" style="color:var(--army);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--army) 60%,transparent)">ATLAS</a> process provides a mechanism for tracking proposed PQC solutions and their evaluation status.</p>
+  <div class="cost-prose" style="margin-top:28px">
+    <p><strong>The Army has an opportunity to apply these lessons before PQC migration becomes urgent.</strong> Unlike unforeseen technological challenges, the need to replace quantum-vulnerable cryptography is already established. Although the arrival of a cryptographically relevant quantum computer remains uncertain, the engineering work required to prepare for migration can begin now.</p>
+    <p>The lesson from WIN-T and JRSS is not simply that technology transitions are difficult. It is that <span class="g-tie g-early">operational requirements and system dependencies must be understood</span> before they become <span class="g-tie g-late">expensive implementation problems</span>. <span class="g-tie g-early">Cryptographic inventory, dependency mapping, performance testing, and operational validation</span> can reduce that uncertainty while preserving time to address discovered limitations.</p>
   </div>
 
-  <p class="cow-foot">As military networks become increasingly mature, changes to cryptographic infrastructure can affect systems well beyond their immediate point of implementation. The experiences of WIN-T and JRSS reinforce the importance of understanding operational requirements and system dependencies before large-scale deployment.</p>
-  <p class="cow-foot"><em>Early discovery and testing can help the Army identify these challenges while sufficient time remains to address them.</em></p>
-  <p class="cow-foot"><em>Lessons drawn from WIN-T Increment 2 and JRSS are based on historical program findings. Their application to PQC migration is an analytical assessment intended to illustrate potential implementation challenges and does not predict specific outcomes.</em></p>
+  <div class="cow-callout" style="margin-top:28px">
+    <p><strong>Prioritize requirements discovery and assessment early to reduce the risk of costly rework during PQC migration. Key activities include:</strong></p>
+    <ul>
+      <li><strong>Inventory:</strong> Identify systems, applications, and devices that use quantum-vulnerable cryptography, including RSA and ECC.</li>
+      <li><strong>Dependencies:</strong> Map applications, services, and legacy networks that rely on these algorithms.</li>
+      <li><strong>Performance:</strong> Establish acceptable latency, throughput, and processing requirements to account for changes in key sizes and cryptographic operations.</li>
+      <li><strong>Legacy systems:</strong> Assess industrial control systems (ICS), operational technology (OT), and resource-constrained devices for migration compatibility.</li>
+      <li><strong>Operational suitability:</strong> Evaluate the effects of PQC implementation on tactical communications, mission requirements, and operator workload.</li>
+      <li><strong>Vendor readiness:</strong> Identify vendor support, upgrade pathways, and cryptographic agility requirements to enable future algorithm changes without replacing equipment.</li>
+    </ul>
+    <p><em>Incomplete discovery increases the risk of fielding systems that require costly modifications, potentially delaying migration and affecting operational readiness.</em></p>
+  </div>
 </section>
 </details>
 

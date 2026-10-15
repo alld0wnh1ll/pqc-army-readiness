@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 930" width="1200" height="930" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e8716b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5fd0b0"/></marker><linearGradient id="gap" x1="0" x2="1"><stop offset="0" stop-color="#e8716b" stop-opacity="0"/><stop offset="1" stop-color="#e8716b" stop-opacity="0.22"/></linearGradient></defs>
+<rect width="1200" height="930" fill="#121a17"/>
+<text x="40" y="62" fill="#f2f4f3" font-size="34" font-weight="700" letter-spacing="-0.5">The Cost of Delayed Discovery</text>
+<rect x="110.0" y="100" width="178.0" height="580" fill="#17211d"/>
+<g transform="translate(199.0,134)"><g fill="none" stroke="#c7d1cd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M-6,4 C-11,0 -10,-12 0,-12 C10,-12 11,0 6,4 V8 H-6 Z"/><path d="M-4,12 H4 M-2,15 H2"/></g></g>
+<text x="199.0" y="180" text-anchor="middle" fill="#e9ecea" font-size="15" font-weight="600">Discovery</text>
+<text x="199.0" y="200" text-anchor="middle" fill="#9fb0aa" font-size="12">Identify systems,</text>
+<text x="199.0" y="215" text-anchor="middle" fill="#9fb0aa" font-size="12">crypto usage, and</text>
+<text x="199.0" y="230" text-anchor="middle" fill="#9fb0aa" font-size="12">dependencies.</text>
+<text x="199.0" y="738" text-anchor="middle" fill="#c7d1cd" font-size="13">Understand</text>
+<text x="199.0" y="754" text-anchor="middle" fill="#c7d1cd" font-size="13">the environment</text>
+<rect x="288.0" y="100" width="178.0" height="580" fill="#141d1a"/>
+<g transform="translate(377.0,134)"><g fill="none" stroke="#c7d1cd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="-9" y="-10" width="18" height="24" rx="2"/><rect x="-4" y="-13" width="8" height="5" rx="1"/><path d="M-5,-2 H5 M-5,3 H5 M-5,8 H2"/></g></g>
+<text x="377.0" y="180" text-anchor="middle" fill="#e9ecea" font-size="15" font-weight="600">Requirements</text>
+<text x="377.0" y="200" text-anchor="middle" fill="#9fb0aa" font-size="12">Define operational,</text>
+<text x="377.0" y="215" text-anchor="middle" fill="#9fb0aa" font-size="12">technical, and</text>
+<text x="377.0" y="230" text-anchor="middle" fill="#9fb0aa" font-size="12">integration needs.</text>
+<text x="377.0" y="738" text-anchor="middle" fill="#c7d1cd" font-size="13">Define what</text>
+<text x="377.0" y="754" text-anchor="middle" fill="#c7d1cd" font-size="13">is needed</text>
+<line x1="288.0" x2="288.0" y1="722" y2="762" stroke="#2a3632"/>
+<rect x="466.0" y="100" width="178.0" height="580" fill="#17211d"/>
+<g transform="translate(555.0,134)"><g fill="none" stroke="#c7d1cd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle r="4.5"/><circle r="9"/><path d="M9.0,0.0 L13.0,0.0" stroke-width="3"/><path d="M6.4,6.4 L9.2,9.2" stroke-width="3"/><path d="M0.0,9.0 L0.0,13.0" stroke-width="3"/><path d="M-6.4,6.4 L-9.2,9.2" stroke-width="3"/><path d="M-9.0,0.0 L-13.0,0.0" stroke-width="3"/><path d="M-6.4,-6.4 L-9.2,-9.2" stroke-width="3"/><path d="M-0.0,-9.0 L-0.0,-13.0" stroke-width="3"/><path d="M6.4,-6.4 L9.2,-9.2" stroke-width="3"/></g></g>
+<text x="555.0" y="180" text-anchor="middle" fill="#e9ecea" font-size="15" font-weight="600">Validation</text>
+<text x="555.0" y="200" text-anchor="middle" fill="#9fb0aa" font-size="12">Prototype, test,</text>
+<text x="555.0" y="215" text-anchor="middle" fill="#9fb0aa" font-size="12">and evaluate in</text>
+<text x="555.0" y="230" text-anchor="middle" fill="#9fb0aa" font-size="12">realistic conditions.</text>
+<text x="555.0" y="738" text-anchor="middle" fill="#c7d1cd" font-size="13">Test and</text>
+<text x="555.0" y="754" text-anchor="middle" fill="#c7d1cd" font-size="13">de-risk</text>
+<line x1="466.0" x2="466.0" y1="722" y2="762" stroke="#2a3632"/>
+<rect x="644.0" y="100" width="178.0" height="580" fill="#141d1a"/>
+<g transform="translate(733.0,134)"><g fill="none" stroke="#c7d1cd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M0,-13 L7,-9.5 L7,-2.5 L0,1 L-7,-2.5 L-7,-9.5 Z M-7,-9.5 L0,-6 L7,-9.5 M0,-6 V1"/><path d="M-7,1 L0,4.5 L0,12 L-7,15.5 L-14,12 L-14,4.5 Z M-14,4.5 L-7,8 L0,4.5 M-7,8 V15.5"/><path d="M7,1 L14,4.5 L14,12 L7,15.5 L0,12 L0,4.5 Z M0,4.5 L7,8 L14,4.5 M7,8 V15.5"/></g></g>
+<text x="733.0" y="180" text-anchor="middle" fill="#e9ecea" font-size="15" font-weight="600">Implementation</text>
+<text x="733.0" y="200" text-anchor="middle" fill="#9fb0aa" font-size="12">Integrate, deploy,</text>
+<text x="733.0" y="215" text-anchor="middle" fill="#9fb0aa" font-size="12">and transition across</text>
+<text x="733.0" y="230" text-anchor="middle" fill="#9fb0aa" font-size="12">the enterprise.</text>
+<text x="733.0" y="738" text-anchor="middle" fill="#c7d1cd" font-size="13">Deploy and</text>
+<text x="733.0" y="754" text-anchor="middle" fill="#c7d1cd" font-size="13">integrate</text>
+<line x1="644.0" x2="644.0" y1="722" y2="762" stroke="#2a3632"/>
+<rect x="822.0" y="100" width="178.0" height="580" fill="#17211d"/>
+<g transform="translate(911.0,134)"><g fill="none" stroke="#c7d1cd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cy="-4" r="2.2"/><path d="M0,-2 L-6,15 M0,-2 L6,15 M-3.5,8 H3.5"/><path d="M-6,-10 A8,8 0 0,0 -6,2 M6,-10 A8,8 0 0,1 6,2 M-10,-14 A14,14 0 0,0 -10,6 M10,-14 A14,14 0 0,1 10,6"/></g></g>
+<text x="911.0" y="180" text-anchor="middle" fill="#e9ecea" font-size="15" font-weight="600">Fielding &amp; Sustainment</text>
+<text x="911.0" y="200" text-anchor="middle" fill="#9fb0aa" font-size="12">Operate, maintain,</text>
+<text x="911.0" y="215" text-anchor="middle" fill="#9fb0aa" font-size="12">and evolve.</text>
+<text x="911.0" y="738" text-anchor="middle" fill="#c7d1cd" font-size="13">Operate and</text>
+<text x="911.0" y="754" text-anchor="middle" fill="#c7d1cd" font-size="13">improve</text>
+<line x1="822.0" x2="822.0" y1="722" y2="762" stroke="#2a3632"/>
+<line x1="110" x2="1000" y1="610.0" y2="610.0" stroke="#2a3632" stroke-dasharray="3 5"/>
+<text x="98" y="614.0" text-anchor="end" fill="#8a9a94" font-size="12.5">1×</text>
+<line x1="110" x2="1000" y1="500.0" y2="500.0" stroke="#2a3632" stroke-dasharray="3 5"/>
+<text x="98" y="504.0" text-anchor="end" fill="#8a9a94" font-size="12.5">10×</text>
+<line x1="110" x2="1000" y1="390.0" y2="390.0" stroke="#2a3632" stroke-dasharray="3 5"/>
+<text x="98" y="394.0" text-anchor="end" fill="#8a9a94" font-size="12.5">100×</text>
+<line x1="110" x2="1000" y1="280.0" y2="280.0" stroke="#2a3632" stroke-dasharray="3 5"/>
+<text x="98" y="284.0" text-anchor="end" fill="#8a9a94" font-size="12.5">1,000×</text>
+<text transform="translate(34,445.03442091197553) rotate(-90)" text-anchor="middle" fill="#b9c4c0" font-size="13">Relative cost of correction (log scale)</text>
+<line x1="110" x2="1010" y1="680" y2="680" stroke="#6b7a75" stroke-width="1.2"/><line x1="110" x2="110" y1="100" y2="680" stroke="#6b7a75" stroke-width="1.2"/>
+<text x="555.0" y="706" text-anchor="middle" fill="#e9ecea" font-size="15" font-weight="600">Migration Lifecycle</text>
+<line x1="110" x2="465.0" y1="701" y2="701" stroke="#3a4843"/><line x1="645.0" x2="1000" y1="701" y2="701" stroke="#3a4843"/>
+<path d="M110.0,610.0 C139.7,607.3 228.7,601.2 288.0,593.9 C347.3,586.6 406.7,580.1 466.0,566.2 C525.3,552.3 584.7,532.7 644.0,510.7 C703.3,488.6 771.0,458.6 822.0,433.8 C873.0,409.0 917.3,380.6 950.0,361.9 C982.7,343.2 1006.7,328.2 1018.0,321.4 L1018.0,539.2 C1006.7,540.4 982.7,542.6 950.0,546.2 C917.3,549.8 873.0,555.7 822.0,560.8 C771.0,565.9 703.3,571.9 644.0,576.9 C584.7,581.9 525.3,586.6 466.0,590.6 C406.7,594.7 347.3,598.1 288.0,601.3 C228.7,604.5 139.7,608.5 110.0,610.0 Z" fill="url(#gap)"/>
+<path d="M110.0,610.0 C139.7,608.5 228.7,604.5 288.0,601.3 C347.3,598.1 406.7,594.7 466.0,590.6 C525.3,586.6 584.7,581.9 644.0,576.9 C703.3,571.9 771.0,565.9 822.0,560.8 C873.0,555.7 917.3,549.8 950.0,546.2 C982.7,542.6 1006.7,540.4 1018.0,539.2" fill="none" stroke="#5fd0b0" stroke-width="3" stroke-linecap="round" marker-end="url(#ag)"/>
+<path d="M110.0,610.0 C139.7,607.3 228.7,601.2 288.0,593.9 C347.3,586.6 406.7,580.1 466.0,566.2 C525.3,552.3 584.7,532.7 644.0,510.7 C703.3,488.6 771.0,458.6 822.0,433.8 C873.0,409.0 917.3,380.6 950.0,361.9 C982.7,343.2 1006.7,328.2 1018.0,321.4" fill="none" stroke="#e8716b" stroke-width="3" stroke-linecap="round" marker-end="url(#ar)"/>
+<line x1="288.0" y1="593.9259160753938" x2="288.0" y2="569.9259160753938" stroke="#e8716b" stroke-opacity="0.5"/>
+<circle cx="288.0" cy="593.9259160753938" r="6" fill="#e8716b" stroke="#121a17" stroke-width="2"/>
+<text x="288.0" y="545.9259160753938" text-anchor="middle" fill="#f0918b" font-size="13.5" font-weight="600">Issues unknown</text>
+<text x="288.0" y="562.9259160753938" text-anchor="middle" fill="#9fb0aa" font-size="11.5">Seem inexpensive here</text>
+<line x1="466.0" y1="566.2265990460759" x2="466.0" y2="527.2265990460759" stroke="#e8716b" stroke-opacity="0.5"/>
+<circle cx="466.0" cy="566.2265990460759" r="6" fill="#e8716b" stroke="#121a17" stroke-width="2"/>
+<text x="466.0" y="488.2265990460759" text-anchor="middle" fill="#f0918b" font-size="13.5" font-weight="600">Issues discovered late</text>
+<text x="466.0" y="505.2265990460759" text-anchor="middle" fill="#9fb0aa" font-size="11.5">Design changes, retesting, and</text>
+<text x="466.0" y="520.2265990460759" text-anchor="middle" fill="#9fb0aa" font-size="11.5">integration across systems</text>
+<line x1="822.0" y1="433.7734009539241" x2="822.0" y2="392.7734009539241" stroke="#e8716b" stroke-opacity="0.5"/>
+<circle cx="822.0" cy="433.7734009539241" r="6" fill="#e8716b" stroke="#121a17" stroke-width="2"/>
+<text x="822.0" y="353.7734009539241" text-anchor="middle" fill="#f0918b" font-size="13.5" font-weight="600">Fielded system changes</text>
+<text x="822.0" y="370.7734009539241" text-anchor="middle" fill="#9fb0aa" font-size="11.5">Extensive rework, operational</text>
+<text x="822.0" y="385.7734009539241" text-anchor="middle" fill="#9fb0aa" font-size="11.5">impact, increased risk</text>
+<circle cx="950" cy="361.92002443863635" r="6" fill="#e8716b" stroke="#121a17" stroke-width="2"/>
+<text x="964" y="387.92002443863635" text-anchor="start" fill="#f0918b" font-size="13.5" font-weight="600">Delayed discovery</text>
+<text x="964" y="404.92002443863635" text-anchor="start" fill="#9fb0aa" font-size="11.5">Increasingly expensive</text>
+<text x="964" y="419.92002443863635" text-anchor="start" fill="#9fb0aa" font-size="11.5">as systems mature</text>
+<line x1="288.0" y1="601.2900629347613" x2="288.0" y2="618.2900629347613" stroke="#5fd0b0" stroke-opacity="0.5"/>
+<circle cx="288.0" cy="601.2900629347613" r="6" fill="#5fd0b0" stroke="#121a17" stroke-width="2"/>
+<text x="288.0" y="633.2900629347613" text-anchor="middle" fill="#5fd0b0" font-size="13.5" font-weight="600">Early discovery</text>
+<text x="288.0" y="650.2900629347613" text-anchor="middle" fill="#9fb0aa" font-size="11.5">Address issues before they</text>
+<text x="288.0" y="665.2900629347613" text-anchor="middle" fill="#9fb0aa" font-size="11.5">become embedded design decisions</text>
+<line x1="644.0" y1="576.8867004769621" x2="644.0" y2="595.8867004769621" stroke="#5fd0b0" stroke-opacity="0.5"/>
+<circle cx="644.0" cy="576.8867004769621" r="6" fill="#5fd0b0" stroke="#121a17" stroke-width="2"/>
+<text x="644.0" y="610.8867004769621" text-anchor="middle" fill="#5fd0b0" font-size="13.5" font-weight="600">Informed implementation</text>
+<text x="644.0" y="627.8867004769621" text-anchor="middle" fill="#9fb0aa" font-size="11.5">Fewer surprises, less rework</text>
+<circle cx="950" cy="546.2238043721509" r="6" fill="#5fd0b0" stroke="#121a17" stroke-width="2"/>
+<text x="964" y="574.2238043721509" text-anchor="start" fill="#5fd0b0" font-size="13.5" font-weight="600">Early discovery</text>
+<text x="964" y="591.2238043721509" text-anchor="start" fill="#9fb0aa" font-size="11.5">Lower risk, more</text>
+<text x="964" y="606.2238043721509" text-anchor="start" fill="#9fb0aa" font-size="11.5">manageable changes</text>
+<g transform="translate(110,804)">
+<line x1="0" x2="36" y1="0" y2="0" stroke="#5fd0b0" stroke-width="3"/><circle cx="18" cy="0" r="4.5" fill="#5fd0b0"/>
+<text x="48" y="5" fill="#5fd0b0" font-size="14" font-weight="600">Early discovery path</text>
+<text x="226" y="5" fill="#9fb0aa" font-size="12.5">Requirements and dependencies resolved while changes are inexpensive</text>
+<line x1="0" x2="36" y1="26" y2="26" stroke="#e8716b" stroke-width="3"/><circle cx="18" cy="26" r="4.5" fill="#e8716b"/>
+<text x="48" y="31" fill="#f0918b" font-size="14" font-weight="600">Delayed discovery path</text>
+<text x="226" y="31" fill="#9fb0aa" font-size="12.5">Same issues surface later, when changes cost significantly more</text>
+</g>
+<line x1="40" x2="1160" y1="866" y2="866" stroke="#2a3632"/>
+<text x="40" y="892" fill="#9fb0aa" font-size="12"><tspan fill="#e9ecea" font-weight="700">Figure 3.</tspan> Conceptual illustration; curves are illustrative, not empirical PQC migration cost data. Adapted from the Defense Acquisition University (1993) model,</text>
+<text x="40" y="910" fill="#9fb0aa" font-size="12">as reproduced in <a href="https://www.wiley.com/en-us/INCOSE+Systems+Engineering+Handbook%2C+5th+Edition-p-9781119814290" xlink:href="https://www.wiley.com/en-us/INCOSE+Systems+Engineering+Handbook%2C+5th+Edition-p-9781119814290" target="_blank"><tspan fill="#7fc7f0" text-decoration="underline">INCOSE Systems Engineering Handbook, 5th ed. (Wiley, 2023), Fig. 1.4</tspan></a>.</text>
+</svg>
