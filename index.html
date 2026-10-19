@@ -402,7 +402,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
         <div class="kicker">Origin Story · Identifying the threat · 1994–2015</div>
         <p>In 1994, Peter Shor demonstrated that a sufficiently capable quantum computer could efficiently break widely used public-key cryptographic systems, including RSA, Diffie-Hellman, and ECC. Two years later, Lov Grover developed an algorithm that could accelerate certain cryptographic attacks, effectively reducing the security strength of symmetric keys against exhaustive search. Unlike the threat posed by Shor’s algorithm, Grover’s impact can largely be mitigated through appropriate symmetric key lengths.</p>
         <p>These discoveries established the theoretical threat of quantum computing to modern cryptography, although practical implementation requires quantum computing capabilities that remain technically challenging to achieve. Research into quantum-resistant alternatives subsequently expanded, including Oded Regev’s 2005 work on learning with errors (LWE), which helped establish the mathematical foundations of modern lattice-based cryptography. The field became widely known as post-quantum cryptography during this period.</p>
-        <p>One major concern is harvest now, decrypt later (HNDL), in which adversaries collect encrypted information today in anticipation of decrypting it when sufficiently capable quantum computers become available. The anticipated emergence of that capability is commonly referred to as <strong>Q-Day</strong>.</p>
+        <p>The emergence of a cryptographically relevant quantum computer is commonly referred to as <strong>Q-Day</strong>. A CRQC can be used for more than one attack. Authentication failures, forged signatures, and impersonation are a primary concern for the Department of War and its partners. Previously collected encrypted traffic may also become accessible if its confidentiality depended on vulnerable key-establishment mechanisms.</p>
         <p>The references below highlight foundational developments in post-quantum cryptography.</p>
         <div class="origin-chips">
           <a href="https://arxiv.org/abs/quant-ph/9508027" target="_blank" rel="noopener">1994 Shor</a>
@@ -596,7 +596,7 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   </div>
 
   <div class="cost-prose" style="margin-top:28px">
-    <p><strong>The Army has an opportunity to apply these lessons before PQC migration becomes urgent.</strong> Unlike unforeseen technological challenges, the need to replace quantum-vulnerable cryptography is already established. Although the arrival of a cryptographically relevant quantum computer remains uncertain, the engineering work required to prepare for migration can begin now.</p>
+    <p><strong>PQC migration is already urgent.</strong> The federal government treats every contract and system as having only a couple of years to be updated. Unlike unforeseen technological challenges, the need to replace quantum-vulnerable cryptography is already established. Although the arrival of a cryptographically relevant quantum computer remains uncertain, the engineering work required to prepare for migration can begin now.</p>
     <p>The lesson from WIN-T and JRSS is not simply that technology transitions are difficult. It is that operational requirements and system dependencies must be understood before they become expensive implementation problems. Cryptographic inventory, dependency mapping, performance testing, and operational validation can reduce that uncertainty while preserving time to address discovered limitations.</p>
   </div>
 
@@ -621,24 +621,24 @@ footer{padding:28px 6vw;color:var(--muted);font-family:var(--mono);font-size:.68
   <div class="atlas-head">
     <div class="eyebrow">ATLAS Defined</div>
     <h2>DOW intake and tracking for PQC solutions</h2>
-    <p>Acquisition, Testing, Licensing, and Security (ATLAS) provides a centralized process for submitting and tracking post-quantum cryptography solutions across the Department of War. The Department requires visibility into PQC products being evaluated, acquired, or deployed by its Components.</p>
-    <p>Government sponsors submit proposed solutions through ATLAS, which records their status and supporting documentation. The system is intended to provide Components with visibility into product evaluations, testing results, certification status, and implementation progress. Sharing this information can reduce redundant testing and support more informed acquisition decisions. However, Components must still determine whether existing evaluation results adequately address their specific operational and technical requirements.</p>
+    <p>Acquisition, Testing, and Licensing Authorization for Security (ATLAS) provides a centralized process for submitting and tracking post-quantum cryptography solutions across the Department of War. The Department requires visibility into PQC products being evaluated, acquired, or deployed by its Components.</p>
+    <p>Government sponsors submit proposed solutions through ATLAS, which records their authorization for use as PQC. Only ATLAS-authorized solutions and systems may be accounted as PQC. Sharing this information can reduce redundant testing and support more informed acquisition decisions. Components remain responsible for ascertaining that a system meets functional requirements.</p>
   </div>
   <div class="atlas-fit" aria-label="How ATLAS fits the migration">
     <div class="fit-cell">
       <div class="tag">How it fits</div>
       <h3>ATLAS provides a centralized intake and tracking process</h3>
-      <p>ATLAS provides a centralized intake and tracking process for proposed PQC solutions. Individual Components retain responsibility for determining whether a product meets their acquisition, testing, certification, and operational requirements. <em>Submission through ATLAS does not constitute authorization to acquire or field a product, nor does it replace applicable NIST standards, CNSA 2.0 requirements, or Component-specific evaluations.</em></p>
+      <p>ATLAS provides a centralized intake and tracking process for proposed PQC solutions. Components remain responsible for ascertaining that a system meets functional requirements. They do not decide, outside ATLAS, whether a product is PQC or whether it is viable to acquire as PQC. <em>ATLAS authorization is necessary for PQC. It is not NSA approval, and it is not sufficient for the other requirements a product must already meet before acquisition.</em></p>
     </div>
     <div class="fit-cell">
       <div class="tag">Who submits</div>
       <h3>A government sponsor initiates the submission</h3>
-      <p>A government sponsor initiates the ATLAS submission using the designated intake questionnaire. The questionnaire collects standardized information about the proposed solution. Vendors provide the supporting documentation identified in Question 13. <em>Submissions that remain incomplete seven days after initiation are closed.</em></p>
+      <p>A government sponsor initiates the ATLAS submission using the designated intake questionnaire. The questionnaire collects standardized information about the proposed solution. Vendors provide the supporting documentation identified in the questionnaire. <em>Submissions that remain incomplete seven days after initiation are closed.</em></p>
     </div>
     <div class="fit-cell">
       <div class="tag">What it tracks</div>
       <h3>Status and results across Components</h3>
-      <p>ATLAS tracks submitted PQC solutions, their evaluation status, and available testing results across Department Components. This includes information about national security system certification and product performance, where applicable. The shared record helps Components identify previously evaluated solutions and determine whether existing results can inform their own assessments. <em>An ATLAS record does not constitute Department-wide approval for fielding.</em></p>
+      <p>ATLAS tracks submitted PQC solutions, their authorization status, and available testing results across Department Components. This includes information about national security system certification and product performance, where applicable. The shared record helps Components identify previously authorized solutions. <em>ATLAS authorization is necessary for a solution to be accounted as PQC. It is not sufficient for the other requirements a product must already meet before acquisition.</em></p>
     </div>
   </div>
   <div class="atlas-actions">
@@ -679,7 +679,7 @@ function decYear(iso){
   return y + (Date.UTC(y,(m||1)-1,day||1) - start) / (next - start);
 }
 const STRATEGY_DAY = decYear('2026-04-16'); // DoW PQC Strategy: cleared for publication 16 Apr 2026
-const TARGET_STATE_DAY = decYear('2029-12-31'); // core systems migrated to PQC-compliant algorithms
+const TARGET_STATE_DAY = decYear('2030-01-01'); // working estimate for the start of a target-state window; not a mandate
 const QDAY_THEORETICAL = decYear('2032-07-01'); // midpoint of the ~2030-2035 CRQC estimate band; the Q-Day phase opens here
 
 const PHASES = [
@@ -687,19 +687,19 @@ const PHASES = [
     key:'pre', label:'Pre-Strategy', years:'Aug 2015 to Apr 2026', from:YEAR_MIN, to:STRATEGY_DAY, color:'var(--ph1)',
     meaning:'policy and standards',
     tense:'Initial Response',
-    story:'For decades, the threat posed by quantum computing remained largely theoretical, with practical capabilities often estimated to be 15 to 30 years away. Nevertheless, the U.S. government began preparing for this threat well before the development of standardized post-quantum algorithms. Early guidance focused on limiting investments in vulnerable cryptography, establishing alternative standards, and preparing organizations for eventual migration. Federal planning initially emphasized a transition through 2035. More recent government initiatives have established earlier milestones for selected defense systems, including migration targets beginning in 2029. While early discussions focused on the HNDL risk, more recent guidance recognizes the operational consequences of compromised digital signatures, including authentication failures and forged communications.'
+    story:'For decades, the threat posed by quantum computing remained largely theoretical, with practical capabilities often estimated to be 15 to 30 years away. Nevertheless, the U.S. government began preparing for this threat well before the development of standardized post-quantum algorithms. Early guidance focused on limiting investments in vulnerable cryptography, establishing alternative standards, and preparing organizations for eventual migration. Federal planning initially emphasized a transition through 2035. Authentication failures, forged signatures, and impersonation are a primary concern for the Department of War and its partners.'
   },
   {
-    key:'strat', label:'Strategy', years:'Apr 2026 to Dec 2029', from:STRATEGY_DAY, to:TARGET_STATE_DAY, color:'var(--ph2)',
+    key:'strat', label:'Strategy', years:'Apr 2026 to ~2030', from:STRATEGY_DAY, to:TARGET_STATE_DAY, color:'var(--ph2)',
     meaning:'this window is current',
     tense:'Current work',
-    story:'The Department of War\'s April 2026 Post-Quantum Cryptography Strategy establishes a target of 31 December 2029 for transitioning core systems to quantum-resistant cryptographic algorithms. Organizations must identify systems that rely on vulnerable cryptography and assess their ability to support approved replacements. Systems unable to transition may require replacement, compensating security controls, or retirement. Early inventory and technical assessment are essential to identifying dependencies, establishing requirements, and meeting migration milestones.'
+    story:'The Department of War\'s April 2026 Post-Quantum Cryptography Strategy establishes Department-wide lines of effort and objectives for migrating to quantum-resistant cryptography. It does not set target dates. Those dates will appear in the implementation plan, which has not been released. Organizations must identify systems that rely on vulnerable cryptography and assess their ability to support approved replacements. Systems unable to transition may require replacement, compensating security controls, or retirement. Early inventory and technical assessment are essential to identifying dependencies and establishing requirements.'
   },
   {
-    key:'impl', label:'Target State', years:'Dec 2029 →', from:TARGET_STATE_DAY, to:QDAY_THEORETICAL, color:'var(--ph3)',
+    key:'impl', label:'Target State', years:'~2030–2032', from:TARGET_STATE_DAY, to:QDAY_THEORETICAL, color:'var(--ph3)',
     meaning:'the planned end state',
     tense:'Planned end state',
-    story:'By 31 December 2029, PQC migration is completed for all core DOW systems. Legacy platforms and operational technology that cannot support approved quantum-resistant algorithms have identified alternative protections, including network isolation, compensating security controls, or eventual replacement. These systems will require continued risk assessment and monitoring until their vulnerabilities can be adequately addressed.'
+    story:'The intended target state is that PQC migration is completed for all core DOW systems. Dates in this window are working estimates, not mandates; a current guess is about 2030 to 2032. Legacy platforms and operational technology that cannot support approved quantum-resistant algorithms have identified alternative protections, including network isolation, compensating security controls, or eventual replacement. These systems will require continued risk assessment and monitoring until their vulnerabilities can be adequately addressed.'
   },
   {
     /* Q-Day is a point, not a phase: the moment a peer holds a CRQC, Post-CRQC begins.
@@ -707,7 +707,7 @@ const PHASES = [
     key:'post', label:'Post-CRQC', years:'After Q-Day (date unknown)', from:QDAY_THEORETICAL, to:YEAR_MAX, color:'var(--ph5)',
     meaning:'starts at Q-Day; the date is unknown',
     tense:'Risk after Q-Day',
-    story:'Q-Day refers to the emergence of a cryptographically relevant quantum computer capable of breaking widely deployed public-key cryptographic algorithms. Although estimates vary, some projections place this event between 2029 and 2035. Systems that continue to rely on vulnerable algorithms may face significant security risks, while those migrated to approved quantum-resistant cryptography will be resistant against these attacks. The consequences extend beyond the disclosure of encrypted information. An adversary capable of breaking vulnerable public-key cryptography could potentially recover previously protected information, impersonate trusted entities, or forge digital signatures. Secondary effects could undermine confidence in command-and-control (C2) systems, software updates, and other mission-critical systems. Previously collected encrypted traffic may also become accessible if its confidentiality depended on vulnerable key-establishment mechanisms.'
+    story:'Q-Day refers to the emergence of a cryptographically relevant quantum computer capable of breaking widely deployed public-key cryptographic algorithms. Although estimates vary, some projections place this event between 2029 and 2035. Systems that continue to rely on vulnerable algorithms may face significant security risks, while those migrated to approved quantum-resistant cryptography will be resistant against these attacks. An adversary capable of breaking vulnerable public-key cryptography could impersonate trusted entities or forge digital signatures. Authentication failures, forged signatures, and impersonation are primary risks to command-and-control (C2) systems, software updates, and other mission-critical systems. Previously collected encrypted traffic may also become accessible if its confidentiality depended on vulnerable key-establishment mechanisms.'
   }
 ];
 
@@ -716,130 +716,122 @@ const DOCS = [
    title:'CNSS Advisory Memorandum 02-15: Quantum Transition',
    desc:'CNSS Advisory Memorandum 02-15 (11 Aug 2015): an advisory memo, not a directive. NSA/CNSS announce the coming transition to quantum-resistant algorithms and advise against major new Suite B (ECC) investment. This document marks a new era. Link is an archived mirror; the original CNSS posting requires navigation from cnss.gov.',
    url:'https://cryptome.org/2015/08/CNSS_Advisory_Memo_02-15.pdf'},
-  {id:'PQC-002', d:'2016-04-28', label:'Apr 2016', phase:'pre',
+  {id:'PQC-002', d:'2016-01-01', label:'Jan 2016', phase:'pre', sourceTier:'mirror', supersededBy:'PQC-015', lastValidated:'Aug 2026',
+   title:'NSA CNSA Suite 1.0 & Quantum Computing FAQ',
+   desc:'Advises national security system stakeholders of the emerging quantum computing threat and recommends limiting significant new investments in Suite B elliptic-curve cryptography. Represents an early formal acknowledgment of the need to transition toward quantum-resistant cryptographic algorithms.',
+   url:'https://cryptome.org/2016/01/CNSA-Suite-and-Quantum-Computing-FAQ.pdf'},
+  {id:'PQC-003', d:'2016-04-28', label:'Apr 2016', phase:'pre',
    title:'NISTIR 8105: Report on Post-Quantum Cryptography',
    desc:'Examines the anticipated threat of quantum computing to existing cryptographic algorithms and outlines NIST\'s approach to evaluating and standardizing quantum-resistant alternatives.',
    url:'https://nvlpubs.nist.gov/nistpubs/ir/2016/NIST.IR.8105.pdf'},
-  {id:'PQC-003', d:'2016-12-20', label:'Dec 2016', phase:'pre',
+  {id:'PQC-004', d:'2016-10-01', label:'Oct 2016', phase:'pre', lastValidated:'Aug 2026',
+   title:'CNSSP-15 Update: CNSA Suite Codified for NSS',
+   desc:'Updates Committee on National Security Systems Policy No. 15 to incorporate CNSA 1.0 cryptographic requirements for national security systems. Establishes an interim cryptographic framework pending the availability of acceptable quantum-resistant standards.',
+   url:'https://www.cnss.gov/CNSS/issuances/Policies.cfm'},
+  {id:'PQC-005', d:'2016-12-20', label:'Dec 2016', phase:'pre',
    title:'NIST Call for PQC Standardization Submissions',
    desc:'NIST formally initiated its public PQC standardization process by soliciting candidate quantum-resistant cryptographic algorithms for evaluation and potential standardization.',
    url:'https://csrc.nist.gov/projects/post-quantum-cryptography'},
-  {id:'PQC-004', d:'2022-05-04', label:'May 2022', phase:'pre',
-   title:'NSM-10: National Security Memorandum on Quantum',
-   desc:'Directs federal agencies to prepare for the transition to quantum-resistant cryptography, including cryptographic inventories, migration planning, and coordination with federal standards development. Establishes a federal migration objective extending through 2035.',
-   url:'https://csrc.nist.gov/csrc/media/Presentations/2024/u-s-government-s-transition-to-pqc/images-media/presman-govt-transition-pqc2024.pdf'},
-  {id:'PQC-005', d:'2022-09-07', label:'Sep 2022', phase:'pre', supersedes:'PQC-026',
-   title:'NSA CNSA 2.0 Advisory',
-   desc:'Defines updated cryptographic algorithm requirements and transition timelines for national security systems. Establishes quantum-resistant alternatives to the algorithms identified in the earlier CNSA 1.0 suite.',
-   url:'https://media.defense.gov/2025/May/30/2003728741/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS.PDF'},
-  {id:'PQC-006', d:'2022-11-18', label:'Nov 2022', phase:'pre', supersededBy:'PQC-022', bibKey:'omb2023m2302',
-   title:'OMB M-23-02: Migrating to PQC',
-   desc:'Establishes requirements for federal agencies to inventory quantum-vulnerable cryptographic systems and develop migration plans. Provided government-wide planning guidance before the issuance of OMB M-26-15.',
-   url:'https://bidenwhitehouse.archives.gov/wp-content/uploads/2022/11/M-23-02-M-Memo-on-Migrating-to-Post-Quantum-Cryptography.pdf'},
-  {id:'PQC-007', d:'2022-12-21', label:'Dec 2022', phase:'pre',
-   title:'Quantum Computing Cybersecurity Preparedness Act',
-   desc:'Public Law 117-260 establishes statutory requirements supporting the federal transition to PQC, including cryptographic inventory and migration planning activities.',
-   url:'https://www.congress.gov/bill/117th-congress/house-bill/7535'},
-  {id:'PQC-008', d:'2023-08-21', label:'Aug 2023', phase:'pre',
-   title:'CISA/NSA/NIST Quantum-Readiness Factsheet',
-   desc:'Joint federal guidance recommending that organizations develop quantum-readiness roadmaps, inventory vulnerable cryptographic systems, assess data protection requirements, and coordinate migration planning with technology vendors.',
-   url:'https://www.cisa.gov/resources-tools/resources/quantum-readiness-migration-post-quantum-cryptography'},
-  {id:'PQC-009', d:'2024-07-15', label:'Jul 2024', phase:'pre',
-   title:'White House Report on PQC Migration (Cost Estimate)',
-   desc:'Provides an estimated cost of approximately $7.1 billion, in 2024 dollars, to migrate civilian federal information systems to PQC between 2025 and 2035. National security system migration costs are addressed separately.',
-   url:'https://bidenwhitehouse.archives.gov/wp-content/uploads/2024/07/REF_PQC-Report_FINAL_Send.pdf'},
-  {id:'PQC-010', d:'2024-08-13', label:'Aug 2024', phase:'pre', supersedes:'PQC-033',
-   title:'FIPS 203 / 204 / 205: First PQC Standards',
-   desc:'NIST finalized its first three post-quantum cryptographic standards: ML-KEM for key encapsulation, and ML-DSA and SLH-DSA for digital signatures. These standards provide a foundation for federal PQC implementation.',
-   url:'https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization'},
-  {id:'PQC-011', d:'2024-11-12', label:'Nov 2024', phase:'pre', status:'draft',
-   title:'NIST IR 8547 (Draft): Transition to PQC Standards',
-   desc:'Proposes a transition schedule for quantum-vulnerable cryptographic algorithms, including deprecation after 2030 and disallowance after 2035.',
-   url:'https://csrc.nist.gov/pubs/ir/8547/ipd'},
-  {id:'PQC-012', d:'2025-03-11', label:'Mar 2025', phase:'pre',
-   title:'NIST Selects HQC as Backup KEM',
-   desc:'NIST selected HQC, a code-based key-encapsulation mechanism, for additional standardization. Its selection provides an alternative mathematical foundation to lattice-based algorithms, supporting cryptographic diversity.',
-   url:'https://www.nist.gov/news-events/news/2025/03/nist-selects-hqc-fifth-algorithm-post-quantum-encryption'},
-  {id:'PQC-014', d:'2026-04-16', label:'Apr 2026', phase:'strat',
-   title:'Department of War Post-Quantum Cryptography Strategy',
-   desc:'Establishes Department-wide PQC migration priorities and implementation milestones, including the 31 December 2029 target for core systems and the 2030 target for high-impact systems. Also addresses coordination with the defense industrial base.',
-   url:'https://DoWcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
-  {id:'PQC-015', d:'2030-12-31', label:'Dec 2030', phase:'impl', status:'milestone',
-   title:'Milestone: DoW High-Impact Systems Deadline',
-   desc:'The DOW PQC Strategy establishes a 2030 implementation target for high-impact systems. This milestone also coincides with NIST\'s proposed deprecation of quantum-vulnerable public-key cryptographic algorithms.',
-   predLabel:'High-impact systems'},
-  {id:'PQC-016', d:'2035-01-01', label:'2035', phase:'impl', status:'milestone',
-   title:'Milestone: Federal Migration Complete / Classical Disallowed',
-   desc:'The federal migration target established under NSM-10 aligns with NIST\'s proposed 2035 deadline for disallowing quantum-vulnerable cryptographic algorithms. This milestone represents a planned compliance deadline rather than a prediction of when a cryptographically relevant quantum computer (CRQC) will become available.',
-   predLabel:'Civilian migration complete'},
-  {id:'PQC-017', d:'2021-07-15', label:'2021', phase:'pre',
+  {id:'PQC-006', d:'2017-12-20', label:'Dec 2017', phase:'pre', supersededBy:'PQC-010', lastValidated:'Aug 2026',
+   title:'NIST PQC Competition: Round 1 Candidates (69)',
+   desc:'NIST accepted 69 candidate algorithms from 82 submissions for the first round of its PQC standardization process. The candidates underwent public evaluation of their security, performance, and implementation characteristics.',
+   url:'https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-1-submissions'},
+  {id:'PQC-007', d:'2018-04-11', label:'Apr 2018', phase:'pre', lastValidated:'Aug 2026',
+   title:'First NIST PQC Standardization Conference',
+   desc:'NIST convened researchers and algorithm developers in April 2018 to present and evaluate the 69 first-round submissions to its PQC standardization process. The conference supported open technical review and cryptographic analysis.',
+   url:'https://csrc.nist.gov/projects/post-quantum-cryptography/workshops-and-timeline'},
+  {id:'PQC-008', d:'2018-12-01', label:'Dec 2018', phase:'pre', lastValidated:'Aug 2026',
+   title:'National Academies: Quantum Computing Progress & Prospects',
+   desc:'Independent assessment of quantum computing capabilities, technical challenges, and future development prospects. Provides a foundation for evaluating the feasibility and potential timelines of cryptographically relevant quantum computing.',
+   url:'https://nap.nationalacademies.org/catalog/25196/quantum-computing-progress-and-prospects'},
+  {id:'PQC-009', d:'2018-12-21', label:'Dec 2018', phase:'pre', lastValidated:'Aug 2026',
+   title:'National Quantum Initiative Act',
+   desc:'Public Law 115-368 establishes a coordinated federal framework for quantum information science research and development, involving agencies including NIST, NSF, and DOE. The legislation supports broader national quantum capabilities rather than establishing specific PQC migration requirements.',
+   url:'https://www.congress.gov/bill/115th-congress/house-bill/6227'},
+  {id:'PQC-010', d:'2019-01-30', label:'Jan 2019', phase:'pre', supersedes:'PQC-006', supersededBy:'PQC-011', lastValidated:'Aug 2026',
+   title:'NIST PQC Competition: Round 2 Candidates (26)',
+   desc:'NIST selected 26 algorithms from the original 69 first-round candidates for continued security and performance evaluation. The remaining candidates included algorithms subsequently selected for standardization.',
+   url:'https://csrc.nist.gov/News/2019/pqc-standardization-process-2nd-round-candidates'},
+  {id:'PQC-011', d:'2020-07-22', label:'Jul 2020', phase:'pre', supersedes:'PQC-010', supersededBy:'PQC-021', lastValidated:'Aug 2026',
+   title:'NIST PQC Competition: Round 3 Finalists (7 + 8 alternates)',
+   desc:'NIST advanced seven finalists and eight alternate candidates for further evaluation during the third round of its PQC standardization process. Subsequent cryptanalysis of candidates, including Rainbow and SIKE, demonstrated the importance of continued security evaluation before standardization.',
+   url:'https://www.nist.gov/news-events/news/2020/07/pqc-standardization-process-third-round-candidate-announcement'},
+  {id:'PQC-012', d:'2021-07-15', label:'2021', phase:'pre',
    title:'NCCoE Project Launch: Migration to Post-Quantum Cryptography',
    desc:'Establishes NIST\'s National Cybersecurity Center of Excellence project supporting practical PQC migration. The initiative develops implementation guidance, cryptographic discovery approaches, and interoperability demonstrations.',
    url:'https://www.nccoe.nist.gov/applied-cryptography/migration-to-pqc'},
-  {id:'PQC-018', d:'2021-10-15', label:'Oct 2021', phase:'pre',
+  {id:'PQC-013', d:'2021-10-15', label:'Oct 2021', phase:'pre',
    title:'DHS Infographic: Preparing for Post-Quantum Cryptography',
    desc:'Provides an early federal roadmap for PQC preparation, emphasizing cryptographic inventories, engagement with standards development, and prioritization based on the sensitivity and required protection lifetime of information.',
    url:'https://www.dhs.gov/sites/default/files/publications/post-quantum_cryptography_infographic_october_2021_508.pdf'},
+  {id:'PQC-014', d:'2022-05-04', label:'May 2022', phase:'pre',
+   title:'NSM-10: National Security Memorandum on Quantum',
+   desc:'Directs federal agencies to prepare for the transition to quantum-resistant cryptography, including cryptographic inventories, migration planning, and coordination with federal standards development. Establishes a federal migration objective extending through 2035.',
+   url:'https://csrc.nist.gov/csrc/media/Presentations/2024/u-s-government-s-transition-to-pqc/images-media/presman-govt-transition-pqc2024.pdf'},
+  {id:'PQC-015', d:'2022-09-07', label:'Sep 2022', phase:'pre', supersedes:'PQC-002',
+   title:'NSA CNSA 2.0 Advisory',
+   desc:'Defines updated cryptographic algorithm requirements and transition timelines for national security systems. Establishes quantum-resistant alternatives to the algorithms identified in the earlier CNSA 1.0 suite.',
+   url:'https://media.defense.gov/2025/May/30/2003728741/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS.PDF'},
+  {id:'PQC-016', d:'2022-11-18', label:'Nov 2022', phase:'pre', supersededBy:'PQC-029', bibKey:'omb2023m2302',
+   title:'OMB M-23-02: Migrating to PQC',
+   desc:'Establishes requirements for federal agencies to inventory quantum-vulnerable cryptographic systems and develop migration plans. Provided government-wide planning guidance before the issuance of OMB M-26-15.',
+   url:'https://bidenwhitehouse.archives.gov/wp-content/uploads/2022/11/M-23-02-M-Memo-on-Migrating-to-Post-Quantum-Cryptography.pdf'},
+  {id:'PQC-017', d:'2022-12-21', label:'Dec 2022', phase:'pre',
+   title:'Quantum Computing Cybersecurity Preparedness Act',
+   desc:'Public Law 117-260 establishes statutory requirements supporting the federal transition to PQC, including cryptographic inventory and migration planning activities.',
+   url:'https://www.congress.gov/bill/117th-congress/house-bill/7535'},
+  {id:'PQC-018', d:'2023-08-21', label:'Aug 2023', phase:'pre',
+   title:'CISA/NSA/NIST Quantum-Readiness Factsheet',
+   desc:'Joint federal guidance recommending that organizations develop quantum-readiness roadmaps, inventory vulnerable cryptographic systems, assess data protection requirements, and coordinate migration planning with technology vendors.',
+   url:'https://www.cisa.gov/resources-tools/resources/quantum-readiness-migration-post-quantum-cryptography'},
   {id:'PQC-019', d:'2023-09-15', label:'Sep 2023', phase:'pre',
    title:'CISA: Post-Quantum Considerations for Operational Technology',
    desc:'Examines PQC migration challenges affecting operational technology (OT) and industrial control systems (ICS), including resource constraints, extended equipment lifecycles, and compatibility with existing infrastructure.',
    url:'https://www.cisa.gov/resources-tools/resources/post-quantum-considerations-operational-technology'},
-  {id:'PQC-020', d:'2026-06-22', label:'Jun 2026', phase:'strat',
-   title:'EO 14412: Securing the Nation Against Advanced Cryptographic Attacks',
-   desc:'Executive order establishing federal measures to strengthen cryptographic security against emerging threats, including those associated with advances in quantum computing.',
-   url:'https://www.whitehouse.gov/presidential-actions/2026/06/securing-the-nation-against-advanced-cryptographic-attacks/'},
-  {id:'PQC-021', d:'2026-06-22', label:'Jun 2026', phase:'strat',
-   title:'EO 14413: Ushering in the Next Frontier of Quantum Innovation',
-   desc:'Executive order supporting U.S. quantum science, technology development, and innovation. Complements federal cybersecurity initiatives by addressing broader national quantum capabilities.',
-   url:'https://www.whitehouse.gov/presidential-actions/2026/06/ushering-in-the-next-frontier-of-quantum-innovation/'},
-  {id:'PQC-022', d:'2026-06-24', label:'Jun 2026', phase:'strat', supersedes:'PQC-006',
-   title:'OMB M-26-15: Execution of the Migration to PQC',
-   desc:'Issued 24 June 2026, this memorandum establishes government-wide implementation guidance for PQC migration, advancing the planning requirements previously established under OMB M-23-02.',
-   url:'https://www.whitehouse.gov/wp-content/uploads/2026/06/M-26-15-Execution-of-the-Migration-to-Post-Quantum-Cryptography.pdf'},
-  {id:'PQC-023', d:'2026-06-23', label:'Jun 2026', phase:'strat', status:'press',
-   title:'DoW Release: Quantum Defense Strategy Announcement',
-   desc:'Official press release announcing the DoW PQC Strategy to the public on 23 June 2026. The underlying strategy document itself is dated 16 April 2026 (PQC-014).',
-   url:'https://www.war.gov/News/Releases/Release/Article/4524599/securing-global-dominance-DoW-unleashes-quantum-defense-strategy-to-harden-netw/'},
+  {id:'PQC-020', d:'2024-07-15', label:'Jul 2024', phase:'pre',
+   title:'White House Report on PQC Migration (Cost Estimate)',
+   desc:'Provides an estimated cost of approximately $7.1 billion, in 2024 dollars, to migrate civilian federal information systems to PQC between 2025 and 2035. National security system migration costs are addressed separately.',
+   url:'https://bidenwhitehouse.archives.gov/wp-content/uploads/2024/07/REF_PQC-Report_FINAL_Send.pdf'},
+  {id:'PQC-021', d:'2024-08-13', label:'Aug 2024', phase:'pre', supersedes:'PQC-011',
+   title:'FIPS 203 / 204 / 205: First PQC Standards',
+   desc:'NIST finalized its first three post-quantum cryptographic standards: ML-KEM for key encapsulation, and ML-DSA and SLH-DSA for digital signatures. These standards provide a foundation for federal PQC implementation.',
+   url:'https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization'},
+  {id:'PQC-022', d:'2024-11-12', label:'Nov 2024', phase:'pre', status:'draft',
+   title:'NIST IR 8547 (Draft): Transition to PQC Standards',
+   desc:'Proposes a transition schedule for quantum-vulnerable cryptographic algorithms, including deprecation after 2030 and disallowance after 2035.',
+   url:'https://csrc.nist.gov/pubs/ir/8547/ipd'},
+  {id:'PQC-023', d:'2025-03-11', label:'Mar 2025', phase:'pre',
+   title:'NIST Selects HQC as Backup KEM',
+   desc:'NIST selected HQC, a code-based key-encapsulation mechanism, for additional standardization. Its selection provides an alternative mathematical foundation to lattice-based algorithms, supporting cryptographic diversity.',
+   url:'https://www.nist.gov/news-events/news/2025/03/nist-selects-hqc-fifth-algorithm-post-quantum-encryption'},
   {id:'PQC-024', d:'2025-06-01', label:'Jun 2025', phase:'pre', lastValidated:'Aug 2026',
    title:'RFC 9794: Terminology for PQ/Traditional Hybrid Schemes',
    desc:'Establishes standardized terminology for hybrid cryptographic schemes combining traditional and post-quantum algorithms. Provides a common technical vocabulary to support interoperable implementations and migration planning.',
    url:'https://www.rfc-editor.org/rfc/rfc9794.html'},
-  {id:'PQC-025', d:'2026-06-19', label:'Jun 2026', phase:'strat', lastValidated:'Aug 2026',
-   title:'RFC 9958: Post-Quantum Cryptography for Engineers',
-   desc:'IETF guidance describing the technical implications of migrating from quantum-vulnerable public-key cryptography to PQC. Addresses algorithm selection, protocol compatibility, implementation considerations, and migration planning.',
-   url:'https://www.rfc-editor.org/info/rfc9958'},
-  {id:'PQC-026', d:'2016-01-01', label:'Jan 2016', phase:'pre', sourceTier:'mirror', supersededBy:'PQC-005', lastValidated:'Aug 2026',
-   title:'NSA CNSA Suite 1.0 & Quantum Computing FAQ',
-   desc:'Advises national security system stakeholders of the emerging quantum computing threat and recommends limiting significant new investments in Suite B elliptic-curve cryptography. Represents an early formal acknowledgment of the need to transition toward quantum-resistant cryptographic algorithms.',
-   url:'https://cryptome.org/2016/01/CNSA-Suite-and-Quantum-Computing-FAQ.pdf'},
-  {id:'PQC-027', d:'2016-10-01', label:'Oct 2016', phase:'pre', lastValidated:'Aug 2026',
-   title:'CNSSP-15 Update: CNSA Suite Codified for NSS',
-   desc:'Updates Committee on National Security Systems Policy No. 15 to incorporate CNSA 1.0 cryptographic requirements for national security systems. Establishes an interim cryptographic framework pending the availability of acceptable quantum-resistant standards.',
-   url:'https://www.cnss.gov/CNSS/issuances/Policies.cfm'},
-  {id:'PQC-028', d:'2017-12-20', label:'Dec 2017', phase:'pre', supersededBy:'PQC-032', lastValidated:'Aug 2026',
-   title:'NIST PQC Competition: Round 1 Candidates (69)',
-   desc:'NIST accepted 69 candidate algorithms from 82 submissions for the first round of its PQC standardization process. The candidates underwent public evaluation of their security, performance, and implementation characteristics.',
-   url:'https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-1-submissions'},
-  {id:'PQC-029', d:'2018-04-11', label:'Apr 2018', phase:'pre', lastValidated:'Aug 2026',
-   title:'First NIST PQC Standardization Conference',
-   desc:'NIST convened researchers and algorithm developers in April 2018 to present and evaluate the 69 first-round submissions to its PQC standardization process. The conference supported open technical review and cryptographic analysis.',
-   url:'https://csrc.nist.gov/projects/post-quantum-cryptography/workshops-and-timeline'},
-  {id:'PQC-030', d:'2018-12-01', label:'Dec 2018', phase:'pre', lastValidated:'Aug 2026',
-   title:'National Academies: Quantum Computing Progress & Prospects',
-   desc:'Independent assessment of quantum computing capabilities, technical challenges, and future development prospects. Provides a foundation for evaluating the feasibility and potential timelines of cryptographically relevant quantum computing.',
-   url:'https://nap.nationalacademies.org/catalog/25196/quantum-computing-progress-and-prospects'},
-  {id:'PQC-031', d:'2018-12-21', label:'Dec 2018', phase:'pre', lastValidated:'Aug 2026',
-   title:'National Quantum Initiative Act',
-   desc:'Public Law 115-368 establishes a coordinated federal framework for quantum information science research and development, involving agencies including NIST, NSF, and DOE. The legislation supports broader national quantum capabilities rather than establishing specific PQC migration requirements.',
-   url:'https://www.congress.gov/bill/115th-congress/house-bill/6227'},
-  {id:'PQC-032', d:'2019-01-30', label:'Jan 2019', phase:'pre', supersedes:'PQC-028', supersededBy:'PQC-033', lastValidated:'Aug 2026',
-   title:'NIST PQC Competition: Round 2 Candidates (26)',
-   desc:'NIST selected 26 algorithms from the original 69 first-round candidates for continued security and performance evaluation. The remaining candidates included algorithms subsequently selected for standardization.',
-   url:'https://csrc.nist.gov/News/2019/pqc-standardization-process-2nd-round-candidates'},
-  {id:'PQC-033', d:'2020-07-22', label:'Jul 2020', phase:'pre', supersedes:'PQC-032', supersededBy:'PQC-010', lastValidated:'Aug 2026',
-   title:'NIST PQC Competition: Round 3 Finalists (7 + 8 alternates)',
-   desc:'NIST advanced seven finalists and eight alternate candidates for further evaluation during the third round of its PQC standardization process. Subsequent cryptanalysis of candidates, including Rainbow and SIKE, demonstrated the importance of continued security evaluation before standardization.',
-   url:'https://www.nist.gov/news-events/news/2020/07/pqc-standardization-process-third-round-candidate-announcement'},
+  {id:'PQC-025', d:'2026-04-16', label:'Apr 2026', phase:'strat',
+   title:'Department of War Post-Quantum Cryptography Strategy',
+   desc:'Establishes Department-wide PQC migration lines of effort and objectives, and addresses coordination with the defense industrial base. Target dates will appear in the implementation plan, which has not been released.',
+   url:'https://DoWcio.war.gov/Portals/0/Documents/Library/DoW-PQC-Strategy.pdf'},
+  {id:'PQC-026', d:'2026-06-22', label:'Jun 2026', phase:'strat',
+   title:'EO 14412: Securing the Nation Against Advanced Cryptographic Attacks',
+   desc:'Executive order establishing federal measures to strengthen cryptographic security against emerging threats, including those associated with advances in quantum computing.',
+   url:'https://www.whitehouse.gov/presidential-actions/2026/06/securing-the-nation-against-advanced-cryptographic-attacks/'},
+  {id:'PQC-027', d:'2026-06-22', label:'Jun 2026', phase:'strat',
+   title:'EO 14413: Ushering in the Next Frontier of Quantum Innovation',
+   desc:'Executive order supporting U.S. quantum science, technology development, and innovation. Complements federal cybersecurity initiatives by addressing broader national quantum capabilities.',
+   url:'https://www.whitehouse.gov/presidential-actions/2026/06/ushering-in-the-next-frontier-of-quantum-innovation/'},
+  {id:'PQC-028', d:'2026-06-23', label:'Jun 2026', phase:'strat', status:'press',
+   title:'DoW Release: Quantum Defense Strategy Announcement',
+   desc:'Official press release announcing the DoW PQC Strategy to the public on 23 June 2026. The underlying strategy document itself is dated 16 April 2026 (PQC-025).',
+   url:'https://www.war.gov/News/Releases/Release/Article/4524599/securing-global-dominance-DoW-unleashes-quantum-defense-strategy-to-harden-netw/'},
+  {id:'PQC-029', d:'2026-06-24', label:'Jun 2026', phase:'strat', supersedes:'PQC-016',
+   title:'OMB M-26-15: Execution of the Migration to PQC',
+   desc:'Issued 24 June 2026, this memorandum establishes government-wide implementation guidance for PQC migration, advancing the planning requirements previously established under OMB M-23-02.',
+   url:'https://www.whitehouse.gov/wp-content/uploads/2026/06/M-26-15-Execution-of-the-Migration-to-Post-Quantum-Cryptography.pdf'},
+  {id:'PQC-030', d:'2035-01-01', label:'2035', phase:'post', status:'milestone',
+   title:'Milestone: Federal Migration Complete / Classical Disallowed',
+   desc:'The federal migration target established under NSM-10 aligns with NIST\'s proposed 2035 deadline for disallowing quantum-vulnerable cryptographic algorithms. This milestone represents a planned compliance deadline rather than a prediction of when a cryptographically relevant quantum computer (CRQC) will become available.',
+   predLabel:'Civilian migration complete'},
 ];
 
 /* snap every document to its day graduation */
@@ -1032,18 +1024,18 @@ const STARS = [
     d:'2024-08-13', year:'Aug 2024', label:'FIPS standards',
     title:'FIPS 203 / 204 / 205 established',
     desc:'NIST published the first PQC standards: FIPS 203 (ML-KEM) for key exchange, and FIPS 204 (ML-DSA) and FIPS 205 (SLH-DSA) for signatures. The star marks that turning point. The matching dot above the axis is the document you can open.',
-    color:'var(--ph1)', docId:'PQC-010'
+    color:'var(--ph1)', docId:'PQC-021'
   },
   {
     d:'2026-04-16', year:'Apr 2026', label:'Strategy',
     title:'DOW PQC Strategy published',
-    desc:'The Department of War set the plan on 16 April 2026: move core systems to PQC by 31 December 2029. Systems outside that core set must either keep operating with PQC support or be retired by 2030. National security systems must use CNSA 2.0 and any proposed alternatives must be approved through the NSA. The DoW PQC Directorate has placed themselves as a gatekeeper for all DoW systems to mitigate any threats potentially posted by industry (e.g., software and hardware vendors selling quantum resitant technologies to Army organizations).',
-    color:'var(--ph2)', docId:'PQC-014'
+    desc:'The Department of War published its Post-Quantum Cryptography Strategy on 16 April 2026. The Strategy establishes lines of effort and objectives. It does not set target dates. Those dates will appear in the implementation plan, which has not been released. National security systems must use CNSA 2.0 and any proposed alternatives must be approved through the NSA. The DoW PQC Directorate has placed themselves as a gatekeeper for all DoW systems to mitigate any threats potentially posted by industry (e.g., software and hardware vendors selling quantum resitant technologies to Army organizations).',
+    color:'var(--ph2)', docId:'PQC-025'
   },
   {
-    d:'2029-12-31', year:'Dec 2029', label:'Target state', static:true,
+    d:'2031-01-01', year:'~2030-32', label:'Target state', static:true,
     title:'Core systems PQC-compliant',
-    desc:'By 31 December 2029, core systems move to PQC algorithms.',
+    desc:'A working estimate, not a mandate. Core systems move to PQC algorithms around 2030 to 2032. Dates will be set in the implementation plan, which has not been released. Legacy platforms and operational technology that cannot support approved quantum-resistant algorithms will need alternative protections, including network isolation, compensating security controls, or eventual replacement.',
     color:'var(--ph3)'
   },
   {
@@ -1276,7 +1268,7 @@ HUBS.forEach(h=>{
 
 /* --- validation as-of notes --- */
 document.getElementById('manifest-asof').textContent =
-  `Links and metadata last validated ${META.validatedAsOf}. Superseded documents stay listed for the historical record.`;
+  `Links and metadata last validated ${META.validatedAsOf}. Catalog numbers follow issuance date. Superseded documents stay listed for the historical record.`;
 document.getElementById('hubs-asof').textContent =
   `Reference hubs last validated ${META.validatedAsOf}.`;
 
