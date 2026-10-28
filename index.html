@@ -1313,5 +1313,28 @@ document.getElementById('hubs-asof').textContent =
   window.addEventListener('hashchange', () => openFold(location.hash));
 })();
 </script>
+<style>
+  html, body { max-width: 100%; overflow-x: clip; }
+</style>
+<script>
+(function () {
+  if (window.parent === window) return;
+  function reportHeight() {
+    var height = Math.max(
+      document.documentElement.scrollHeight,
+      document.body ? document.body.scrollHeight : 0
+    );
+    window.parent.postMessage({ type: 'qday:height', height: height },
+      'https://cyber.army.mil');
+  }
+  window.addEventListener('load', reportHeight);
+  window.addEventListener('resize', reportHeight);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(reportHeight).observe(document.documentElement);
+  }
+  setTimeout(reportHeight, 300);
+  setTimeout(reportHeight, 1500);
+})();
+</script>
 </body>
 </html>
